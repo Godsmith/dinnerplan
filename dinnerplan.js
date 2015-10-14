@@ -1,23 +1,45 @@
 Days = new Mongo.Collection('days');
 Meals = new Mongo.Collection('meals');
 
+Array.prototype.chunk = function(chunkSize) {
+  var R = [];
+  for (var i=0; i<this.length; i+=chunkSize)
+    R.push(this.slice(i,i+chunkSize));
+  return R;
+};
+
 if (Meteor.isClient) {
   Meteor.subscribe('days');
   Meteor.subscribe('meals');
   moment.locale(navigator.language)
 
   Template.body.helpers({
-    days: function() {
+    weeks: function() {
       var query = Days.find({},{sort: {date: 1}});
       var daysWithMeals = query.fetch();
       var padding = getDays(28, 7);
-      return padObjectArray(daysWithMeals, padding, dateOfDayIsEqual)
+      var allDays = padObjectArray(daysWithMeals, padding, dateOfDayIsEqual)
+      var dayChunks = allDays.chunk(7);
+      var allWeeks = [];
+      dayChunks.forEach(function(dayChunk) {
+        allWeeks.push({days: dayChunk});
+      });
+      return allWeeks;
+    }
+  });
+
+  Template.week.helpers({
+    days: function() {
+      return this.days;
     }
   });
 
   Template.day.helpers({
-    stringFromDate: function(date){
-      return moment(date).format('dddd YYYY-MM-DD')
+    dayFromDate: function(date){
+      return moment(date).format('dddd');
+    },
+    formatDate: function(date){
+      return moment(date).format('YYYY-MM-DD');
     }
   });
 
