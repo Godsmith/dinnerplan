@@ -18,7 +18,7 @@
 </body>
 
 <template name="day">
-  <tr class="viewing date-{{dateOfDayFromDate date}}">
+  <tr class="viewing date-{{date}}">
     <td>{{stringFromDate date}}</td>
     <td>{{meal}}</td>
     {{#if currentUser}}
@@ -29,7 +29,7 @@
       </td>
     {{/if}}
   </tr>
-  <tr class='editing date-{{dateOfDayFromDate date}}' style="display: none;">
+  <tr class='editing date-{{date}}' style="display: none;">
     <td>{{stringFromDate date}}</td>
     <td><input type="text" class="form-control"
     value={{meal}}></td>

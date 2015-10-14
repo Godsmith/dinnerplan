@@ -10,18 +10,14 @@ if (Meteor.isClient) {
     days: function() {
       var query = Days.find({},{sort: {date: 1}});
       var daysWithMeals = query.fetch();
-      //return daysWithMeals;
       var padding = getDays(28, 7);
-      return padObjectArray(daysWithMeals, padding, isSameDay)
+      return padObjectArray(daysWithMeals, padding, dateOfDayIsEqual)
     }
   });
 
   Template.day.helpers({
     stringFromDate: function(date){
       return moment(date).format('dddd YYYY-MM-DD')
-    },
-    dateOfDayFromDate: function(date){
-      return dateOfDayFromDate(date);
     }
   });
 
@@ -33,10 +29,9 @@ if (Meteor.isClient) {
     },
 
     'click .edit': function(event, template){
-      var dateOfDay = dateOfDayFromDate(this.date);
-      $('.viewing.date-' + dateOfDay).hide();
-      $('.editing.date-' + dateOfDay).show();
-      $('.editing.date-' + dateOfDay + ' input').select();
+      $('.viewing.date-' + this.date).hide();
+      $('.editing.date-' + this.date).show();
+      $('.editing.date-' + this.date + ' input').select();
     },
 
     'click .ok': function(event, template){
@@ -50,6 +45,7 @@ if (Meteor.isClient) {
     'keydown .editing input': function(event, template){
       switch (event.keyCode) {
         case 13:
+          event.preventDefault(); //to prevent the enter key to trigger the edit button
           ok(this);
           break;
         case 27:
@@ -59,23 +55,34 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.day.onRendered(function(){
+    // If this template is created, it is because we clicked ok when creating it.
+    // After this, we have to focus the edit button.
+    focusEditButton(this.data);
+  });
+
   var ok = function(day) {
-    var dateOfDay = dateOfDayFromDate(day.date);
-    day.meal = $('.date-' + dateOfDay + ' input').val();
+    day.meal = $('.date-' + day.date + ' input').val();
     Meteor.call('updateDay', day);
-    hideEditing(dateOfDay);
+    hideEditing(day);
     console.log('updated ' + day.date + ' with text ' + day.meal)
+    focusEditButton(day);
   };
 
   var cancel = function(day) {
-    var dateOfDay = dateOfDayFromDate(day.date);
-    hideEditing(dateOfDay);
-    $('.date-' + dateOfDay + ' input').val(day.meal);
+    hideEditing(day);
+    $('.date-' + day.date + ' input').val(day.meal);
+    focusEditButton(day);
   };
 
-  var hideEditing = function(dateOfDay) {
-    $('.viewing.date-' + dateOfDay).show();
-    $('.editing.date-' + dateOfDay).hide();
+  var hideEditing = function(day) {
+    $('.viewing.date-' + day.date).show();
+    $('.editing.date-' + day.date).hide();
+  };
+
+  var focusEditButton = function(day) {
+    $('.viewing.date-' + day.date + ' .edit').focus();
+    console.log($(':focus'));
   };
 
   Accounts.ui.config({
@@ -114,7 +121,7 @@ Meteor.methods({
 getDays = function(daysBack, daysForward) {
   var days = [];
   for (var i =-daysBack; i <= daysForward; i++) {
-    date = moment().utc().add(i, 'days').startOf('day').toDate();
+    var date = moment().utc().add(i, 'days').startOf('day').format('YYYY-MM-DD');
     days.push({date: date})
   }
   return days
@@ -133,12 +140,6 @@ padObjectArray = function(originalArray, padObjects, compareFunction) {
   return retVal
 };
 
-isSameDay = function(day1, day2) {
-  return (day1.date.getDate() == day2.date.getDate()
-    && day1.date.getMonth() == day2.date.getMonth()
-    && day1.date.getFullYear() == day2.date.getFullYear());
-};
-
-dateOfDayFromDate = function(date) {
-  return moment(date).format('YYYY-MM-DD')
+dateOfDayIsEqual = function(day1, day2){
+  return day1.date === day2.date;
 };
