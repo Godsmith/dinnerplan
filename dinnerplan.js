@@ -7,6 +7,9 @@ Array.prototype.chunk = function(chunkSize) {
     R.push(this.slice(i,i+chunkSize));
   return R;
 };
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 if (Meteor.isClient) {
   Meteor.subscribe('days');
@@ -17,8 +20,8 @@ if (Meteor.isClient) {
     weeks: function() {
       var query = Days.find({},{sort: {date: 1}});
       var daysWithMeals = query.fetch();
-      var padding = getDays(28, 7);
-      var allDays = padObjectArray(daysWithMeals, padding, dateOfDayIsEqual)
+      var padding = getDaysFromWeekRange(1,2);
+      var allDays = padObjectArray(daysWithMeals, padding, dateOfDayIsEqual);
       var dayChunks = allDays.chunk(7);
       var allWeeks = [];
       dayChunks.forEach(function(dayChunk) {
@@ -36,7 +39,7 @@ if (Meteor.isClient) {
 
   Template.day.helpers({
     dayFromDate: function(date){
-      return moment(date).format('dddd');
+      return moment(date).format('dddd').capitalize();
     },
     formatDate: function(date){
       return moment(date).format('YYYY-MM-DD');
@@ -146,7 +149,18 @@ getDays = function(daysBack, daysForward) {
     var date = moment().utc().add(i, 'days').startOf('day').format('YYYY-MM-DD');
     days.push({date: date})
   }
-  return days
+  return days;
+};
+
+getDaysFromWeekRange = function(weeksBack, weeksForward) {
+  var days = [];
+  for (var i=-weeksBack; i<=weeksForward; i++) {
+    for (var j=1; j<=7; j++) {
+      var date = moment().isoWeekday(i*7+j).startOf('day').format('YYYY-MM-DD');
+      days.push({date: date});
+    }
+  }
+  return days;
 };
 
 padObjectArray = function(originalArray, padObjects, compareFunction) {
@@ -159,7 +173,7 @@ padObjectArray = function(originalArray, padObjects, compareFunction) {
       }
     }
   });
-  return retVal
+  return retVal;
 };
 
 dateOfDayIsEqual = function(day1, day2){
