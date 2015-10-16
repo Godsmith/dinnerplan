@@ -6,3 +6,20 @@ Template.editMeal.helpers({
     return Session.get('meal');
   }
 });
+
+Template.editMeal.events({
+  'click .ok': function(event, template){
+    var meal = {
+      name: $('.editMeal input.name').val(),
+      time: $('.editMeal input.time').val(),
+      ingredients: $('.editMeal input.ingredients').val(),
+      steps: $('.editMeal input.steps').val()
+    };
+    Meteor.call('updateMeal', meal);
+    Session.set('displayEditMeal', false);
+  },
+
+  'click .cancel': function(event, template){
+    Session.set('displayEditMeal', false);
+  }
+});

@@ -1,8 +1,14 @@
 <template name="editMeal">
-  <div style="{{display}}">
-    <input type="text" class="form-control" value={{meal.name}}>
-    <input type="text" class="form-control" value={{meal.time}}>
-    <input type="text" class="form-control" value={{meal.ingredients}}>
-    <input type="text" class="form-control" value={{meal.steps}}>
+  <div class="editMeal" style="{{display}}">
+    <input id="name" type="text" class="name form-control" value={{meal.name}}>
+    <input type="text" class="time form-control" value={{meal.time}}>
+    <input type="text" class="ingredients form-control" value={{meal.ingredients}}>
+    <input type="text" class="steps form-control" value={{meal.steps}}>
+    <button type="button" class="btn btn-default ok">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-default cancel">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </button>
   </div>
 </template>
