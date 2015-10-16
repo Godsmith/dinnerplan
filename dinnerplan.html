@@ -1,5 +1,5 @@
 <head>
-  <title>Mat</title>
+  <title>Dinner Plan</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -14,6 +14,7 @@
       {{/each}}
     </div>
   </div>
+  {{> editMeal }}}
 </body>
 
 <template name="week">
@@ -31,7 +32,7 @@
 <template name="day">
   <tr class="viewing date-{{date}}">
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
-    <td>{{meal}}</td>
+    <td><a href="#">{{meal}}</a></td>
     {{#if currentUser}}
       <td class="edit">
         <button type="button" class="btn btn-default edit">
@@ -52,4 +53,14 @@
       </button>
     </td>
   </tr>
+</template>
+
+<template name="editMeal">
+  <div style="{{display}}">
+    <input type="text" class="form-control" value={{meal.name}}>
+    <input type="text" class="form-control" value={{meal.time}}>
+    <input type="text" class="form-control" value={{meal.ingredients}}>
+    <input type="text" class="form-control" value={{meal.steps}}>
+
+  </div>
 </template>

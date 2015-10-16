@@ -77,6 +77,14 @@ if (Meteor.isClient) {
           cancel(this);
           break;
       }
+    },
+
+    'click a': function(event, template) {
+      var mealName = template.data.meal;
+      Meteor.call('mealFromName', mealName, function(error, result) {
+        Session.set('meal', result);
+        Session.set('displayEditMeal', true);
+      });
     }
   });
 
@@ -84,6 +92,14 @@ if (Meteor.isClient) {
     // If this template is created, it is because we clicked ok when creating it.
     // After this, we have to focus the edit button.
     focusEditButton(this.data);
+  });
+
+  Template.editMeal.helpers({
+    display: function() {
+      return Session.get('displayEditMeal') ? '' : 'display: none;';
+    }
+
+
   });
 
   var ok = function(day) {
@@ -138,6 +154,12 @@ Meteor.methods({
       owner: Meteor.userId(),
       username: Meteor.user().username
     }, {upsert: true});
+  },
+  getMealFromName: function(name) {
+    Meals.find({
+      owner: Meteor.userId(),
+      name: name
+    })
   }
 });
 
