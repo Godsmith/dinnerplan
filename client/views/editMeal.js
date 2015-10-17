@@ -11,6 +11,7 @@ Template.editMeal.events({
   'click .ok': function(event, template){
     var meal = {
       name: $('.editMeal input.name').val(),
+      source: $('.editMeal input.source').val(),
       time: $('.editMeal input.time').val(),
       ingredients: $('.editMeal input.ingredients').val(),
       steps: $('.editMeal input.steps').val()

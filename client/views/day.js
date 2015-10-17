@@ -4,6 +4,9 @@ Template.day.helpers({
   },
   formatDate: function(date){
     return moment(date).format('YYYY-MM-DD');
+  },
+  mealLinkClass: function(meal) {
+    return _.contains(Session.get('mealNames'), meal) ? 'exists' : '';
   }
 });
 

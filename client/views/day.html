@@ -1,7 +1,7 @@
 <template name="day">
   <tr class="viewing date-{{date}}">
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
-    <td><a href="#">{{meal}}</a></td>
+    <td><a class="{{mealLinkClass meal}}" href="#">{{meal}}</a></td>
     {{#if currentUser}}
       <td class="edit">
         <button type="button" class="btn btn-default edit">
