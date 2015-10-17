@@ -9,12 +9,18 @@
     <h1>Välkommen{{#if currentUser}}, {{/if}}{{currentUser.username}}!</h1>
     {{> loginButtons }}
     <div class="row">
-      {{#each weeks}}
-        {{> week}}
-      {{/each}}
+      <div class="col-md-6">
+        <div class="row">
+          {{#each weeks}}
+            {{> week}}
+          {{/each}}
+        </div>
+      </div>
+      <div class="col-md-6 editMeal" style="{{display}}">
+        {{> editMeal }}
+      </div>
     </div>
   </div>
-  {{> editMeal }}}
 </body>
 
 

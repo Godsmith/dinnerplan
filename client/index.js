@@ -10,6 +10,9 @@ Template.body.helpers({
       allWeeks.push({days: dayChunk});
     });
     return allWeeks;
+  },
+  display: function() {
+    return Session.get('displayEditMeal') ? '' : 'display: none;';
   }
 });
 

@@ -1,7 +1,4 @@
 Template.editMeal.helpers({
-  display: function() {
-    return Session.get('displayEditMeal') ? '' : 'display: none;';
-  },
   meal: function() {
     return Session.get('meal');
   }
@@ -18,6 +15,7 @@ Template.editMeal.events({
     };
     Meteor.call('updateMeal', meal);
     Session.set('displayEditMeal', false);
+    loadMealNames(); // To make the meal blue. Should be done reactively instead.
   },
 
   'click .cancel': function(event, template){
