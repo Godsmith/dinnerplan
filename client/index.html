@@ -5,18 +5,18 @@
 </head>
 
 <body>
-  <div>
+  <div class="container">
     <h1>Välkommen{{#if currentUser}}, {{/if}}{{currentUser.username}}!</h1>
     {{> loginButtons }}
     <div class="row">
-      <div class="col-md-6">
+      <div class="{{weeksDivClass}}">
         <div class="row">
           {{#each weeks}}
             {{> week}}
           {{/each}}
         </div>
       </div>
-      <div class="col-md-6 editMeal" style="{{display}}">
+      <div class="editMeal {{editMealDivClass}}">
         {{> editMeal }}
       </div>
     </div>
