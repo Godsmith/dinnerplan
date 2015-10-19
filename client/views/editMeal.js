@@ -7,11 +7,11 @@ Template.editMeal.helpers({
 Template.editMeal.events({
   'click .ok': function(event, template){
     var meal = {
-      name: $('.editMeal input.name').val(),
-      source: $('.editMeal input.source').val(),
-      time: $('.editMeal input.time').val(),
-      ingredients: $('.editMeal input.ingredients').val(),
-      steps: $('.editMeal input.steps').val()
+      name: $('#inputMealName').val(),
+      source: $('#inputMealSource').val(),
+      time: $('#inputMealTime').val(),
+      ingredients: $('#inputMealIngredients').val(),
+      steps: $('#inputMealSteps').val()
     };
     Meteor.call('updateMeal', meal);
     Session.set('displayEditMeal', false);
