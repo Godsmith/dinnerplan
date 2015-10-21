@@ -1,36 +1,9 @@
 <template name="editMeal">
   <div>
     <form class="form-horizontal">
-      <div class="form-group">
-        <label for="inputMealName" class="col-sm-2">Name</label>
-        <div class="col-sm-10">
-          <textarea id="inputMealName" rows="1" class="form-control">{{meal.name}}</textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputMealSource" class="col-sm-2">Source</label>
-        <div class="col-sm-10">
-          <textarea id="inputMealSource" rows="1" class="form-control">{{meal.source}}</textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputMealTime" class="col-sm-2">Time</label>
-        <div class="col-sm-10">
-          <input id="inputMealTime" type="text" class="form-control" value="{{meal.time}}">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputMealIngredients" class="col-sm-2">Ingredients</label>
-        <div class="col-sm-10">
-          <textarea id="inputMealIngredients" rows="1" class="form-control">{{meal.ingredients}}</textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputMealSteps" class="col-sm-2">Steps</label>
-        <div class="col-sm-10">
-          <textarea id="inputMealSteps" rows="1" class="form-control">{{meal.steps}}</textarea>
-        </div>
-      </div>
+      {{#each textareas}}
+        {{> textarea}}
+      {{/each}}
       <button type="button" class="btn btn-default ok">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
       </button>
@@ -38,5 +11,14 @@
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
     </form>
+  </div>
+</template>
+
+<template name="textarea">
+  <div class="form-group">
+    <label for="{{id}}" class="col-sm-2">{{label}}</label>
+    <div class="col-sm-10">
+      <textarea id="{{id}}" rows="1" class="form-control">{{value}}</textarea>
+    </div>
   </div>
 </template>

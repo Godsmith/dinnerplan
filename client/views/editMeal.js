@@ -1,6 +1,33 @@
 Template.editMeal.helpers({
-  meal: function() {
-    return Session.get('meal');
+  textareas: function() {
+    var meal = Session.get('meal');
+    return [
+      {
+        id: 'inputMealName',
+        label: 'Name',
+        value: meal.name
+      },
+      {
+        id: 'inputMealSource',
+        label: 'Source',
+        value: meal.source
+      },
+      {
+        id: 'inputMealTime',
+        label: 'Time',
+        value: meal.time
+      },
+      {
+        id: 'inputMealIngredients',
+        label: 'Ingredients',
+        value: meal.ingredients
+      },
+      {
+        id: 'inputMealSteps',
+        label: 'Steps',
+        value: meal.steps
+      }
+    ]
   }
 });
 
