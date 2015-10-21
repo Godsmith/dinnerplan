@@ -55,21 +55,27 @@ Template.day.events({
 Template.day.onRendered(function(){
   // If this template is created, it is because we clicked ok when creating it.
   // After this, we have to focus the edit button.
-  focusEditButton(this.data);
+  var editButton = Session.get("editButtonToFocus");
+  if (editButton) {
+    $(editButton).focus();
+    Session.set("editButtonToFocus", null);
+  }
 });
 
 var ok = function(day) {
   day.meal = $('.date-' + day.date + ' textarea').val();
   Meteor.call('updateDay', day);
   hideEditing(day);
-  console.log('updated ' + day.date + ' with text ' + day.meal)
-  focusEditButton(day);
+  console.log('updated ' + day.date + ' with text ' + day.meal);
+  $(editButtonToFocus(day)).focus();
+  // Focus the edit button when the template is created next time
+  Session.set("editButtonToFocus", editButtonToFocus(day));
 };
 
 var cancel = function(day) {
   hideEditing(day);
   $('.date-' + day.date + ' textarea').val(day.meal);
-  focusEditButton(day);
+  $(editButtonToFocus(day)).focus();
 };
 
 var hideEditing = function(day) {
@@ -77,7 +83,7 @@ var hideEditing = function(day) {
   $('.editing.date-' + day.date).hide();
 };
 
-var focusEditButton = function(day) {
-  $('.viewing.date-' + day.date + ' .edit').focus();
+var editButtonToFocus = function(day) {
+  return '.viewing.date-' + day.date + ' .edit';
 };
 

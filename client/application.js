@@ -1,5 +1,6 @@
 Meteor.subscribe('days');
 Meteor.subscribe('meals');
+Meteor.subscribe('currentUser');
 
 Meteor.startup(function() {
   loadMealNames();
