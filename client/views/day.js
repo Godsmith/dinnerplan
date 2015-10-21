@@ -20,7 +20,7 @@ Template.day.events({
   'click .edit': function(event, template){
     $('.viewing.date-' + this.date).hide();
     $('.editing.date-' + this.date).show();
-    $('.editing.date-' + this.date + ' input').select();
+    $('.editing.date-' + this.date + ' textarea').select();
   },
 
   'click .ok': function(event, template){
@@ -31,7 +31,7 @@ Template.day.events({
     cancel(this);
   },
 
-  'keydown .editing input': function(event, template){
+  'keydown .editing textarea': function(event, template){
     switch (event.keyCode) {
       case 13:
         event.preventDefault(); //to prevent the enter key to trigger the edit button
@@ -59,7 +59,7 @@ Template.day.onRendered(function(){
 });
 
 var ok = function(day) {
-  day.meal = $('.date-' + day.date + ' input').val();
+  day.meal = $('.date-' + day.date + ' textarea').val();
   Meteor.call('updateDay', day);
   hideEditing(day);
   console.log('updated ' + day.date + ' with text ' + day.meal)
@@ -68,7 +68,7 @@ var ok = function(day) {
 
 var cancel = function(day) {
   hideEditing(day);
-  $('.date-' + day.date + ' input').val(day.meal);
+  $('.date-' + day.date + ' textarea').val(day.meal);
   focusEditButton(day);
 };
 
