@@ -1,3 +1,5 @@
+'use strict';
+
 describe('misc', function() {
   describe('getDays', function () {
     it('returns a single day when back=0 and forward=0', function () {

@@ -1,3 +1,5 @@
+'use strict';
+
 Template.body.helpers({
   weeks: function() {
     var query = Days.find({},{sort: {date: 1}});

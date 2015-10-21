@@ -1,3 +1,5 @@
+'use strict';
+
 Template.editMeal.helpers({
   textareas: function() {
     var meal = Session.get('meal');

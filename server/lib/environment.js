@@ -1,3 +1,4 @@
+'use strict';
 
 Accounts.onCreateUser(function(options, user) {
   user.weeksBack = 1;

@@ -1,3 +1,5 @@
+'use strict';
+
 Meteor.subscribe('days');
 Meteor.subscribe('meals');
 Meteor.subscribe('currentUser');

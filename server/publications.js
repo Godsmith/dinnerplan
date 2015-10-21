@@ -1,3 +1,5 @@
+'use strict';
+
 Meteor.publish("days", function() {
   return Days.find({ owner: this.userId });
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 moment.locale(navigator.language);
 
 Accounts.ui.config({

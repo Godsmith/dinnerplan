@@ -1,3 +1,5 @@
+'use strict';
+
 Template.day.helpers({
   dayFromDate: function(date){
     return moment(date).format('dddd').capitalize();
