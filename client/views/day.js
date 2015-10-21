@@ -79,6 +79,5 @@ var hideEditing = function(day) {
 
 var focusEditButton = function(day) {
   $('.viewing.date-' + day.date + ' .edit').focus();
-  console.log($(':focus'));
 };
 

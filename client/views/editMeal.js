@@ -49,3 +49,14 @@ Template.editMeal.events({
     Session.set('displayEditMeal', false);
   }
 });
+
+Template.editMeal.onRendered(function(){
+  this.autorun(function(){
+    Session.get("meal");
+    Tracker.afterFlush(function() {
+      $('textarea').each(function () {
+        adjustTextAreaHeight(this);
+      });
+    });
+  });
+});
