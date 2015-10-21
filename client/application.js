@@ -1,5 +1,3 @@
-'use strict';
-
 Meteor.subscribe('days');
 Meteor.subscribe('meals');
 Meteor.subscribe('currentUser');
@@ -21,3 +19,4 @@ adjustTextAreaHeight = function(textarea) {
   textarea.style.height = (Math.max(textarea.scrollHeight, 32) + 2) + 'px';
   //textarea.style.height = (textarea.scrollHeight + 2) + 'px';
 };
+

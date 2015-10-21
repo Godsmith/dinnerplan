@@ -4,7 +4,13 @@ Template.body.helpers({
   weeks: function() {
     var query = Days.find({},{sort: {date: 1}});
     var daysWithMeals = query.fetch();
-    var padding = getDaysFromWeekRange(Meteor.user().weeksBack,Meteor.user().weeksForward);
+    var weeksBack = 2;
+    var weeksForward = 1;
+    if (Meteor.user()) {
+      weeksBack = Meteor.user().weeksBack;
+      weeksForward = Meteor.user().weeksForward;
+    }
+    var padding = getDaysFromWeekRange(weeksBack,weeksForward);
     var allDays = padObjectArray(daysWithMeals, padding, dateOfDayIsEqual);
     var dayChunks = allDays.chunk(7);
     var allWeeks = [];
@@ -20,10 +26,14 @@ Template.body.helpers({
     return Session.get('displayEditMeal') ? 'col-xs-12 col-sm-6 col-md-4' : 'hidden';
   },
   weeksBack: function() {
-    return Meteor.user().weeksBack;
+    if (Meteor.user()) {
+      return Meteor.user().weeksBack;
+    }
   },
   weeksForward: function() {
-    return Meteor.user().weeksForward;
+    if (Meteor.user()) {
+      return Meteor.user().weeksForward;
+    }
   }
 });
 
