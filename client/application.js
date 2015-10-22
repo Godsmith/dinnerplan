@@ -7,9 +7,7 @@ Meteor.startup(function() {
 });
 
 loadMealNames = function() {
-  Meteor.call('mealNames', function(error, result) {
-    Session.set("mealNames", result);
-  });
+  Meteor.call('mealNames', (error, result) => { Session.set("mealNames", result); });
 };
 
 adjustTextAreaHeight = function(textarea) {

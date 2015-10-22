@@ -40,8 +40,10 @@ Template.body.helpers({
 Template.body.onRendered = function() {
   $('textarea').each(function () {
     this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    //console.log('textarea set')
   }).on('input propertychange', function () {
     adjustTextAreaHeight(this);
+    //console.log('textarea on input')
   });
 
   $('#inputWeeksBack').on('input', function() {

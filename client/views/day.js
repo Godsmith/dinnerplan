@@ -1,37 +1,19 @@
 'use strict';
 
 Template.day.helpers({
-  dayFromDate: function(date){
-    return moment(date).format('dddd').capitalize();
-  },
-  formatDate: function(date){
-    return moment(date).format('YYYY-MM-DD');
-  },
-  mealLinkClass: function(meal) {
-    return _.contains(Session.get('mealNames'), meal) ? 'exists' : '';
-  }
+  dayFromDate: date => moment(date).format('dddd').capitalize(),
+  formatDate: date => moment(date).format('YYYY-MM-DD'),
+  mealLinkClass: meal => _.contains(Session.get('mealNames'), meal) ? 'exists' : ''
 });
 
 Template.day.events({
-  'change .meal': function(event, template){
-    this.meal = $(event.target).val();
-    Meteor.call('updateDay', this);
-    console.log('updated ' + this.date + ' with text ' + this.meal)
-  },
-
-  'click .edit': function(event, template){
+  'click .edit'() {
     $('.viewing.date-' + this.date).hide();
     $('.editing.date-' + this.date).show();
     $('.editing.date-' + this.date + ' textarea').select();
   },
-
-  'click .ok': function(event, template){
-    ok(this);
-  },
-
-  'click .cancel': function(event, template){
-    cancel(this);
-  },
+  'click .ok'() { ok(this); },
+  'click .cancel'() { cancel(this); },
 
   'keydown .editing textarea': function(event, template){
     switch (event.keyCode) {
@@ -85,7 +67,5 @@ var hideEditing = function(day) {
   $('.editing.date-' + day.date).hide();
 };
 
-var editButtonToFocus = function(day) {
-  return '.viewing.date-' + day.date + ' .edit';
-};
+let editButtonToFocus = (day) => '.viewing.date-' + day.date + ' .edit';
 
