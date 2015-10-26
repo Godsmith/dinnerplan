@@ -24,3 +24,5 @@ less
 twbs:bootstrap
 accounts-ui
 accounts-password
+iron:router
+ejson

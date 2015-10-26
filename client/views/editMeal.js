@@ -7,7 +7,7 @@ Template.editMeal.helpers({
     var retVal = _.map(mealParameters, function(mealParameter) {
       return {
         id: mealParameter.textareaId,
-        label: mealParameter.textareaLabel,
+        label: mealParameter.label,
         value: meal[mealParameter.key]
       }
     });

@@ -1,0 +1,22 @@
+<template name="recipes">
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          {{#each mealParameters}}
+          <th>
+            {{label}}
+          </th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+      {{#each meals}}
+        {{> meal}}
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+

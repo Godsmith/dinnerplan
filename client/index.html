@@ -4,34 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
-  <div class="container">
-    <h1>Välkommen{{#if currentUser}}, {{/if}}{{currentUser.username}}!</h1>
-    {{> loginButtons }}
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="inputWeeksBack">Veckor bakåt</label>
-        <input type="text" class="form-control" id="inputWeeksBack" value="{{weeksBack}}">
-      </div>
-      <div class="form-group">
-        <label for="inputWeeksForward">framåt</label>
-        <input type="email" class="form-control" id="inputWeeksForward" value="{{weeksForward}}">
-      </div>
-    </form>
-    <div class="row">
-      <div class="{{weeksDivClass}}">
-        <div class="row">
-          {{#each weeks}}
-            {{> week}}
-          {{/each}}
-        </div>
-      </div>
-      <div class="editMeal {{editMealDivClass}}">
-        {{> editMeal }}
-      </div>
-    </div>
-  </div>
-</body>
+
 
 
 

@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<template name="layout">
+  <div class="container">
+    <div class="page-header">
+      <h1>Dinner plan</h1>
+    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="navbar-text">{{> loginButtons }}</li>
+          <li class="{{#if activeIs 'plan'}}active{{/if}}"><a href="/">Veckoplan</a></li>
+          <li class="{{#if activeIs 'recipes'}}active{{/if}}"><a href="/recipes">Recept</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  {{> yield }}
+</template>
