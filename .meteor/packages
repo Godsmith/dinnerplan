@@ -18,11 +18,10 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 insecure                # Allow all DB writes from clients (for prototyping)
 momentjs:moment
-sanjo:jasmine
 velocity:html-reporter
+sanjo:jasmine
 less
 twbs:bootstrap
 accounts-ui
 accounts-password
 iron:router
-ejson
