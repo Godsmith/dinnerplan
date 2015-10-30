@@ -48,4 +48,10 @@ module.exports = function () {
     browser.waitForExist(button);
     browser.click(button);
   });
+
+  this.Given(/^The control with id "([^"]*)" is set to the value "([^"]*)"$/, function (arg1, arg2) {
+    var selector = '#' + arg1;
+    browser.waitForExist(selector);
+    browser.setValue(selector, arg2);
+  });
 };
