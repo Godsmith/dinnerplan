@@ -13,4 +13,10 @@ Feature: Creating account and logging in and out
     And I click the Create account button
     Then I should see my name "newuser" on the page
 
-   
+  @focus
+  Scenario: After logging out of my account, "Sign in" should be shown again
+    Given The main page is showing
+    And I am a logged in user
+    When I click my username
+    And I click the Sign out button
+    Then I should see "Sign in" on the page again
