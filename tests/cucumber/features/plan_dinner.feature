@@ -12,11 +12,41 @@ Feature: Creating account and logging in and out
     And The input box with id "inputWeeksForward" should have the value "2"
     And The number of days showing should be "28"
 
-  @ignore
-  Scenario: Adding meals to days
+  @focus
+  Scenario: Adding meals to days by pressing Enter
     Given The main page is showing
     And I am a logged in user
     When I click an edit button
     And I fill in text "Korv Stroganoff" in the text box
-    And I press Enter
+    And I press "Enter"
     Then I should see "Korv Stroganoff" on the page
+
+  @focus
+  Scenario: Adding meals to days by clicking the ok button
+    Given The main page is showing
+    And I am a logged in user
+    When I click an edit button
+    And I fill in text "Korv Stroganoff" in the text box
+    And I click the ok button
+    Then I should see "Korv Stroganoff" on the page
+
+  @focus
+  Scenario: Canceling when adding a meal by pressing Enter
+    Given The main page is showing
+    And I am a logged in user
+    When I click an edit button
+    And I fill in text "Korv Stroganoff" in the text box
+    And I click the cancel button
+    Then I should see "" on the page
+
+  @focus
+  Scenario: Editing an existing planned meal for a day
+    Given The main page is showing
+    And I am a logged in user
+    When I click an edit button
+    And I fill in text "Korv Stroganoff" in the text box
+    And I click the ok button
+    And I click an edit button
+    And I fill in text "Pasta Carbonara" in the text box
+    And I click the ok button
+    Then I should see "Pasta Carbonara" on the page

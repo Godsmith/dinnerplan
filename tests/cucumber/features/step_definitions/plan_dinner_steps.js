@@ -17,8 +17,8 @@ module.exports = function () {
     browser.setValue(textarea, arg1);
   });
 
-  this.When(/^I press Enter$/, function () {
-    browser.keys('Enter');
+  this.When(/^I press "([^"]*)"$/, function (arg1) {
+    browser.keys(arg1);
   });
 
   this.Then(/^I should see "([^"]*)" on the page$/, function (arg1) {
@@ -37,6 +37,15 @@ module.exports = function () {
     expect(String(browser.elements('.viewing').value.length)).toEqual(arg1);
   });
 
+  this.When(/^I click the ok button$/, function () {
+    var button = '.date-' + today + ' .ok';
+    browser.waitForExist(button);
+    browser.click(button);
+  });
 
-
+  this.When(/^I click the cancel button$/, function () {
+    var button = '.date-' + today + ' .cancel';
+    browser.waitForExist(button);
+    browser.click(button);
+  });
 };

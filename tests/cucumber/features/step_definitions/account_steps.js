@@ -4,8 +4,6 @@
 module.exports = function () {
   this.Given(/^The main page is showing$/, function () {
     browser.url(process.env.ROOT_URL);
-    browser.waitForExist('body *');
-    browser.waitForVisible('body *');
   });
 
   this.When(/^I click the Sign in link$/, function () {
