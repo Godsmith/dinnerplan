@@ -3,7 +3,7 @@
  */
 module.exports = function () {
   this.Given(/^The main page is showing$/, function () {
-    browser.url(process.env.ROOT_URL);
+    this.support.navigateToMainPage();
   });
 
   this.When(/^I click the Sign in link$/, function () {
@@ -36,12 +36,13 @@ module.exports = function () {
   });
 
   this.Given(/^I am a logged in user$/, function () {
-    var userData = {username: 'newuser', password: 'password'};
-    this.server.call('addUser', userData);
-    browser.executeAsync(function(userData, done) {
-      Meteor.loginWithPassword(userData.username, userData.password, done);
-    }, userData);
-    browser.waitForExist('#login-name-link');
+    this.support.createUserAndLogIn();
+    //var userData = {username: 'newuser', password: 'password'};
+    //this.server.call('addUser', userData);
+    //browser.executeAsync(function(userData, done) {
+    //  Meteor.loginWithPassword(userData.username, userData.password, done);
+    //}, userData);
+    //browser.waitForExist('#login-name-link');
   });
 
   this.When(/^I click my username$/, function () {
@@ -59,4 +60,10 @@ module.exports = function () {
     var text = browser.getText('#login-sign-in-link');
     expect(text).toContain(arg1);
   });
+
+  this.Given(/^I am a logged in user on the main page$/, function () {
+    this.support.navigateToMainPage();
+    this.support.createUserAndLogIn();
+  });
+
 };

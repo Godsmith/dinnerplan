@@ -15,8 +15,7 @@ Feature: Creating account and logging in and out
 
   @focus
   Scenario: After logging out of my account, "Sign in" should be shown again
-    Given The main page is showing
-    And I am a logged in user
+    Given I am a logged in user on the main page
     When I click my username
     And I click the Sign out button
     Then I should see "Sign in" on the page again
