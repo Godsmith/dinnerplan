@@ -14,7 +14,7 @@ Feature: Creating account and logging in and out
 
   @focus
   Scenario: When changing it to 0 week back and 1 weeks forward, the number of days showing
-  should be 7
+  should be 14
     Given The main page is showing
     And I am a logged in user
     And The control with id "inputWeeksBack" is set to the value "0"
