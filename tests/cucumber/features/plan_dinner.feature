@@ -36,7 +36,7 @@ Feature: Creating account and logging in and out
     And I am a logged in user
     When I click an edit button
     And I fill in text "Korv Stroganoff" in the text box
-    And I click the ok button
+    And I click the "ok" button for today's meal
     Then I should see "Korv Stroganoff" on the page
 
   @focus
@@ -45,7 +45,7 @@ Feature: Creating account and logging in and out
     And I am a logged in user
     When I click an edit button
     And I fill in text "Korv Stroganoff" in the text box
-    And I click the cancel button
+    And I click the "cancel" button for today's meal
     Then I should see "" on the page
 
   @focus
@@ -54,8 +54,8 @@ Feature: Creating account and logging in and out
     And I am a logged in user
     When I click an edit button
     And I fill in text "Korv Stroganoff" in the text box
-    And I click the ok button
+    And I click the "ok" button for today's meal
     And I click an edit button
     And I fill in text "Pasta Carbonara" in the text box
-    And I click the ok button
+    And I click the "ok" button for today's meal
     Then I should see "Pasta Carbonara" on the page

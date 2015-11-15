@@ -12,9 +12,7 @@ module.exports = function () {
   });
 
   this.When(/^I fill in text "([^"]*)" in the text box$/, function (arg1) {
-    var textarea = '.date-' + today + ' textarea';
-    browser.waitForExist(textarea);
-    browser.setValue(textarea, arg1);
+    this.support.setValueOfSelector('.date-' + today + ' textarea', arg1)
   });
 
   this.When(/^I press "([^"]*)"$/, function (arg1) {
@@ -37,14 +35,8 @@ module.exports = function () {
     expect(String(browser.elements('.viewing').value.length)).toEqual(arg1);
   });
 
-  this.When(/^I click the ok button$/, function () {
-    var button = '.date-' + today + ' .ok';
-    browser.waitForExist(button);
-    browser.click(button);
-  });
-
-  this.When(/^I click the cancel button$/, function () {
-    var button = '.date-' + today + ' .cancel';
+  this.When(/^I click the "([^"]*)" button for today's meal$/, function (arg1) {
+    var button = '.date-' + today + ' .' + arg1;
     browser.waitForExist(button);
     browser.click(button);
   });
