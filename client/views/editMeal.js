@@ -35,6 +35,7 @@ Template.editMeal.events({
 Template.editMeal.onRendered(function(){
   this.autorun(function(){
     Session.get("meal");
+    // Resize textareas after loading data from the database
     Tracker.afterFlush(function() {
       $('textarea').each(function () {
         adjustTextAreaHeight(this);

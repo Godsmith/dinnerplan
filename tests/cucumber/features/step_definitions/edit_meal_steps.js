@@ -55,4 +55,17 @@ module.exports = function () {
     expect(this.support.getValueOfSelector('#inputMealTime')).toEqual(arg1);
   });
 
+  this.Given(/^I click the "([^"]*)" textarea$/, function (arg1) {
+    this.support.clickSelector('#inputMeal' + arg1)
+  });
+  var height;
+  this.Given(/^The "([^"]*)" textarea has a certain height$/, function (arg1) {
+    height = browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value;
+  });
+
+  this.Then(/^The "([^"]*)" textarea has increased in height$/, function (arg1) {
+    expect(browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value).toBeGreaterThan(height);
+  });
+
+
 };

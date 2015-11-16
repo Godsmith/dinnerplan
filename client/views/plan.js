@@ -1,12 +1,6 @@
 'use strict';
 
 Template.plan.onRendered(function() {
-  $('textarea').each(function () {
-    this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-  }).on('input propertychange', function () {
-    adjustTextAreaHeight(this);
-  });
-
   $('#inputWeeksBack').on('input', function() {
     updateWeeksVariable(this, 'updateWeeksBack');
   });
@@ -19,6 +13,14 @@ Template.plan.onRendered(function() {
     Meteor.call(methodName, self.value);
     //prevent focus from shifting to the new weeks that were added
     self.focus();
+  }
+});
+
+Template.plan.events({
+  'input textarea': function(event, template) {
+    console.log(event.target)
+    console.log($(event.target))
+    adjustTextAreaHeight(event.target);
   }
 });
 

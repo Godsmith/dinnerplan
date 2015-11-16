@@ -34,6 +34,16 @@ Feature: Edit meals
     When I click the "cancel" edit meal button
     Then The edit controls should not show
 
+    @focus
+      Scenario: When I insert a new row in one of the edit fields the textarea should expand
+    automatically
+      Given I am a logged in user on the main page in edit mode
+      And The "Source" textarea has a certain height
+      When I click the "Source" textarea
+      And I press "Enter"
+      Then The "Source" textarea has increased in height
+
+
   @focus
   Scenario: Adding a new meal to the database should change the color of the link to blue
     Given I am a logged in user on the main page that has inserted a meal into the database
