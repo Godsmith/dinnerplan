@@ -3,16 +3,17 @@
  */
 module.exports = function () {
 
-  var today = moment().format('YYYY-MM-DD');
+  dates = {
+    today: moment().format('YYYY-MM-DD'),
+    tomorrow: moment().add(1, 'days').format('YYYY-MM-DD')
+  };
 
-  this.When(/^I click an edit button$/, function () {
-    var button = '.date-' + today + ' button';
-    browser.waitForExist(button);
-    browser.click(button);
+  this.When(/^I click the edit button for "([^"]*)"'s meal$/, function (arg1) {
+    this.support.clickEditButtonForDate(dates[arg1]);
   });
 
-  this.When(/^I fill in text "([^"]*)" in the text box$/, function (arg1) {
-    this.support.setValueOfSelector('.date-' + today + ' textarea', arg1)
+  this.When(/^I insert "([^"]*)" in "([^"]*)"'s text box$/, function (arg1, arg2) {
+    this.support.setValueOfSelector('.date-' + dates[arg2] + ' textarea', arg1)
   });
 
   this.When(/^I press "([^"]*)"$/, function (arg1) {
@@ -20,7 +21,7 @@ module.exports = function () {
   });
 
   this.Then(/^I should see "([^"]*)" on the page$/, function (arg1) {
-    var a = '.date-' + today + ' a';
+    var a = '.date-' + dates.today + ' a';
     browser.waitForExist(a);
     expect(browser.getText(a)).toEqual(arg1);
   });
@@ -35,8 +36,8 @@ module.exports = function () {
     expect(String(browser.elements('.viewing').value.length)).toEqual(arg1);
   });
 
-  this.When(/^I click the "([^"]*)" button for today's meal$/, function (arg1) {
-    var button = '.date-' + today + ' .' + arg1;
+  this.When(/^I click the "([^"]*)" button for "([^"]*)"'s meal$/, function (arg1, arg2) {
+    var button = '.date-' + dates[arg2] + ' .' + arg1;
     browser.waitForExist(button);
     browser.click(button);
   });

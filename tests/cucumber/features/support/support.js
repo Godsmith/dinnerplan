@@ -1,4 +1,7 @@
 module.exports = function () {
+
+  'use strict';
+
   this.Before(function () {
 
     var theServer = this.server;
@@ -18,16 +21,22 @@ module.exports = function () {
         browser.waitForExist('#login-name-link');
       },
 
-      addMealForTonight: function() {
-        this.clickSelector('.date-' + today + ' button');
-        var textarea = '.date-' + today + ' textarea';
+      addMealForDate: function(mealName, dateString) {
+        this.clickSelector('.date-' + dateString + ' button');
+        var textarea = '.date-' + dateString + ' textarea';
         browser.waitForExist(textarea);
-        browser.setValue(textarea, 'mymealname');
+        browser.setValue(textarea, mealName);
         browser.keys('Enter');
       },
 
-      clickTonightsMeal: function() {
-        this.clickSelector('.viewing.date-' + today + ' a')
+      clickEditButtonForDate: function(dateString) {
+        var button = '.date-' + dateString + ' button';
+        browser.waitForExist(button);
+        browser.click(button);
+      },
+
+      clickMealName: function(dateString) {
+        this.clickSelector('.viewing.date-' + dateString + ' a')
       },
 
       setValueOfSelector: function(selector, value) {
@@ -53,11 +62,10 @@ module.exports = function () {
       insertMealIntoDatabaseAndShow: function() {
         this.navigateToMainPage();
         this.createUserAndLogIn();
-        this.addMealForTonight();
-        this.clickTonightsMeal();
+        this.addMealForDate('meal name', today);
+        this.clickMealName(today);
         this.clickSelector('.editMeal .ok');
       }
-
     }
   });
 };

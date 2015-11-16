@@ -18,8 +18,6 @@ Template.plan.onRendered(function() {
 
 Template.plan.events({
   'input textarea': function(event, template) {
-    console.log(event.target)
-    console.log($(event.target))
     adjustTextAreaHeight(event.target);
   }
 });

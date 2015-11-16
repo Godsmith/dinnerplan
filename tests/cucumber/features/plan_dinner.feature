@@ -25,8 +25,8 @@ Feature: Creating account and logging in and out
   Scenario: Adding meals to days by pressing Enter
     Given The main page is showing
     And I am a logged in user
-    When I click an edit button
-    And I fill in text "Korv Stroganoff" in the text box
+    When I click the edit button for "today"'s meal
+    And I insert "Korv Stroganoff" in "today"'s text box
     And I press "Enter"
     Then I should see "Korv Stroganoff" on the page
 
@@ -34,28 +34,28 @@ Feature: Creating account and logging in and out
   Scenario: Adding meals to days by clicking the ok button
     Given The main page is showing
     And I am a logged in user
-    When I click an edit button
-    And I fill in text "Korv Stroganoff" in the text box
-    And I click the "ok" button for today's meal
+    When I click the edit button for "today"'s meal
+    And I insert "Korv Stroganoff" in "today"'s text box
+    And I click the "ok" button for "today"'s meal
     Then I should see "Korv Stroganoff" on the page
 
   @focus
   Scenario: Canceling when adding a meal by pressing Enter
     Given The main page is showing
     And I am a logged in user
-    When I click an edit button
-    And I fill in text "Korv Stroganoff" in the text box
-    And I click the "cancel" button for today's meal
+    When I click the edit button for "today"'s meal
+    And I insert "Korv Stroganoff" in "today"'s text box
+    And I click the "cancel" button for "today"'s meal
     Then I should see "" on the page
 
   @focus
   Scenario: Editing an existing planned meal for a day
     Given The main page is showing
     And I am a logged in user
-    When I click an edit button
-    And I fill in text "Korv Stroganoff" in the text box
-    And I click the "ok" button for today's meal
-    And I click an edit button
-    And I fill in text "Pasta Carbonara" in the text box
-    And I click the "ok" button for today's meal
+    When I click the edit button for "today"'s meal
+    And I insert "Korv Stroganoff" in "today"'s text box
+    And I click the "ok" button for "today"'s meal
+    And I click the edit button for "today"'s meal
+    And I insert "Pasta Carbonara" in "today"'s text box
+    And I click the "ok" button for "today"'s meal
     Then I should see "Pasta Carbonara" on the page

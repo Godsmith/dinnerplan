@@ -30,6 +30,7 @@ Template.day.events({
   'click a': function(event, template) {
     var mealName = template.data.meal;
     Meteor.call('mealFromName', mealName, function(error, result) {
+      $('.editMeal form').trigger('reset');
       Session.set('meal', result);
       Session.set('displayEditMeal', true);
     });

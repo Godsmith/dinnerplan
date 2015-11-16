@@ -1,13 +1,16 @@
 module.exports = function () {
 
-  var today = moment().format('YYYY-MM-DD');
+  var dates = {
+    today: moment().format('YYYY-MM-DD'),
+    tomorrow: moment().add(1, 'days').format('YYYY-MM-DD')
+  };
 
   this.Given(/^I have added a meal for tonight$/, function () {
-    this.support.addMealForTonight();
+    this.support.addMealForDate('meal name', dates.today);
   });
 
-  this.When(/^I click tonight's meal$/, function () {
-    this.support.clickTonightsMeal();
+  this.When(/^I click "([^"]*)"'s meal$/, function (arg1) {
+    this.support.clickMealName(dates[arg1]);
   });
 
   this.Then(/^The "([^"]*)" edit control should show$/, function (arg1) {
@@ -17,8 +20,8 @@ module.exports = function () {
   this.Given(/^I am a logged in user on the main page in edit mode$/, function () {
     this.support.navigateToMainPage();
     this.support.createUserAndLogIn();
-    this.support.addMealForTonight();
-    this.support.clickTonightsMeal();
+    this.support.addMealForDate('meal name', dates.today);
+    this.support.clickMealName(dates.today);
   });
 
   this.Then(/^The edit controls should not show$/, function () {
@@ -30,7 +33,7 @@ module.exports = function () {
   });
 
   this.Then(/^The color of tonight's meal should be "([^"]*)"$/, function (arg1) {
-    var selector = '.viewing.date-' + today + ' a';
+    var selector = '.viewing.date-' + dates.today + ' a';
     browser.waitForVisible(selector);
     expect(browser.getCssProperty(selector, 'color').parsed.hex).toEqual(arg1);
   });
@@ -51,10 +54,6 @@ module.exports = function () {
     browser.waitForVisible('#login-name-link');
   });
 
-  this.Then(/^The Time field should say "([^"]*)"$/, function (arg1) {
-    expect(this.support.getValueOfSelector('#inputMealTime')).toEqual(arg1);
-  });
-
   this.Given(/^I click the "([^"]*)" textarea$/, function (arg1) {
     this.support.clickSelector('#inputMeal' + arg1)
   });
@@ -67,5 +66,12 @@ module.exports = function () {
     expect(browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value).toBeGreaterThan(height);
   });
 
+  this.Then(/^The text of the Time textbox should be "([^"]*)"$/, function (arg1) {
+    expect(this.support.getValueOfSelector('#inputMealTime')).toEqual(arg1);
+  });
 
+  this.When(/^I insert "([^"]*)" as "([^"]*)"'s meal$/, function (meal, arg2) {
+    var dateString = dates[arg2];
+    this.support.addMealForDate(meal, dateString);
+  });
 };

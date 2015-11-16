@@ -14,7 +14,7 @@ Feature: Edit meals
   Scenario: When I click on the name of a meal it should open the edit meal view
     Given I am a logged in user on the main page
     And I have added a meal for tonight
-    When I click tonight's meal
+    When I click "today"'s meal
     Then The "Name" edit control should show
     And The "Source" edit control should show
     And The "Time" edit control should show
@@ -34,15 +34,14 @@ Feature: Edit meals
     When I click the "cancel" edit meal button
     Then The edit controls should not show
 
-    @focus
-      Scenario: When I insert a new row in one of the edit fields the textarea should expand
-    automatically
-      Given I am a logged in user on the main page in edit mode
-      And The "Source" textarea has a certain height
-      When I click the "Source" textarea
-      And I press "Enter"
-      Then The "Source" textarea has increased in height
-
+  @focus
+  Scenario: When I insert a new row in one of the edit fields the textarea should expand
+  automatically
+    Given I am a logged in user on the main page in edit mode
+    And The "Source" textarea has a certain height
+    When I click the "Source" textarea
+    And I press "Enter"
+    Then The "Source" textarea has increased in height
 
   @focus
   Scenario: Adding a new meal to the database should change the color of the link to blue
@@ -57,5 +56,27 @@ Feature: Edit meals
     And I click the "ok" edit meal button
     And I refresh the page
     And I wait until I have been logged in
-    And I click tonight's meal
-    Then The Time field should say "30 min"
+    And I click "today"'s meal
+    Then The text of the Time textbox should be "30 min"
+
+  @focus
+  Scenario: When clicking a recipe with an empty field after clicking a recipe with some
+  filled-in fields, all the empty fields should be shown as empty
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I insert "meal name" as "tomorrow"'s meal
+    And I click "tomorrow"'s meal
+    And I enter "A very long string that almost certainly causes a row break" in the Time field
+    And I click the "ok" edit meal button
+    And I click "today"'s meal
+    Then The text of the Time textbox should be ""
+
+  @temp
+  @focus
+  Scenario: When filling in a field and then switching recipe without saving, the field should be
+  cleared
+    Given I am a logged in user on the main page in edit mode
+    When I enter "30 min" in the Time field
+    And I insert "meal name" as "tomorrow"'s meal
+    And I click "tomorrow"'s meal
+    Then The text of the Time textbox should be ""
+
