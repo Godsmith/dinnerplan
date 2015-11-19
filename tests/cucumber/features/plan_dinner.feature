@@ -17,9 +17,26 @@ Feature: Creating account and logging in and out
   should be 14
     Given The main page is showing
     And I am a logged in user
-    And The control with id "inputWeeksBack" is set to the value "0"
-    And The control with id "inputWeeksForward" is set to the value "1"
+    And I set the control with id "inputWeeksBack" to the value "0"
+    And I set the control with id "inputWeeksForward" to the value "1"
     Then The number of days showing should be "14"
+
+  @focus
+  Scenario: When changing the number of weeks back to more than 8, the number should be changed
+  to 8.
+    Given The main page is showing
+    And I am a logged in user
+    And I set the control with id "inputWeeksBack" to the value "53"
+    Then The control with id "inputWeeksBack" should have the value "8"
+
+  @focus
+  Scenario: When changing the number of weeks back to less than -8, the number should be
+  changed
+  to 8.
+    Given The main page is showing
+    And I am a logged in user
+    And I set the control with id "inputWeeksBack" to the value "-53"
+    Then The control with id "inputWeeksBack" should have the value "-8"
 
   @focus
   Scenario: Adding meals to days by pressing Enter

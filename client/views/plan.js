@@ -1,11 +1,15 @@
 'use strict';
 
 Template.plan.onRendered(function() {
-  $('#inputWeeksBack').on('input', function() {
+  $('#inputWeeksBack').on('input', function(event) {
+    event.preventDefault();
+    $(this).val(makeAbsoluteValueLessThan($(this).val(), MAX_WEEKS_BACK));
     updateWeeksVariable(this, 'updateWeeksBack');
   });
 
   $('#inputWeeksForward').on('input', function() {
+    event.preventDefault();
+    $(this).val(makeAbsoluteValueLessThan($(this).val(), MAX_WEEKS_FORWARD));
     updateWeeksVariable(this, 'updateWeeksForward');
   });
 

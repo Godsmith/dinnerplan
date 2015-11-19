@@ -42,9 +42,15 @@ module.exports = function () {
     browser.click(button);
   });
 
-  this.Given(/^The control with id "([^"]*)" is set to the value "([^"]*)"$/, function (arg1, arg2) {
+  this.Given(/^I set the control with id "([^"]*)" to the value "([^"]*)"$/, function (arg1, arg2) {
     var selector = '#' + arg1;
     browser.waitForExist(selector);
     browser.setValue(selector, arg2);
+  });
+
+  this.Then(/^The control with id "([^"]*)" should have the value "([^"]*)"$/, function (arg1, arg2) {
+    var selector = '#' + arg1;
+    browser.waitForExist(selector);
+    expect(browser.getValue(selector)).toEqual(arg2);
   });
 };
