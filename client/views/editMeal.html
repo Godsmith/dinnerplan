@@ -17,8 +17,24 @@
 <template name="textarea">
   <div class="form-group">
     <label for="{{id}}" class="col-sm-2">{{label}}</label>
-    <div class="col-sm-10">
-      <textarea id="{{id}}" rows="1" class="form-control">{{value}}</textarea>
-    </div>
+    {{#if equals type 'textarea'}}
+      <div class="col-sm-10">
+        <textarea id="{{id}}" rows="1" class="form-control">{{value}}</textarea>
+      </div>
+    {{/if}}
+    {{#if equals type 'rateit'}}
+      {{>ratings}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="ratings">
+  <div class="btn-group col-sm-8" data-toggle="buttons">
+    {{#each numbers}}
+        <label class="btn btn-default rating {{active}}">
+          <input type="radio" name="options" autocomplete="off">
+                 {{number}}
+        </label>
+    {{/each}}
   </div>
 </template>

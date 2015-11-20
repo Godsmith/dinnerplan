@@ -6,9 +6,10 @@ Template.editMeal.helpers({
     if (!meal) return false;
     var retVal = _.map(mealParameters, function(mealParameter) {
       return {
-        id: mealParameter.textareaId,
+        id: mealParameter.htmlId,
         label: mealParameter.label,
-        value: meal[mealParameter.key]
+        value: meal[mealParameter.databaseKeyName],
+        type: mealParameter.type
       }
     });
     return retVal;
@@ -19,7 +20,16 @@ Template.editMeal.events({
   'click .ok': function(event, template){
     let meal = {};
     for (let mealParameter of mealParameters) {
-      meal[mealParameter.key] = $('#' + mealParameter.textareaId).val()
+      var element = $('#' + mealParameter.htmlId);
+      var value;
+      switch (mealParameter.type) {
+        case 'textarea':
+          value = element.val();
+          break;
+        case 'rating':
+          value = $.trim($('label.active').text());
+      }
+      meal[mealParameter.databaseKeyName] = value;
     }
 
     Meteor.call('updateMeal', meal);
@@ -43,3 +53,21 @@ Template.editMeal.onRendered(function(){
     });
   });
 });
+
+Template.textarea.helpers({
+  equals: (a,b) => a==b
+});
+
+Template.ratings.helpers({
+  numbers: function() {
+    var list = [];
+    for (var i = 1; i<=5; i++) {
+      var obj = {};
+      obj.number = i;
+      obj.active = this.value == i ? 'active' : '';
+      list.push(obj);
+    }
+    return list
+  }
+});
+
