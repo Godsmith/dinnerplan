@@ -1,8 +1,8 @@
 <template name="editMeal">
   <div>
     <form class="form-horizontal">
-      {{#each textareas}}
-        {{> textarea}}
+      {{#each mealProperties}}
+        {{> mealProperty}}
       {{/each}}
       <button type="button" class="btn btn-default ok">
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<template name="textarea">
+<template name="mealProperty">
   <div class="form-group">
     <label for="{{id}}" class="col-sm-2">{{label}}</label>
     {{#if equals type 'textarea'}}

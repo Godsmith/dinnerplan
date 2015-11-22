@@ -1,6 +1,6 @@
 Meals = new Mongo.Collection('meals');
 
-class MealParameter {
+class MealProperty {
   constructor(key, type, htmlId, label) {
     this.databaseKeyName = key;
     this.type = type;
@@ -9,11 +9,11 @@ class MealParameter {
   }
 }
 
-MEAL_PARAMETERS = [
-  new MealParameter('name', 'textarea', 'inputMealName', 'Namn'),
-  new MealParameter('source', 'textarea', 'inputMealSource', 'Källa'),
-  new MealParameter('time', 'textarea', 'inputMealTime', 'Tid'),
-  new MealParameter('ingredients', 'textarea', 'inputMealIngredients', 'Ingredienser'),
-  new MealParameter('steps', 'textarea', 'inputMealSteps', 'Steg'),
-  new MealParameter('rating', 'rating', 'inputMealRating', 'Betyg')
+MEAL_PROPERTIES = [
+  new MealProperty('name', 'textarea', 'inputMealName', 'Namn'),
+  new MealProperty('source', 'textarea', 'inputMealSource', 'Källa'),
+  new MealProperty('time', 'textarea', 'inputMealTime', 'Tid'),
+  new MealProperty('ingredients', 'textarea', 'inputMealIngredients', 'Ingredienser'),
+  new MealProperty('steps', 'textarea', 'inputMealSteps', 'Steg'),
+  new MealProperty('rating', 'rating', 'inputMealRating', 'Betyg')
 ];

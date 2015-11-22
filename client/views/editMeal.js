@@ -1,15 +1,15 @@
 'use strict';
 
 Template.editMeal.helpers({
-  textareas: function() {
+  mealProperties: function() {
     var meal = Session.get('meal');
     if (!meal) return false;
-    var retVal = _.map(MEAL_PARAMETERS, function(mealParameter) {
+    var retVal = _.map(MEAL_PROPERTIES, function(mealProperty) {
       return {
-        id: mealParameter.htmlId,
-        label: mealParameter.label,
-        value: meal[mealParameter.databaseKeyName],
-        type: mealParameter.type
+        id: mealProperty.htmlId,
+        label: mealProperty.label,
+        value: meal[mealProperty.databaseKeyName],
+        type: mealProperty.type
       }
     });
     return retVal;
@@ -19,17 +19,17 @@ Template.editMeal.helpers({
 Template.editMeal.events({
   'click .ok': function(event, template){
     let meal = {};
-    for (let mealParameter of MEAL_PARAMETERS) {
-      var element = $('#' + mealParameter.htmlId);
+    for (let mealProperty of MEAL_PROPERTIES) {
+      var element = $('#' + mealProperty.htmlId);
       var value;
-      switch (mealParameter.type) {
+      switch (mealProperty.type) {
         case 'textarea':
           value = element.val();
           break;
         case 'rating':
           value = $.trim($('label.active').text());
       }
-      meal[mealParameter.databaseKeyName] = value;
+      meal[mealProperty.databaseKeyName] = value;
     }
 
     Meteor.call('updateMeal', meal);
@@ -54,7 +54,7 @@ Template.editMeal.onRendered(function(){
   });
 });
 
-Template.textarea.helpers({
+Template.mealProperty.helpers({
   equals: (a,b) => a==b
 });
 
