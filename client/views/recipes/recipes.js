@@ -6,6 +6,6 @@ Template.recipes.helpers({
     return Session.get("meals");
   },
   mealParameters: function() {
-    return mealParameters;
+    return MEAL_PARAMETERS;
   }
 });

@@ -9,7 +9,7 @@ class MealParameter {
   }
 }
 
-mealParameters = [
+MEAL_PARAMETERS = [
   new MealParameter('name', 'textarea', 'inputMealName', 'Namn'),
   new MealParameter('source', 'textarea', 'inputMealSource', 'Källa'),
   new MealParameter('time', 'textarea', 'inputMealTime', 'Tid'),

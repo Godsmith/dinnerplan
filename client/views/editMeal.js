@@ -4,7 +4,7 @@ Template.editMeal.helpers({
   textareas: function() {
     var meal = Session.get('meal');
     if (!meal) return false;
-    var retVal = _.map(mealParameters, function(mealParameter) {
+    var retVal = _.map(MEAL_PARAMETERS, function(mealParameter) {
       return {
         id: mealParameter.htmlId,
         label: mealParameter.label,
@@ -19,7 +19,7 @@ Template.editMeal.helpers({
 Template.editMeal.events({
   'click .ok': function(event, template){
     let meal = {};
-    for (let mealParameter of mealParameters) {
+    for (let mealParameter of MEAL_PARAMETERS) {
       var element = $('#' + mealParameter.htmlId);
       var value;
       switch (mealParameter.type) {
