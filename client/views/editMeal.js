@@ -50,27 +50,30 @@ Template.editMeal.events({
 });
 
 Template.editMeal.onRendered(function(){
-  var $select = $('#categories').selectize({
-    valueField: 'value',
-    labelField: 'value',
-    searchField: 'value',
-    options: CATEGORIES
-  });
-
-
   this.autorun(function(){
-    let meal = Session.get("meal");
-
-    let selectize = $select[0].selectize;
-    let categoriesArray = meal.categories ? meal.categories.split(',') : [];
-    selectize.setValue(categoriesArray);
-
+    Session.get("meal");
     // Resize textareas after loading data from the database
     Tracker.afterFlush(function() {
       $('textarea').each(function () {
         adjustTextAreaHeight(this);
       });
     });
+  });
+});
+
+Template.categories.onRendered(function() {
+  var $select = $('#categories').selectize({
+    valueField: 'value',
+    labelField: 'value',
+    searchField: 'value',
+    options: CATEGORIES
+  });
+  var selectize = $select[0].selectize;
+  
+  this.autorun(function(){
+    var meal = Session.get("meal");
+    let categoriesArray = meal.categories ? meal.categories.split(',') : [];
+    selectize.setValue(categoriesArray);
   });
 });
 
