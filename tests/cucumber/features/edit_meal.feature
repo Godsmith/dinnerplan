@@ -22,6 +22,23 @@ Feature: Edit meals
     And The "Steps" edit control should show
 
   @focus
+  Scenario: When I click on the name of a meal the name of that meal should be shown in the edit
+  meal view
+    Given I am a logged in user on the main page
+    And I have added a meal "Korv Stroganoff" for tonight
+    When I click "today"'s meal
+    Then The text of the "Name" textbox should be "Korv Stroganoff"
+
+  @focus
+  Scenario: When I click on the name of a meal twice the name of that meal should still be shown in
+  the edit meal view
+    Given I am a logged in user on the main page
+    And I have added a meal "Korv Stroganoff" for tonight
+    When I click "today"'s meal
+    And I click "today"'s meal
+    Then The text of the "Name" textbox should be "Korv Stroganoff"
+
+  @focus
   Scenario: When a meal name that is not in the database has been created for tonight, it should be
   colored red
     Given I am a logged in user on the main page
@@ -57,9 +74,9 @@ Feature: Edit meals
     And I refresh the page
     And I wait until I have been logged in
     And I click "today"'s meal
-    Then The text of the Time textbox should be "30 min"
+    Then The text of the "Time" textbox should be "30 min"
 
-  @focus
+  @ignore
   Scenario: When clicking a recipe with an empty field after clicking a recipe with some
   filled-in fields, all the empty fields should be shown as empty
     Given I am a logged in user on the main page that has inserted a meal into the database
@@ -68,15 +85,14 @@ Feature: Edit meals
     And I enter "A very long string that almost certainly causes a row break" in the Time field
     And I click the "ok" edit meal button
     And I click "today"'s meal
-    Then The text of the Time textbox should be ""
+    Then The text of the "Time" textbox should be ""
 
-  @temp
-  @focus
+  @ignore
   Scenario: When filling in a field and then switching recipe without saving, the field should be
   cleared
     Given I am a logged in user on the main page in edit mode
     When I enter "30 min" in the Time field
     And I insert "meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
-    Then The text of the Time textbox should be ""
+    Then The text of the "Time" textbox should be ""
 

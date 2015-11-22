@@ -28,10 +28,11 @@ Template.day.events({
   },
 
   'click a': function(event, template) {
+    // Remove label marking so that it does not carry over
+    $('label.rating').removeClass('active');
+
     var mealName = template.data.meal;
     Meteor.call('mealFromName', mealName, function(error, result) {
-      $('.editMeal form').trigger('reset');
-      $('label.rating').removeClass('active');
       Session.set('meal', result);
       Session.set('displayEditMeal', true);
     });

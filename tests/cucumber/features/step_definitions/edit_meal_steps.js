@@ -9,6 +9,10 @@ module.exports = function () {
     this.support.addMealForDate('meal name', dates.today);
   });
 
+  this.Given(/^I have added a meal "([^"]*)" for tonight$/, function (arg1) {
+    this.support.addMealForDate(arg1, dates.today);
+  });
+
   this.When(/^I click "([^"]*)"'s meal$/, function (arg1) {
     this.support.clickMealName(dates[arg1]);
   });
@@ -66,8 +70,8 @@ module.exports = function () {
     expect(browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value).toBeGreaterThan(height);
   });
 
-  this.Then(/^The text of the Time textbox should be "([^"]*)"$/, function (arg1) {
-    expect(this.support.getValueOfSelector('#inputMealTime')).toEqual(arg1);
+  this.Then(/^The text of the "([^"]*)" textbox should be "([^"]*)"$/, function (arg1, arg2) {
+    expect(this.support.getValueOfSelector('#inputMeal' + arg1)).toEqual(arg2);
   });
 
   this.When(/^I insert "([^"]*)" as "([^"]*)"'s meal$/, function (meal, arg2) {
