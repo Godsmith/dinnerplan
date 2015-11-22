@@ -28,6 +28,13 @@ Template.editMeal.events({
           break;
         case 'rating':
           value = $.trim($('label.active').text());
+          break;
+        case 'categories':
+          value = $('#categories').val();
+          break;
+        default:
+          throw "Error: Tried to store unknown meal property type '" + mealProperty.type + "' to" +
+          " the database"
       }
       meal[mealProperty.databaseKeyName] = value;
     }
@@ -43,8 +50,21 @@ Template.editMeal.events({
 });
 
 Template.editMeal.onRendered(function(){
+  var $select = $('#categories').selectize({
+    valueField: 'value',
+    labelField: 'value',
+    searchField: 'value',
+    options: CATEGORIES
+  });
+
+
   this.autorun(function(){
-    Session.get("meal");
+    let meal = Session.get("meal");
+
+    let selectize = $select[0].selectize;
+    let categoriesArray = meal.categories ? meal.categories.split(',') : [];
+    selectize.setValue(categoriesArray);
+
     // Resize textareas after loading data from the database
     Tracker.afterFlush(function() {
       $('textarea').each(function () {

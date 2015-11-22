@@ -25,6 +25,9 @@
     {{#if equals type 'rating'}}
       {{>ratings}}
     {{/if}}
+    {{#if equals type 'categories'}}
+      {{>categories value=value}}
+    {{/if}}
   </div>
 </template>
 
@@ -36,5 +39,11 @@
                  {{number}}
         </label>
     {{/each}}
+  </div>
+</template>
+
+<template name="categories">
+  <div class="col-sm-8">
+    <input type="text" id="categories" value="{{value}}">
   </div>
 </template>

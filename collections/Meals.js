@@ -15,5 +15,6 @@ MEAL_PROPERTIES = [
   new MealProperty('time', 'textarea', 'inputMealTime', 'Tid'),
   new MealProperty('ingredients', 'textarea', 'inputMealIngredients', 'Ingredienser'),
   new MealProperty('steps', 'textarea', 'inputMealSteps', 'Steg'),
-  new MealProperty('rating', 'rating', 'inputMealRating', 'Betyg')
+  new MealProperty('rating', 'rating', 'inputMealRating', 'Betyg'),
+  new MealProperty('categories', 'categories', '', 'Kategorier')
 ];

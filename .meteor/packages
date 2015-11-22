@@ -25,3 +25,4 @@ accounts-ui
 accounts-password
 iron:router
 xolvio:cucumber@=0.19.5_1
+jeremy:selectize
