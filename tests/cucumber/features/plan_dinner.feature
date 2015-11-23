@@ -76,3 +76,12 @@ Feature: Creating account and logging in and out
     And I insert "Pasta Carbonara" in "today"'s text box
     And I click the "ok" button for "today"'s meal
     Then I should see "Pasta Carbonara" on the page
+
+    @focus
+    Scenario: Editing a two-row meal name should bring up a two-row editing button
+      Given I am a logged in user on the main page
+      And I have added "Text that spans over two rows" for tonight
+      And I refresh the page
+      And I click the edit button for "today"'s meal
+      Then The height of today's textarea should be "54" pixels
+

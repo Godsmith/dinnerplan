@@ -25,7 +25,7 @@ Feature: Edit meals
   Scenario: When I click on the name of a meal the name of that meal should be shown in the edit
   meal view
     Given I am a logged in user on the main page
-    And I have added a meal "Korv Stroganoff" for tonight
+    And I have added "Korv Stroganoff" for tonight
     When I click "today"'s meal
     Then The text of the "Name" textbox should be "Korv Stroganoff"
 
@@ -33,7 +33,7 @@ Feature: Edit meals
   Scenario: When I click on the name of a meal twice the name of that meal should still be shown in
   the edit meal view
     Given I am a logged in user on the main page
-    And I have added a meal "Korv Stroganoff" for tonight
+    And I have added "Korv Stroganoff" for tonight
     When I click "today"'s meal
     And I click "today"'s meal
     Then The text of the "Name" textbox should be "Korv Stroganoff"

@@ -53,4 +53,10 @@ module.exports = function () {
     browser.waitForExist(selector);
     expect(browser.getValue(selector)).toEqual(arg2);
   });
+
+  this.Then(/^The height of today's textarea should be "([^"]*)" pixels$/, function (height) {
+    var textarea = '.date-' + dates.today + ' textarea';
+    browser.waitForExist(textarea);
+    expect(browser.getCssProperty(textarea, "height").parsed.value).toEqual(parseInt(height));
+  });
 };

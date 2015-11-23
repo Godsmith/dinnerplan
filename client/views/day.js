@@ -10,7 +10,9 @@ Template.day.events({
   'click .edit'() {
     $('.viewing.date-' + this.date).hide();
     $('.editing.date-' + this.date).show();
-    $('.editing.date-' + this.date + ' textarea').select();
+    let textarea = $('.editing.date-' + this.date + ' textarea')[0];
+    adjustTextAreaHeight(textarea); // So that the textarea height will scale with the text
+    textarea.select();
   },
   'click .ok'() { ok(this); },
   'click .cancel'() { cancel(this); },

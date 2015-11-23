@@ -9,10 +9,6 @@ module.exports = function () {
     this.support.addMealForDate('meal name', dates.today);
   });
 
-  this.Given(/^I have added a meal "([^"]*)" for tonight$/, function (arg1) {
-    this.support.addMealForDate(arg1, dates.today);
-  });
-
   this.When(/^I click "([^"]*)"'s meal$/, function (arg1) {
     this.support.clickMealName(dates[arg1]);
   });
@@ -50,8 +46,12 @@ module.exports = function () {
     this.support.setValueOfSelector('#inputMealTime', arg1);
   });
 
-  this.Given(/^I refresh the page$/, function () {
+  this.Given(/^I refresh the page$/, function (callback) {
     browser.refresh();
+    // Wait for a second so that all elements have disappeared, or waitForExist may return true
+    setTimeout(function() {
+      callback();
+    }, 1000);
   });
 
   this.Given(/^I wait until I have been logged in$/, function () {
@@ -77,5 +77,9 @@ module.exports = function () {
   this.When(/^I insert "([^"]*)" as "([^"]*)"'s meal$/, function (meal, arg2) {
     var dateString = dates[arg2];
     this.support.addMealForDate(meal, dateString);
+  });
+
+  this.Given(/^I have added "([^"]*)" for tonight$/, function (arg1) {
+    this.support.addMealForDate(arg1, dates.today);
   });
 };
