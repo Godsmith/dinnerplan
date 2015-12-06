@@ -100,4 +100,17 @@ module.exports = function () {
     browser.waitForExist('.selectize-input div');
     expect(browser.getAttribute('.selectize-input div', 'data-value'), arg1);
   });
+
+  this.When(/^I select "([^"]*)" servings$/, function (arg1) {
+    browser.click('#inputMealServings');
+    browser.waitForVisible('#inputMealServings option');
+    browser.selectByVisibleText('#inputMealServings', '2')
+  });
+
+  this.Then(/^"([^"]*)" servings should be selected$/, function (arg1) {
+    browser.click('#inputMealServings');
+    browser.waitForExist('option:checked');
+    expect(browser.getValue('option:checked')).toEqual(arg1);
+  });
+
 };

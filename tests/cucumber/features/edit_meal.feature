@@ -71,7 +71,7 @@ Feature: Edit meals
   when reloading the page and clicking the edit button again
     Given I am a logged in user on the main page in edit mode
     When I enter "30 min" in the "Time" field
-    And I enter "4" in the "Servings" field
+    And I select "2" servings
     And I click the first rating button
     And I enter "Soppa" in the selectize field
     And I click the "ok" edit meal button
@@ -79,7 +79,7 @@ Feature: Edit meals
     And I wait until I have been logged in
     And I click "today"'s meal
     Then The text of the "Time" textbox should be "30 min"
-    And The text of the "Servings" textbox should be "4"
+    And "2" servings should be selected
     And The first rating button should be pressed
     And The selectize field should contain an entry "Soppa"
 

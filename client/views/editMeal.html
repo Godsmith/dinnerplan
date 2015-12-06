@@ -28,6 +28,9 @@
     {{#if equals type 'categories'}}
       {{>categories value=value}}
     {{/if}}
+    {{#if equals type 'servings'}}
+      {{>servings value=value}}
+    {{/if}}
   </div>
 </template>
 
@@ -45,5 +48,15 @@
 <template name="categories">
   <div class="col-sm-8">
     <input type="text" id="inputMealCategories" value="{{value}}">
+  </div>
+</template>
+
+<template name="servings">
+  <div class="col-sm-8">
+    <select class="form-control" id="inputMealServings">
+      {{#each servingNumbers}}
+        <option {{selected}}>{{number}}</option>
+      {{/each}}
+    </select>
   </div>
 </template>

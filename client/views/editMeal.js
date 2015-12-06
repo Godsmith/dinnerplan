@@ -32,6 +32,9 @@ Template.editMeal.events({
         case 'categories':
           value = $('#inputMealCategories').val();
           break;
+        case 'servings':
+          value = $('#inputMealServings option:selected').text()
+          break;
         default:
           throw "Error: Tried to store unknown meal property type '" + mealProperty.type + "' to" +
           " the database"
@@ -94,3 +97,15 @@ Template.ratings.helpers({
   }
 });
 
+Template.servings.helpers({
+  servingNumbers: function() {
+    let retVal = [];
+    for (let i=1; i<=10; i++) {
+      retVal.push({
+        number: i,
+        selected: i==this.value ? 'selected' : ''
+      })
+    }
+    return retVal;
+  }
+});
