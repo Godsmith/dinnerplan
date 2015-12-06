@@ -30,7 +30,7 @@ Template.editMeal.events({
           value = $.trim($('label.active').text());
           break;
         case 'categories':
-          value = $('#categories').val();
+          value = $('#inputMealCategories').val();
           break;
         default:
           throw "Error: Tried to store unknown meal property type '" + mealProperty.type + "' to" +
@@ -62,7 +62,7 @@ Template.editMeal.onRendered(function(){
 });
 
 Template.categories.onRendered(function() {
-  var $select = $('#categories').selectize({
+  var $select = $('#inputMealCategories').selectize({
     valueField: 'value',
     labelField: 'value',
     searchField: 'value',

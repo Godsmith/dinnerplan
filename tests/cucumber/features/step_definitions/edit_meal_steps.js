@@ -42,8 +42,8 @@ module.exports = function () {
     this.support.insertMealIntoDatabaseAndShow();
   });
 
-  this.When(/^I enter "([^"]*)" in the Time field$/, function (arg1) {
-    this.support.setValueOfSelector('#inputMealTime', arg1);
+  this.When(/^I enter "([^"]*)" in the "([^"]*)" field$/, function (value, fieldName) {
+    this.support.setValueOfSelector('#inputMeal' + fieldName, value);
   });
 
   this.Given(/^I refresh the page$/, function (callback) {
@@ -81,5 +81,23 @@ module.exports = function () {
 
   this.Given(/^I have added "([^"]*)" for tonight$/, function (arg1) {
     this.support.addMealForDate(arg1, dates.today);
+  });
+
+  this.When(/^I click the first rating button$/, function () {
+    browser.click('.btn.rating');
+  });
+
+  this.Then(/^The first rating button should be pressed$/, function () {
+    expect(browser.getAttribute('.btn.rating','class')[0]).toContain('active');
+  });
+
+  this.When(/^I enter "([^"]*)" in the selectize field$/, function (arg1) {
+    browser.setValue('.selectize-input input', arg1);
+    browser.keys('Enter');
+  });
+
+  this.Then(/^The selectize field should contain an entry "([^"]*)"$/, function (arg1) {
+    browser.waitForExist('.selectize-input div');
+    expect(browser.getAttribute('.selectize-input div', 'data-value'), arg1);
   });
 };

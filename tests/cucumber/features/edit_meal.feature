@@ -64,17 +64,22 @@ Feature: Edit meals
   Scenario: Adding a new meal to the database should change the color of the link to blue
     Given I am a logged in user on the main page that has inserted a meal into the database
     Then The color of tonight's meal should be "#0645ad"
-    
+
+    @temp
   @focus
   Scenario: When adding a property to a meal in the database, that property should persist 
   when reloading the page and clicking the edit button again
     Given I am a logged in user on the main page in edit mode
-    When I enter "30 min" in the Time field
+    When I enter "30 min" in the "Time" field
+    And I click the first rating button
+    And I enter "Soppa" in the selectize field
     And I click the "ok" edit meal button
     And I refresh the page
     And I wait until I have been logged in
     And I click "today"'s meal
     Then The text of the "Time" textbox should be "30 min"
+    And The first rating button should be pressed
+    And The selectize field should contain an entry "Soppa"
 
   @ignore
   Scenario: When clicking a recipe with an empty field after clicking a recipe with some
@@ -91,7 +96,7 @@ Feature: Edit meals
   Scenario: When filling in a field and then switching recipe without saving, the field should be
   cleared
     Given I am a logged in user on the main page in edit mode
-    When I enter "30 min" in the Time field
+    When I enter "30 min" in the "Time" field
     And I insert "meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
     Then The text of the "Time" textbox should be ""
