@@ -30,6 +30,8 @@ module.exports = function () {
 
   this.When(/^I click the "([^"]*)" edit meal button$/, function (arg1) {
     this.support.clickSelector('.editMeal .' + arg1);
+    // wait for the modal dialog to close
+    browser.waitForVisible('.editMeal', undefined, true); // waitForNotExist
   });
 
   this.Then(/^The color of tonight's meal should be "([^"]*)"$/, function (arg1) {
@@ -67,7 +69,8 @@ module.exports = function () {
   });
 
   this.Then(/^The "([^"]*)" textarea has increased in height$/, function (arg1) {
-    expect(browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value).toBeGreaterThan(height);
+    var textAreaHeight = browser.getCssProperty('#inputMeal' + arg1, "height").parsed.value;
+    expect(textAreaHeight).toBeGreaterThan(height);
   });
 
   this.Then(/^The text of the "([^"]*)" textbox should be "([^"]*)"$/, function (arg1, arg2) {

@@ -36,7 +36,7 @@ Template.day.events({
     var mealName = template.data.meal;
     Meteor.call('mealFromName', mealName, function(error, result) {
       Session.set('meal', result);
-      Session.set('displayEditMeal', true);
+      $('#editMealModal').modal();
     });
   }
 });

@@ -30,15 +30,6 @@ Feature: Edit meals
     Then The text of the "Name" textbox should be "Korv Stroganoff"
 
   @focus
-  Scenario: When I click on the name of a meal twice the name of that meal should still be shown in
-  the edit meal view
-    Given I am a logged in user on the main page
-    And I have added "Korv Stroganoff" for tonight
-    When I click "today"'s meal
-    And I click "today"'s meal
-    Then The text of the "Name" textbox should be "Korv Stroganoff"
-
-  @focus
   Scenario: When a meal name that is not in the database has been created for tonight, it should be
   colored red
     Given I am a logged in user on the main page
@@ -61,11 +52,36 @@ Feature: Edit meals
     Then The "Source" textarea has increased in height
 
   @focus
+  Scenario: If I have inserted a double row in an edit field and then close and reopen the
+    editMeal dialog, the double row should persist
+    Given I am a logged in user on the main page in edit mode
+    And The "Ingredients" textarea has a certain height
+    When I click the "Ingredients" textarea
+    And I press "Enter"
+    And I click the "ok" edit meal button
+    And I click "today"'s meal
+    Then The "Ingredients" textarea has increased in height
+
+  @focus
+  Scenario: If I have inserted a double row in an edit field and switch to another edit dialog
+  and back again, the double row should persist
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I insert "Fiskpudding" as "tomorrow"'s meal
+    And I click "tomorrow"'s meal
+    And I click the "Ingredients" textarea
+    And I press "Enter"
+    And I click the "ok" edit meal button
+    And I click "today"'s meal
+    And The "Ingredients" textarea has a certain height
+    And I click the "cancel" edit meal button
+    And I click "tomorrow"'s meal
+    Then The "Ingredients" textarea has increased in height
+
+  @focus
   Scenario: Adding a new meal to the database should change the color of the link to blue
     Given I am a logged in user on the main page that has inserted a meal into the database
     Then The color of tonight's meal should be "#0645ad"
 
-    @temp
   @focus
   Scenario: When adding a property to a meal in the database, that property should persist 
   when reloading the page and clicking the edit button again

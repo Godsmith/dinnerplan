@@ -11,16 +11,14 @@
       </div>
     </form>
     <div class="row">
-      <div class="{{weeksDivClass}}">
+      <div class="col-xs-12">
         <div class="row">
           {{#each weeks}}
             {{> week}}
           {{/each}}
         </div>
       </div>
-      <div class="editMeal {{editMealDivClass}}">
-        {{> editMeal }}
-      </div>
     </div>
   </div>
+  {{> editMeal }}
 </template>

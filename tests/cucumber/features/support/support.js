@@ -36,7 +36,9 @@ module.exports = function () {
       },
 
       clickMealName: function(dateString) {
-        this.clickSelector('.viewing.date-' + dateString + ' a')
+        var selector = '.viewing.date-' + dateString + ' a'
+        browser.waitForVisible(selector);
+        this.clickSelector(selector)
       },
 
       setValueOfSelector: function(selector, value) {
