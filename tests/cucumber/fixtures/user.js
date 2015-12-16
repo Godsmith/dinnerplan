@@ -14,16 +14,4 @@
       });
     }
   });
-
-  Meteor.methods({
-    addDefaultUserAndTonightsMeal: function() {
-      Meteor.users.remove({});
-      Accounts.createUser({
-        username: 'newuser',
-        password: 'password'
-      });
-
-    }
-  })
-
 })();

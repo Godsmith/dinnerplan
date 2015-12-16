@@ -85,3 +85,12 @@ Feature: Creating account and logging in and out
       And I click the edit button for "today"'s meal
       Then The height of today's textarea should be "54" pixels
 
+  @focus
+  Scenario: Creating a meal consisting just of spaces should not add an entry to the database
+    Given I am a logged in user on the main page
+    When I click the edit button for "today"'s meal
+    And I insert "        " in "today"'s text box
+    And I click the "ok" button for "today"'s meal
+    Then There shouldn't be any meals in the database
+
+

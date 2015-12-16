@@ -57,20 +57,22 @@ Feature: Edit meals
     Given I am a logged in user on the main page in edit mode
     And The "Source" textarea has a certain height
     When I click the "Source" textarea
-    And I press "Enter"
+    And I enter two lines of text
     Then The "Source" textarea has increased in height
 
+  @temp
   @focus
   Scenario: If I have inserted a double row in an edit field and then close and reopen the
     editMeal dialog, the double row should persist
     Given I am a logged in user on the main page in edit mode
     And The "Ingredients" textarea has a certain height
     When I click the "Ingredients" textarea
-    And I press "Enter"
+    And I enter two lines of text
     And I click the "ok" edit meal button
     And I click "today"'s meal
     Then The "Ingredients" textarea has increased in height
 
+  @temp
   @focus
   Scenario: If I have inserted a double row in an edit field and switch to another edit dialog
   and back again, the double row should persist
@@ -78,7 +80,7 @@ Feature: Edit meals
     When I insert "Fiskpudding" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
     And I click the "Ingredients" textarea
-    And I press "Enter"
+    And I enter two lines of text
     And I click the "ok" edit meal button
     And I click "today"'s meal
     And The "Ingredients" textarea has a certain height

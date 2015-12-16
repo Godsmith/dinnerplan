@@ -53,9 +53,11 @@ Template.day.onRendered(function(){
 
 var ok = function(day) {
   day.meal = $.trim($('.date-' + day.date + ' textarea').val());
-  Meteor.call('updateDay', day);
+  if (day.meal.length > 0) {
+    Meteor.call('updateDay', day);
+  }
+
   hideEditing(day);
-  console.log('updated ' + day.date + ' with text ' + day.meal);
   $(editButtonToFocus(day)).focus();
   // Focus the edit button when the template is created next time
   Session.set("editButtonToFocus", editButtonToFocus(day));

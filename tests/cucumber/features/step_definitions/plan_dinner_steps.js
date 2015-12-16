@@ -20,6 +20,12 @@ module.exports = function () {
     browser.keys(arg1);
   });
 
+  this.When(/^I enter two lines of text$/, function () {
+    browser.keys('first line');
+    browser.keys('Enter');
+    browser.keys('second line');
+  });
+
   this.Then(/^I should see "([^"]*)" on the page$/, function (arg1) {
     var a = '.date-' + dates.today + ' a';
     browser.waitForExist(a);
@@ -58,5 +64,10 @@ module.exports = function () {
     var textarea = '.date-' + dates.today + ' textarea';
     browser.waitForExist(textarea);
     expect(browser.getCssProperty(textarea, "height").parsed.value).toEqual(parseInt(height));
+  });
+
+  this.Then(/^There shouldn't be any meals in the database$/, function () {
+    var hasRecipes = this.server.call("hasRecipes");
+    expect(hasRecipes).toEqual(false);
   });
 };

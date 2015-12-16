@@ -5,6 +5,7 @@
   Meteor.methods({
     'reset' : function() {
       Meteor.users.remove({});
+      Meals.remove({});
     }
   });
 
