@@ -18,3 +18,9 @@ Router.route('/recipes', function() {
   })
 });
 
+Router.route('/about', function() {
+  this.render('about');
+  this.layout('layout', {
+    data: {active: 'about'}
+  })
+});
