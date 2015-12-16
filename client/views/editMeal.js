@@ -27,7 +27,7 @@ Template.editMeal.events({
           value = element.val();
           break;
         case 'rating':
-          value = $.trim($('label.active').text());
+          value = $('label.active').text();
           break;
         case 'categories':
           value = $('#inputMealCategories').val();
@@ -39,7 +39,7 @@ Template.editMeal.events({
           throw "Error: Tried to store unknown meal property type '" + mealProperty.type + "' to" +
           " the database"
       }
-      meal[mealProperty.databaseKeyName] = value;
+      meal[mealProperty.databaseKeyName] = $.trim(value);
     }
 
     Meteor.call('updateMeal', meal);

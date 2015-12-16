@@ -52,7 +52,7 @@ Template.day.onRendered(function(){
 });
 
 var ok = function(day) {
-  day.meal = $('.date-' + day.date + ' textarea').val();
+  day.meal = $.trim($('.date-' + day.date + ' textarea').val());
   Meteor.call('updateDay', day);
   hideEditing(day);
   console.log('updated ' + day.date + ' with text ' + day.meal);
