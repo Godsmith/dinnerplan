@@ -35,6 +35,15 @@ module.exports = function () {
         browser.click(button);
       },
 
+      focusEditButtonForDate: function(dateString) {
+        var editButton = '.date-' + dateString + ' button';
+        var cancelButton = '.date-' + dateString + ' .cancel';
+        browser.waitForExist(editButton);
+        browser.click(editButton);
+        browser.waitForExist(cancelButton);
+        browser.click(cancelButton)
+      },
+
       clickMealName: function(dateString) {
         var selector = '.viewing.date-' + dateString + ' a'
         browser.waitForVisible(selector);

@@ -60,7 +60,6 @@ Feature: Edit meals
     And I enter two lines of text
     Then The "Source" textarea has increased in height
 
-  @temp
   @focus
   Scenario: If I have inserted a double row in an edit field and then close and reopen the
     editMeal dialog, the double row should persist
@@ -72,7 +71,6 @@ Feature: Edit meals
     And I click "today"'s meal
     Then The "Ingredients" textarea has increased in height
 
-  @temp
   @focus
   Scenario: If I have inserted a double row in an edit field and switch to another edit dialog
   and back again, the double row should persist

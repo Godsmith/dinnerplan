@@ -32,6 +32,11 @@ module.exports = function () {
     expect(browser.getText(a)).toEqual(arg1);
   });
 
+  this.Then(/^There shouldn't be any link to today's meal$/, function () {
+    var a = '.date-' + dates.today + ' a';
+    browser.waitForExist(a, undefined, true); //waitForNotExist
+  });
+
   this.Then(/^The input box with id "([^"]*)" should have the value "([^"]*)"$/, function (arg1, arg2) {
     var selector = '#' + arg1;
     browser.waitForExist(selector);
@@ -69,5 +74,15 @@ module.exports = function () {
   this.Then(/^There shouldn't be any meals in the database$/, function () {
     var hasRecipes = this.server.call("hasRecipes");
     expect(hasRecipes).toEqual(false);
+  });
+
+  this.When(/^I select "([^"]*)"'s edit button$/, function (arg1) {
+    this.support.focusEditButtonForDate(dates[arg1]);
+  });
+
+  this.When(/^"([^"]*)"'s edit button should be selected$/, function (arg1) {
+    var textarea = '.date-' + dates[arg1] + ' textarea';
+    browser.keys('Enter');
+    browser.waitForVisible(textarea)
   });
 };

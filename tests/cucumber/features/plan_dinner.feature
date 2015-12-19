@@ -63,7 +63,7 @@ Feature: Creating account and logging in and out
     When I click the edit button for "today"'s meal
     And I insert "Korv Stroganoff" in "today"'s text box
     And I click the "cancel" button for "today"'s meal
-    Then I should see "" on the page
+    Then There shouldn't be any link to today's meal
 
   @focus
   Scenario: Editing an existing planned meal for a day
@@ -92,5 +92,14 @@ Feature: Creating account and logging in and out
     And I insert "        " in "today"'s text box
     And I click the "ok" button for "today"'s meal
     Then There shouldn't be any meals in the database
+
+  @temp
+  @focus
+  Scenario: When an edit button is in focus and tab is pressed, the cursor should move to the next
+    edit button
+    Given I am a logged in user on the main page
+    When I select "today"'s edit button
+    And I press "Tab"
+    Then "tomorrow"'s edit button should be selected
 
 
