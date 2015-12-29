@@ -110,23 +110,24 @@ Feature: Edit meals
 
   # These two test cases is for a bug fix that has not been implemented. Uncomment when that
   # bug should be fixed.
-  @ignore
+  @focus
   Scenario: When clicking a recipe with an empty field after clicking a recipe with some
   filled-in fields, all the empty fields should be shown as empty
     Given I am a logged in user on the main page that has inserted a meal into the database
-    When I insert "meal name" as "tomorrow"'s meal
+    When I insert "another meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
-    And I enter "A very long string that almost certainly causes a row break" in the Time field
+    And I enter "30 min" in the "Time" field
     And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
     Then The text of the "Time" textbox should be ""
 
-  @ignore
+  @focus
   Scenario: When filling in a field and then switching recipe without saving, the field should be
   cleared
     Given I am a logged in user on the main page in edit mode
     When I enter "30 min" in the "Time" field
-    And I insert "meal name" as "tomorrow"'s meal
+    And I click the "ok" edit meal button and wait for the dialog to close
+    And I insert "another meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
     Then The text of the "Time" textbox should be ""
 

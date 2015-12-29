@@ -23,6 +23,10 @@ showEditMealModal = function() {
   divSurroundingNameField.removeClass('has-error');
   let helpBlock = divSurroundingNameField.find('.help-block');
   helpBlock.css('display', 'none');
+  let meal = Session.get('meal');
+  for (mealProperty of MEAL_PROPERTIES) {
+    $('#' + mealProperty.htmlId).val(meal[mealProperty.databaseKeyName]);
+  }
 
   $('#editMealModal').modal();
 };
