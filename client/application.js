@@ -18,3 +18,11 @@ adjustTextAreaHeight = function(textarea) {
   //textarea.style.height = (textarea.scrollHeight + 2) + 'px';
 };
 
+showEditMealModal = function() {
+  let divSurroundingNameField = $('#inputMealName').parent();
+  divSurroundingNameField.removeClass('has-error');
+  let helpBlock = divSurroundingNameField.find('.help-block');
+  helpBlock.css('display', 'none');
+
+  $('#editMealModal').modal();
+};

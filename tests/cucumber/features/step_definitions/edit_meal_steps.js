@@ -31,6 +31,12 @@ module.exports = function () {
   this.When(/^I click the "([^"]*)" edit meal button$/, function (arg1) {
     this.support.clickSelector('.editMeal .' + arg1);
     // wait for the modal dialog to close
+    //browser.waitForVisible('.editMeal', undefined, true); // waitForNotExist
+  });
+
+  this.When(/^I click the "([^"]*)" edit meal button and wait for the dialog to close$/, function (arg1) {
+    this.support.clickSelector('.editMeal .' + arg1);
+    // wait for the modal dialog to close
     browser.waitForVisible('.editMeal', undefined, true); // waitForNotExist
   });
 

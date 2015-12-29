@@ -46,13 +46,30 @@ Template.editMeal.events({
     if (oldMealName == undefined) {
       oldMealName = meal.name;
     }
-    if (oldMealName != meal.name) {
-      Meteor.call('updateMealNameInDaysDatabase', oldMealName, meal.name)
+    if (oldMealName === meal.name) {
+      updateMealAndHideModal(oldMealName, meal);
+    } else {
+      Meteor.call('mealExists', meal.name, function(error, mealExists) {
+        if (mealExists) {
+          let divSurroundingNameField = $('#inputMealName').parent();
+          divSurroundingNameField.addClass('has-error');
+          let helpBlock = divSurroundingNameField.find('.help-block');
+          helpBlock.text(STRINGS.nameAlreadyExists);
+          helpBlock.css('display', 'inline');
+        } else {
+          Meteor.call('updateMealNameInDaysDatabase', oldMealName, meal.name);
+          updateMealAndHideModal(oldMealName, meal);
+        }
+      });
     }
-    Meteor.call('updateMeal', oldMealName, meal);
-    loadMealNames(); // To make the meal blue. Should be done reactively instead.
   }
 });
+
+function updateMealAndHideModal(oldMealName, meal) {
+  Meteor.call('updateMeal', oldMealName, meal);
+  loadMealNames(); // To make the meal blue. Should be done reactively instead.
+  $('#editMealModal').modal('hide');
+}
 
 Template.editMeal.onRendered(function(){
   this.autorun(function(){

@@ -48,7 +48,7 @@ Feature: Edit meals
   @focus
   Scenario: When I cancel an edit it should hide the edit controls again
     Given I am a logged in user on the main page in edit mode
-    When I click the "cancel" edit meal button
+    When I click the "cancel" edit meal button and wait for the dialog to close
     Then The edit controls should not show
 
   @focus
@@ -67,7 +67,7 @@ Feature: Edit meals
     And The "Ingredients" textarea has a certain height
     When I click the "Ingredients" textarea
     And I enter two lines of text
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
     Then The "Ingredients" textarea has increased in height
 
@@ -79,10 +79,10 @@ Feature: Edit meals
     And I click "tomorrow"'s meal
     And I click the "Ingredients" textarea
     And I enter two lines of text
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
     And The "Ingredients" textarea has a certain height
-    And I click the "cancel" edit meal button
+    And I click the "cancel" edit meal button and wait for the dialog to close
     And I click "tomorrow"'s meal
     Then The "Ingredients" textarea has increased in height
 
@@ -99,7 +99,7 @@ Feature: Edit meals
     And I select "2" servings
     And I click the first rating button
     And I enter "Soppa" in the selectize field
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     And I refresh the page
     And I wait until I have been logged in
     And I click "today"'s meal
@@ -117,7 +117,7 @@ Feature: Edit meals
     When I insert "meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
     And I enter "A very long string that almost certainly causes a row break" in the Time field
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
     Then The text of the "Time" textbox should be ""
 
@@ -137,7 +137,7 @@ Feature: Edit meals
     And I have inserted the same meal for tomorrow
     When I click "today"'s meal
     And I enter "new name" in the "Name" field
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     Then The text of "today"'s meal should be "new name"
     And The text of "tomorrow"'s meal should be "new name"
 
@@ -147,7 +147,16 @@ Feature: Edit meals
     And I have inserted the same meal for tomorrow
     When I click "today"'s meal
     And I enter "new name" in the "Name" field
-    And I click the "ok" edit meal button
+    And I click the "ok" edit meal button and wait for the dialog to close
     And I insert "meal name" as "today"'s meal
     Then The color of tonight's meal should be "#ba0000"
+
+  @focus
+  Scenario: You should not be able to change a recipe name to an existing recipe name.
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I insert "meal name 2" as "tomorrow"'s meal
+    And I click "tomorrow"'s meal
+    And I enter "meal name" in the "Name" field
+    And I click the "ok" edit meal button
+    Then The "Name" edit control should show
 
