@@ -108,6 +108,8 @@ Feature: Edit meals
     And The first rating button should be pressed
     And The selectize field should contain an entry "Soppa"
 
+  # These two test cases is for a bug fix that has not been implemented. Uncomment when that
+  # bug should be fixed.
   @ignore
   Scenario: When clicking a recipe with an empty field after clicking a recipe with some
   filled-in fields, all the empty fields should be shown as empty
@@ -127,4 +129,25 @@ Feature: Edit meals
     And I insert "meal name" as "tomorrow"'s meal
     And I click "tomorrow"'s meal
     Then The text of the "Time" textbox should be ""
+
+  @focus
+  Scenario: When changing the name of a recipe, all recipes with that name in the week view should
+    also change name
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    And I have inserted the same meal for tomorrow
+    When I click "today"'s meal
+    And I enter "new name" in the "Name" field
+    And I click the "ok" edit meal button
+    Then The text of "today"'s meal should be "new name"
+    And The text of "tomorrow"'s meal should be "new name"
+
+  @focus
+  Scenario: When changing the name of a recipe, the old recipe name should no longer exist
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    And I have inserted the same meal for tomorrow
+    When I click "today"'s meal
+    And I enter "new name" in the "Name" field
+    And I click the "ok" edit meal button
+    And I insert "meal name" as "today"'s meal
+    Then The color of tonight's meal should be "#ba0000"
 

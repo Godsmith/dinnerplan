@@ -41,7 +41,11 @@ module.exports = function () {
   });
 
   this.Given(/^I am a logged in user on the main page that has inserted a meal into the database$/, function () {
-    this.support.insertMealIntoDatabaseAndShow();
+    this.support.createUserAndInsertMealIntoDatabase();
+  });
+
+  this.Given(/^I have inserted the same meal for tomorrow$/, function () {
+    this.support.insertMealForTomorrow();
   });
 
   this.When(/^I enter "([^"]*)" in the "([^"]*)" field$/, function (value, fieldName) {

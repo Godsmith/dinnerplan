@@ -6,6 +6,8 @@ module.exports = function () {
 
     var theServer = this.server;
     var today = moment().format('YYYY-MM-DD');
+    var tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
+    var MEAL_NAME = 'meal name';
 
     this.support = {
       navigateToMainPage: function() {
@@ -70,11 +72,17 @@ module.exports = function () {
         browser.click(selector);
       },
 
-      insertMealIntoDatabaseAndShow: function() {
+      createUserAndInsertMealIntoDatabase: function() {
         this.navigateToMainPage();
         this.createUserAndLogIn();
-        this.addMealForDate('meal name', today);
+        this.addMealForDate(MEAL_NAME, today);
         this.clickMealName(today);
+        this.clickSelector('.editMeal .ok');
+      },
+
+      insertMealForTomorrow: function() {
+        this.addMealForDate(MEAL_NAME, tomorrow);
+        this.clickMealName(tomorrow);
         this.clickSelector('.editMeal .ok');
       }
     }

@@ -17,7 +17,7 @@ Template.editMeal.helpers({
 });
 
 Template.editMeal.events({
-  'click .ok': function(event, template){
+  'click .ok': function(){
     let meal = {};
     for (let mealProperty of MEAL_PROPERTIES) {
       var element = $('#' + mealProperty.htmlId);
@@ -42,9 +42,16 @@ Template.editMeal.events({
       meal[mealProperty.databaseKeyName] = $.trim(value);
     }
 
-    Meteor.call('updateMeal', meal);
+    let oldMealName = Session.get('meal').name;
+    if (oldMealName == undefined) {
+      oldMealName = meal.name;
+    }
+    if (oldMealName != meal.name) {
+      Meteor.call('updateMealNameInDaysDatabase', oldMealName, meal.name)
+    }
+    Meteor.call('updateMeal', oldMealName, meal);
     loadMealNames(); // To make the meal blue. Should be done reactively instead.
-  },
+  }
 });
 
 Template.editMeal.onRendered(function(){

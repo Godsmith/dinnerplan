@@ -45,7 +45,7 @@ Feature: Creating account and logging in and out
     When I click the edit button for "today"'s meal
     And I insert "Korv Stroganoff" in "today"'s text box
     And I press "Enter"
-    Then I should see "Korv Stroganoff" on the page
+    Then The text of "today"'s meal should be "Korv Stroganoff"
 
   @focus
   Scenario: Adding meals to days by clicking the ok button
@@ -54,7 +54,7 @@ Feature: Creating account and logging in and out
     When I click the edit button for "today"'s meal
     And I insert "Korv Stroganoff" in "today"'s text box
     And I click the "ok" button for "today"'s meal
-    Then I should see "Korv Stroganoff" on the page
+    Then The text of "today"'s meal should be "Korv Stroganoff"
 
   @focus
   Scenario: Canceling when adding a meal by pressing Enter
@@ -75,7 +75,7 @@ Feature: Creating account and logging in and out
     And I click the edit button for "today"'s meal
     And I insert "Pasta Carbonara" in "today"'s text box
     And I click the "ok" button for "today"'s meal
-    Then I should see "Pasta Carbonara" on the page
+    Then The text of "today"'s meal should be "Pasta Carbonara"
 
     @focus
     Scenario: Editing a two-row meal name should bring up a two-row editing button
@@ -93,7 +93,6 @@ Feature: Creating account and logging in and out
     And I click the "ok" button for "today"'s meal
     Then There shouldn't be any meals in the database
 
-  @temp
   @focus
   Scenario: When an edit button is in focus and tab is pressed, the cursor should move to the next
     edit button

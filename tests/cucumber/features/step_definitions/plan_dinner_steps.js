@@ -26,10 +26,10 @@ module.exports = function () {
     browser.keys('second line');
   });
 
-  this.Then(/^I should see "([^"]*)" on the page$/, function (arg1) {
-    var a = '.date-' + dates.today + ' a';
+  this.Then(/^The text of "([^"]*)"'s meal should be "([^"]*)"$/, function (day, name) {
+    var a = '.date-' + dates[day] + ' a';
     browser.waitForExist(a);
-    expect(browser.getText(a)).toEqual(arg1);
+    expect(browser.getText(a)).toEqual(name);
   });
 
   this.Then(/^There shouldn't be any link to today's meal$/, function () {
