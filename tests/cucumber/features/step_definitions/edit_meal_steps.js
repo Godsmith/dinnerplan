@@ -51,7 +51,7 @@ module.exports = function () {
   });
 
   this.Given(/^I have inserted the same meal for tomorrow$/, function () {
-    this.support.insertMealForTomorrow();
+    this.support.insertTheSameMealForTomorrow();
   });
 
   this.When(/^I enter "([^"]*)" in the "([^"]*)" field$/, function (value, fieldName) {

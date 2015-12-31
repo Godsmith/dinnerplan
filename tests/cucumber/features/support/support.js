@@ -80,10 +80,8 @@ module.exports = function () {
         this.clickSelector('.editMeal .ok');
       },
 
-      insertMealForTomorrow: function() {
+      insertTheSameMealForTomorrow: function() {
         this.addMealForDate(MEAL_NAME, tomorrow);
-        this.clickMealName(tomorrow);
-        this.clickSelector('.editMeal .ok');
       }
     }
   });

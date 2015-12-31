@@ -21,9 +21,12 @@ adjustTextAreaHeight = function(textarea) {
 showEditMealModal = function() {
   let divSurroundingNameField = $('#inputMealName').parent();
   divSurroundingNameField.removeClass('has-error');
+
   let helpBlock = divSurroundingNameField.find('.help-block');
   helpBlock.css('display', 'none');
+
   let meal = Session.get('meal');
+  Session.set('editing', meal._id == undefined);
   for (mealProperty of MEAL_PROPERTIES) {
     $('#' + mealProperty.htmlId).val(meal[mealProperty.databaseKeyName]);
   }

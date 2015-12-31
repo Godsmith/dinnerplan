@@ -69,6 +69,7 @@ Feature: Edit meals
     And I enter two lines of text
     And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
+    And I click the "edit" edit meal button
     Then The "Ingredients" textarea has increased in height
 
   @focus
@@ -81,9 +82,11 @@ Feature: Edit meals
     And I enter two lines of text
     And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
+    And I click the "edit" edit meal button
     And The "Ingredients" textarea has a certain height
     And I click the "cancel" edit meal button and wait for the dialog to close
     And I click "tomorrow"'s meal
+    And I click the "edit" edit meal button
     Then The "Ingredients" textarea has increased in height
 
   @focus
@@ -103,6 +106,7 @@ Feature: Edit meals
     And I refresh the page
     And I wait until I have been logged in
     And I click "today"'s meal
+    And I click the "edit" edit meal button
     Then The text of the "Time" textbox should be "30 min"
     And "2" servings should be selected
     And The first rating button should be pressed
@@ -119,6 +123,7 @@ Feature: Edit meals
     And I enter "30 min" in the "Time" field
     And I click the "ok" edit meal button and wait for the dialog to close
     And I click "today"'s meal
+    And I click the "edit" edit meal button
     Then The text of the "Time" textbox should be ""
 
   @focus
@@ -137,6 +142,7 @@ Feature: Edit meals
     Given I am a logged in user on the main page that has inserted a meal into the database
     And I have inserted the same meal for tomorrow
     When I click "today"'s meal
+    And I click the "edit" edit meal button
     And I enter "new name" in the "Name" field
     And I click the "ok" edit meal button and wait for the dialog to close
     Then The text of "today"'s meal should be "new name"
@@ -147,6 +153,7 @@ Feature: Edit meals
     Given I am a logged in user on the main page that has inserted a meal into the database
     And I have inserted the same meal for tomorrow
     When I click "today"'s meal
+    And I click the "edit" edit meal button
     And I enter "new name" in the "Name" field
     And I click the "ok" edit meal button and wait for the dialog to close
     And I insert "meal name" as "today"'s meal

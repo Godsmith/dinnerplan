@@ -13,10 +13,16 @@ Template.editMeal.helpers({
       }
     });
     return retVal;
-  }
+  },
+  mealName: function() {
+    let meal = Session.get('meal');
+    return meal === undefined ? '' : meal.name;
+  },
+  editing: () => Session.get('editing')
 });
 
 Template.editMeal.events({
+  'click .edit': () => Session.set('editing', true),
   'click .ok': function(){
     let meal = {};
     for (let mealProperty of MEAL_PROPERTIES) {
@@ -74,7 +80,8 @@ function updateMealAndHideModal(oldMealName, meal) {
 Template.editMeal.onRendered(function(){
   this.autorun(function(){
     Session.get("meal");
-    // Resize textareas after loading data from the database
+    Session.get('editing');
+    // Resize textareas after loading data from the database and pressing the edit button
     Tracker.afterFlush(function() {
       $('textarea').each(function () {
         adjustTextAreaHeight(this);
@@ -100,8 +107,23 @@ Template.categories.onRendered(function() {
 });
 
 Template.mealProperty.helpers({
-  equals: (a,b) => a==b
+  equals: (a,b) => a==b,
+  editing: () => Session.get('editing'),
+  prepareValue: function(s) {
+    s = s.replace(/\n/g,'<br>');
+    s = linkify(s);
+    return s
+  }
 });
+
+function linkify(text) {
+  //var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  var urlRegex = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
+  return text.replace(urlRegex, function(url) {
+    let targetUrl = url.startsWith('http') ? url : 'http://' + url;
+    return '<a href="' + targetUrl + '">' + url + '</a>';
+  });
+}
 
 Template.ratings.helpers({
   numbers: function() {
