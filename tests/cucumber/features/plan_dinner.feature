@@ -5,43 +5,39 @@ Feature: Creating account and logging in and out
   So that I can use the core functionality of the site
 
   @focus
-  Scenario: By default, the plan page should show 2 weeks back and 1 week forward
-    Given The main page is showing
-    And I am a logged in user
-    Then The input box with id "inputWeeksBack" should have the value "1"
-    And The input box with id "inputWeeksForward" should have the value "2"
+  Scenario: By default, the plan page should show four weeks total
+    Given I am a logged in user on the main page
+    Then The input box with id "inputNumberOfWeeks" should have the value "4"
     And The number of days showing should be "28"
 
   @focus
-  Scenario: When changing it to 0 week back and 1 weeks forward, the number of days showing
-  should be 14
-    Given The main page is showing
-    And I am a logged in user
-    And I set the control with id "inputWeeksBack" to the value "0"
-    And I set the control with id "inputWeeksForward" to the value "1"
+  Scenario: When choosing to show 2 weeks, the number of days showing should be 14
+    Given I am a logged in user on the main page
+    And I set the control with id "inputNumberOfWeeks" to the value "2"
     Then The number of days showing should be "14"
 
+  # This test will fail when the selected week happens to be 53, since some years do not have a
+  # week 53
   @focus
-  Scenario: When changing the number of weeks back to more than 8, the number should be changed
-  to 8.
-    Given The main page is showing
-    And I am a logged in user
-    And I set the control with id "inputWeeksBack" to the value "53"
-    Then The control with id "inputWeeksBack" should have the value "8"
+  Scenario: When changing the start week and the number of weeks shown, those changes should
+  persist after a page reload
+    Given I am a logged in user on the main page
+    When I send two up arrows to the "inputFirstWeek" control and record the value
+    And I set the control with id "inputNumberOfWeeks" to the value "2"
+    And I refresh the page
+    Then The input box with id "inputFirstWeek" should still have the recorded value
+    Then The input box with id "inputNumberOfWeeks" should have the value "2"
 
   @focus
-  Scenario: When changing the number of weeks back to less than -8, the number should be
-  changed
-  to 8.
-    Given The main page is showing
-    And I am a logged in user
-    And I set the control with id "inputWeeksBack" to the value "-53"
-    Then The control with id "inputWeeksBack" should have the value "-8"
+  Scenario: When changing the number of weeks shown to more than 12, the number should be
+  changed to 12.
+    Given I am a logged in user on the main page
+    And I set the control with id "inputNumberOfWeeks" to the value "53"
+    Then The control with id "inputNumberOfWeeks" should have the value "12"
 
   @focus
   Scenario: Adding meals to days by pressing Enter
-    Given The main page is showing
-    And I am a logged in user
+    Given I am a logged in user on the main page
     When I click the edit button for "today"'s meal
     And I insert "Korv Stroganoff" in "today"'s text box
     And I press "Enter"

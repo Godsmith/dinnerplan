@@ -7,6 +7,7 @@ module.exports = function () {
     today: moment().format('YYYY-MM-DD'),
     tomorrow: moment().add(1, 'days').format('YYYY-MM-DD')
   };
+  var storedValue;
 
   this.When(/^I click the edit button for "([^"]*)"'s meal$/, function (arg1) {
     this.support.clickEditButtonForDate(dates[arg1]);
@@ -84,5 +85,18 @@ module.exports = function () {
     var textarea = '.date-' + dates[arg1] + ' textarea';
     browser.keys('Enter');
     browser.waitForVisible(textarea)
+  });
+
+  this.When(/^I send two up arrows to the "([^"]*)" control and record the value$/, function (arg1) {
+    var selector = "#" + arg1;
+    browser.click(selector);
+    // click() seems to select the year control, so switch to the week control first by pressing
+    // Shift+Tab.
+    browser.keys(['Shift', 'Tab', 'Shift', 'Up arrow', 'Up arrow']);
+    storedValue = browser.getValue(selector);
+  });
+
+  this.Then(/^The input box with id "([^"]*)" should still have the recorded value$/, function (arg1) {
+    expect(browser.getValue('#' + arg1)).toEqual(storedValue);
   });
 };
