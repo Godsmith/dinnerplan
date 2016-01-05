@@ -60,6 +60,7 @@ Feature: Creating account and logging in and out
     And I insert "Korv Stroganoff" in "today"'s text box
     And I click the "cancel" button for "today"'s meal
     Then There shouldn't be any link to today's meal
+    And There shouldn't be meals for any days in the database
 
   @focus
   Scenario: Editing an existing planned meal for a day
@@ -87,7 +88,17 @@ Feature: Creating account and logging in and out
     When I click the edit button for "today"'s meal
     And I insert "        " in "today"'s text box
     And I click the "ok" button for "today"'s meal
-    Then There shouldn't be any meals in the database
+    Then There shouldn't be any link to today's meal
+    And There shouldn't be meals for any days in the database
+
+  @focus
+  Scenario: Deleting the text in a planned meal field should remove the meal from that day
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "today"'s meal
+    And I insert "" in "today"'s text box
+    And I click the "ok" button for "today"'s meal
+    Then There shouldn't be any link to today's meal
+    And There shouldn't be meals for any days in the database
 
   @focus
   Scenario: When an edit button is in focus and tab is pressed, the cursor should move to the next

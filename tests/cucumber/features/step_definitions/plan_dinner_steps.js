@@ -72,9 +72,9 @@ module.exports = function () {
     expect(browser.getCssProperty(textarea, "height").parsed.value).toEqual(parseInt(height));
   });
 
-  this.Then(/^There shouldn't be any meals in the database$/, function () {
-    var hasRecipes = this.server.call("hasRecipes");
-    expect(hasRecipes).toEqual(false);
+  this.Then(/^There shouldn't be meals for any days in the database$/, function () {
+    var hasMeals = this.server.call("hasMeals");
+    expect(hasMeals).toEqual(false);
   });
 
   this.When(/^I select "([^"]*)"'s edit button$/, function (arg1) {

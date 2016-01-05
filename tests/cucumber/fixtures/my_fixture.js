@@ -6,6 +6,7 @@
     'reset' : function() {
       Meteor.users.remove({});
       Meals.remove({});
+      Days.remove({});
     }
   });
 
