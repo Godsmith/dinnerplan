@@ -30,8 +30,6 @@ module.exports = function () {
 
   this.When(/^I click the "([^"]*)" edit meal button$/, function (arg1) {
     this.support.clickSelector('.editMeal .' + arg1);
-    // wait for the modal dialog to close
-    //browser.waitForVisible('.editMeal', undefined, true); // waitForNotExist
   });
 
   this.When(/^I click the "([^"]*)" edit meal button and wait for the dialog to close$/, function (arg1) {
@@ -126,4 +124,25 @@ module.exports = function () {
     expect(browser.getValue('option:checked')).toEqual(arg1);
   });
 
+  this.Then(/^The comments of today's meal should show today's date and "([^"]*)"$/, function (arg1) {
+    this.support.clickMealName(dates['today']);
+    expect(browser.getHTML('#editMealModal')).toContain(moment().format('YYYY-MM-DD') + ': ' + arg1)
+  });
+
+  this.Then(/^The comments of today's meal should show today's date exactly once$/, function () {
+    var occurrences = count(browser.getHTML('#editMealModal'), dates['today']);
+    expect(occurrences).toEqual(1);
+  });
+
+  this.When(/^I add a comment for today's meal with the comment "([^"]*)"$/, function (arg1) {
+    this.support.clickMealName(dates['today']);
+    this.support.clickSelector('.editMeal .edit');
+
+    this.support.setValueOfSelector('#inputMealComments', arg1);
+    this.support.clickSelector('.editMeal .ok');
+  });
+
+  function count(s, part) {
+    return s.split(part).length - 1
+  }
 };

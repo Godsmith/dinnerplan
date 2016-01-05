@@ -24,7 +24,8 @@ Template.editMeal.helpers({
 Template.editMeal.events({
   'click .edit': () => Session.set('editing', true),
   'click .ok': function(){
-    let meal = {};
+    let currentMeal = Session.get('meal');
+    let newMeal = {};
     for (let mealProperty of MEAL_PROPERTIES) {
       var element = $('#' + mealProperty.htmlId);
       var value;
@@ -39,23 +40,39 @@ Template.editMeal.events({
           value = $('#inputMealCategories').val();
           break;
         case 'servings':
-          value = $('#inputMealServings option:selected').text()
+          value = $('#inputMealServings option:selected').text();
+          break;
+        case 'comments':
+          let oldComments = currentMeal[mealProperty.databaseKeyName];
+          if (oldComments === undefined) {
+            oldComments = []
+          }
+
+          let newComment = $('#inputMealComments').val();
+          if (newComment.length !== 0) {
+            oldComments.push(moment().format('YYYY-MM-DD') + ': ' + newComment);
+          }
+
+          value = oldComments;
           break;
         default:
           throw "Error: Tried to store unknown meal property type '" + mealProperty.type + "' to" +
           " the database"
       }
-      meal[mealProperty.databaseKeyName] = $.trim(value);
+      if (typeof value === 'string') {
+        value = $.trim(value);
+      }
+      newMeal[mealProperty.databaseKeyName] = value;
     }
 
-    let oldMealName = Session.get('meal').name;
+    let oldMealName = currentMeal.name;
     if (oldMealName == undefined) {
-      oldMealName = meal.name;
+      oldMealName = newMeal.name;
     }
-    if (oldMealName === meal.name) {
-      updateMealAndHideModal(oldMealName, meal);
+    if (oldMealName === newMeal.name) {
+      updateMealAndHideModal(oldMealName, newMeal);
     } else {
-      Meteor.call('mealExists', meal.name, function(error, mealExists) {
+      Meteor.call('mealExists', newMeal.name, function(error, mealExists) {
         if (mealExists) {
           let divSurroundingNameField = $('#inputMealName').parent();
           divSurroundingNameField.addClass('has-error');
@@ -63,8 +80,8 @@ Template.editMeal.events({
           helpBlock.text(STRINGS.nameAlreadyExists);
           helpBlock.css('display', 'inline');
         } else {
-          Meteor.call('updateMealNameInDaysDatabase', oldMealName, meal.name);
-          updateMealAndHideModal(oldMealName, meal);
+          Meteor.call('updateMealNameInDaysDatabase', oldMealName, newMeal.name);
+          updateMealAndHideModal(oldMealName, newMeal);
         }
       });
     }
@@ -109,11 +126,7 @@ Template.categories.onRendered(function() {
 Template.mealProperty.helpers({
   equals: (a,b) => a==b,
   editing: () => Session.get('editing'),
-  prepareValue: function(s) {
-    s = s.replace(/\n/g,'<br>');
-    s = linkify(s);
-    return s
-  }
+  prepareValue: prepareValue
 });
 
 function linkify(text) {
@@ -150,3 +163,32 @@ Template.servings.helpers({
     return retVal;
   }
 });
+
+Template.comments.helpers({
+  prepareValue: prepareValue
+});
+
+function prepareValue(s) {
+  if (typeof s === 'string') {
+    s = linkify(s);
+    s = escapeHtml(s);
+  } else if (s === undefined) {
+    return '';
+  } else {
+    // assume array of strings
+    let escapedArray = [];
+    for (let text of s) {
+      escapedArray.push(escapeHtml(text));
+    }
+    s = escapedArray.join('<br>');
+  }
+  s = s.replace(/\n/g, '<br>');
+  return s;
+}
+
+function escapeHtml(text) {
+  'use strict';
+  return text.replace(/[\"&<>]/g, function (a) {
+    return { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' }[a];
+  });
+}

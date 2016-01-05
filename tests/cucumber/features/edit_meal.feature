@@ -20,6 +20,7 @@ Feature: Edit meals
     And The "Time" edit control should show
     And The "Ingredients" edit control should show
     And The "Steps" edit control should show
+    And The "Comments" edit control should show
 
   @focus
   Scenario: When I click on the name of a meal the name of that meal should be shown in the edit
@@ -112,8 +113,6 @@ Feature: Edit meals
     And The first rating button should be pressed
     And The selectize field should contain an entry "Soppa"
 
-  # These two test cases is for a bug fix that has not been implemented. Uncomment when that
-  # bug should be fixed.
   @focus
   Scenario: When clicking a recipe with an empty field after clicking a recipe with some
   filled-in fields, all the empty fields should be shown as empty
@@ -168,3 +167,24 @@ Feature: Edit meals
     And I click the "ok" edit meal button
     Then The "Name" edit control should show
 
+  @focus
+  Scenario: After adding a comment, it should show with today's date.
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click "today"'s meal
+    And I click the "edit" edit meal button
+    And I enter "my comment" in the "Comments" field
+    And I click the "ok" edit meal button
+    Then The comments of today's meal should show today's date and "my comment"
+
+  @focus
+  Scenario: HTML in comments should be escaped
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I add a comment for today's meal with the comment "<br>"
+    Then The comments of today's meal should show today's date and "&lt;br&gt;"
+
+  @focus
+  Scenario: Adding an empty comment should not add a new comment and should not remove the old one
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I add a comment for today's meal with the comment "my comment"
+    When I add a comment for today's meal with the comment ""
+    Then The comments of today's meal should show today's date exactly once

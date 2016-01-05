@@ -52,6 +52,9 @@
       {{#if equals type 'servings'}}
         {{>servings value=value}}
       {{/if}}
+      {{#if equals type 'comments'}}
+        {{>comments value=value id=id}}
+      {{/if}}
     {{else}}
       <div class="col-sm-10">
         {{{prepareValue value}}}
@@ -84,5 +87,12 @@
         <option {{selected}}>{{number}}</option>
       {{/each}}
     </select>
+  </div>
+</template>
+
+<template name="comments">
+  <div class="col-sm-8">
+    {{{prepareValue value}}}
+    <textarea id="{{id}}" rows="1" class="form-control"></textarea>
   </div>
 </template>
