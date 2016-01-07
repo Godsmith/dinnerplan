@@ -44,15 +44,6 @@ Feature: Creating account and logging in and out
     Then The text of "today"'s meal should be "Korv Stroganoff"
 
   @focus
-  Scenario: Adding meals to days by clicking the ok button
-    Given The main page is showing
-    And I am a logged in user
-    When I click the edit button for "today"'s meal
-    And I insert "Korv Stroganoff" in "today"'s text box
-    And I click the "ok" button for "today"'s meal
-    Then The text of "today"'s meal should be "Korv Stroganoff"
-
-  @focus
   Scenario: Canceling when adding a meal by pressing Enter
     Given The main page is showing
     And I am a logged in user
@@ -68,10 +59,10 @@ Feature: Creating account and logging in and out
     And I am a logged in user
     When I click the edit button for "today"'s meal
     And I insert "Korv Stroganoff" in "today"'s text box
-    And I click the "ok" button for "today"'s meal
+    And I press "Enter"
     And I click the edit button for "today"'s meal
     And I insert "Pasta Carbonara" in "today"'s text box
-    And I click the "ok" button for "today"'s meal
+    And I press "Enter"
     Then The text of "today"'s meal should be "Pasta Carbonara"
 
     @focus
@@ -87,7 +78,7 @@ Feature: Creating account and logging in and out
     Given I am a logged in user on the main page
     When I click the edit button for "today"'s meal
     And I insert "        " in "today"'s text box
-    And I click the "ok" button for "today"'s meal
+    And I press "Enter"
     Then There shouldn't be any link to today's meal
     And There shouldn't be meals for any days in the database
 
@@ -96,7 +87,7 @@ Feature: Creating account and logging in and out
     Given I am a logged in user on the main page that has inserted a meal into the database
     When I click the edit button for "today"'s meal
     And I insert "" in "today"'s text box
-    And I click the "ok" button for "today"'s meal
+    And I press "Enter"
     Then There shouldn't be any link to today's meal
     And There shouldn't be meals for any days in the database
 

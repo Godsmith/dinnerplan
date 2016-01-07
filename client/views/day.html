@@ -2,11 +2,13 @@
   <tr class="viewing date-{{date}}">
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
     <td>
-      {{#if mealExists meal}}
-        <a class="{{mealLinkClass meal}}" href="#">
-          {{meal}}
-        </a>
-      {{/if}}
+      <div class="meal-name">
+        {{#if mealExists meal}}
+          <a class="{{mealLinkClass meal}}" href="#">
+            {{meal}}
+          </a>
+        {{/if}}
+      </div>
     </td>
     {{#if currentUser}}
       <td class="edit">
@@ -18,12 +20,12 @@
   </tr>
   <tr class='editing date-{{date}}' style="display: none;">
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
-    <td><textarea rows="1" class="form-control">{{meal}}</textarea></td>
-    <!--<td><input type="text" class="form-control" value={{meal}}></td>-->
     <td>
-      <button type="button" class="btn btn-default ok">
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-      </button>
+      <div class="meal-name">
+        <textarea rows="1" class="form-control">{{meal}}</textarea>
+      </div>
+    </td>
+    <td>
       <button type="button" class="btn btn-default cancel">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
