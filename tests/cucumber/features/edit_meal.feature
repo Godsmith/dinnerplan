@@ -195,3 +195,12 @@ Feature: Edit meals
     When I add a comment for today's meal with the comment "my comment"
     When I add a comment for today's meal with the comment ""
     Then The comments of today's meal should show today's date exactly once
+
+  @focus
+  Scenario: When adding a URL in the link field in a recipe, that link should show up as an HTML
+  link.
+    Given I am a logged in user on the main page in edit mode
+    When I enter "a.com" in the "Source" field
+    And I click the "ok" edit meal button
+    And I click "today"'s meal
+    Then The component ".editMeal" should include the HTML ">a.com</a>"

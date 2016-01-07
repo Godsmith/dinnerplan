@@ -7,11 +7,11 @@ module.exports = function () {
   this.Then(/^There should be "([^"]*)" rows in the recipes table, including header$/, function (arg1) {
     var selector = '.recipes tr';
     browser.waitForVisible('.recipes td'); //wait until table data loaded
-    expect(browser.elements(selector).value.length).toEqual(2);
+    expect(browser.elements(selector).value.length).toEqual(parseInt(arg1));
   });
 
   this.Then(/^The component "([^"]*)" should include the HTML "([^"]*)"$/, function (component, html) {
-    browser.waitForVisible('.recipes td');
+    browser.waitForVisible(component);
     expect(browser.getHTML(component)).toContain(html);
   });
 

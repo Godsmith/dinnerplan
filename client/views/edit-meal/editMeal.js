@@ -170,8 +170,8 @@ Template.comments.helpers({
 
 function prepareValue(s) {
   if (typeof s === 'string') {
-    s = linkify(s);
     s = escapeHtml(s);
+    s = linkify(s);
   } else if (s === undefined) {
     return '';
   } else {
