@@ -146,6 +146,17 @@ module.exports = function () {
     this.support.clickSelector('.editMeal .ok');
   });
 
+  this.When(/^I add the "([^"]*)" category to "([^"]*)"'s meal$/, function (category, day) {
+    this.support.clickMealName(dates[day]);
+    if (browser.isExisting('.editMeal .edit')) {
+      this.support.clickSelector('.editMeal .edit');
+    }
+    this.support.clickSelector('.selectize-input');
+    browser.keys(category);
+    browser.keys('Enter');
+    this.support.clickSelector('.editMeal .ok');
+  });
+
   function count(s, part) {
     return s.split(part).length - 1
   }

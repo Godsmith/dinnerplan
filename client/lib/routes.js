@@ -24,3 +24,10 @@ Router.route('/about', function() {
     data: {active: 'about'}
   })
 });
+
+Router.route('/categories', function() {
+  this.render('categories');
+  this.layout('layout', {
+    data: {active: 'categories'}
+  })
+});

@@ -1,23 +1,5 @@
 <template name="recipes">
-  <div class="container">
-    <table class="table recipes">
-      <thead>
-        <tr>
-          {{#each mealProperties}}
-          <th>
-            {{label}}
-          </th>
-          {{/each}}
-        </tr>
-      </thead>
-      <tbody>
-      {{#each meals}}
-        {{> meal}}
-      {{/each}}
-      </tbody>
-    </table>
-  </div>
-  {{> editMeal }}
+  {{>recipesTable meals=meals}}
 </template>
 
 

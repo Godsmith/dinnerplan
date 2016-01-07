@@ -4,8 +4,5 @@ Template.recipes.helpers({
       Session.set("meals", value);
     });
     return Session.get("meals");
-  },
-  mealProperties: function() {
-    return MEAL_PROPERTIES;
   }
 });

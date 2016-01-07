@@ -107,7 +107,7 @@ Template.editMeal.onRendered(function(){
   });
 });
 
-Template.categories.onRendered(function() {
+Template.categoriesField.onRendered(function() {
   var $select = $('#inputMealCategories').selectize({
     valueField: 'value',
     labelField: 'value',
