@@ -3,7 +3,6 @@
 Template.day.helpers({
   dayFromDate: date => moment(date).format('dddd').capitalize(),
   formatDate: date => moment(date).format('YYYY-MM-DD'),
-  mealLinkClass: meal => _.contains(Session.get('mealNames'), meal) ? 'exists' : '',
   mealExists: meal => meal
 });
 
@@ -28,17 +27,6 @@ Template.day.events({
         cancel(this);
         break;
     }
-  },
-
-  'click a': function(event, template) {
-    // Remove label marking so that it does not carry over
-    $('label.rating').removeClass('active');
-
-    var mealName = template.data.meal;
-    Meteor.call('mealFromName', mealName, function(error, result) {
-      Session.set('meal', result);
-      showEditMealModal();
-    });
   }
 });
 

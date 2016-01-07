@@ -4,9 +4,7 @@
     <td>
       <div class="meal-name">
         {{#if mealExists meal}}
-          <a class="{{mealLinkClass meal}}" href="#">
-            {{meal}}
-          </a>
+          {{>editMealLink meal=meal}}
         {{/if}}
       </div>
     </td>

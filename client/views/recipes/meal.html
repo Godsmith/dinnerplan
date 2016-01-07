@@ -2,7 +2,11 @@
   <tr>
     {{#each parameters}}
     <td>
+      {{#if isName}}
+        {{>editMealLink meal=value}}
+      {{else}}
       {{value}}
+      {{/if}}
     </td>
     {{/each}}
   </tr>

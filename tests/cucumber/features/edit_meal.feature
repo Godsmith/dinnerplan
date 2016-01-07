@@ -23,12 +23,19 @@ Feature: Edit meals
     And The "Comments" edit control should show
 
   @focus
-  Scenario: When I click on the name of a meal the name of that meal should be shown in the edit
-  meal view
+  Scenario: When I click on the name of a meal that does not exist in the database the name of that
+  meal should be shown in the edit meal view
     Given I am a logged in user on the main page
     And I have added "Korv Stroganoff" for tonight
     When I click "today"'s meal
     Then The text of the "Name" textbox should be "Korv Stroganoff"
+
+  @focus
+  Scenario: When I click on the name of a meal that does exist in the database the name of that
+  meal should be shown in the edit meal view
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click "today"'s meal
+    Then The component "div.meal-property" should show
 
   # getValue always strips spaces, so I cannot verify this. Perhaps with jQuery, but I do not know
   # how to use that in these tests

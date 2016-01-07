@@ -17,6 +17,10 @@ module.exports = function () {
     browser.waitForVisible('#inputMeal' + arg1);
   });
 
+  this.Then(/^The component "([^"]*)" should show$/, function (arg1) {
+    browser.waitForVisible(arg1);
+  });
+
   this.Given(/^I am a logged in user on the main page in edit mode$/, function () {
     this.support.navigateToMainPage();
     this.support.createUserAndLogIn();

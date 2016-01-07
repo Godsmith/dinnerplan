@@ -9,4 +9,14 @@ module.exports = function () {
     browser.waitForVisible('.recipes td'); //wait until table data loaded
     expect(browser.elements(selector).value.length).toEqual(2);
   });
+
+  this.Then(/^The component "([^"]*)" should include the HTML "([^"]*)"$/, function (component, html) {
+    browser.waitForVisible('.recipes td');
+    expect(browser.getHTML(component)).toContain(html);
+  });
+
+  this.When(/^I click "([^"]*)"$/, function (component) {
+    browser.waitForVisible(component);
+    browser.click(component);
+  });
 };
