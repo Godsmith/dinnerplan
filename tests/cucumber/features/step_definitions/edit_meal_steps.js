@@ -89,6 +89,15 @@ module.exports = function () {
     expect(this.support.getValueOfSelector('#inputMeal' + arg1)).toEqual(arg2);
   });
 
+  this.Then(/^The text of the "([^"]*)" textbox \(without stripping spaces\) should be "([^"]*)"$/, function (arg1, arg2) {
+    // The getValueOfSelector is
+    var selector = '#inputMeal' + arg1;
+    browser.waitForVisible(selector);
+    var value = browser.execute(function(selector) {
+      return $(selector).val();
+    }, selector).value;
+    expect(value).toEqual(arg2);
+  });
   this.When(/^I insert "([^"]*)" as "([^"]*)"'s meal$/, function (meal, arg2) {
     var dateString = dates[arg2];
     this.support.addMealForDate(meal, dateString);

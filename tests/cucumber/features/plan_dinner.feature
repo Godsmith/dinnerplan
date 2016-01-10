@@ -99,4 +99,30 @@ Feature: Creating account and logging in and out
     And I press "Tab"
     Then "tomorrow"'s edit button should be selected
 
+  @focus
+  Scenario: When typing the beginning of an existing meal name, the rest of the meal name should
+    autocomplete
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "tomorrow"'s meal
+    And I type "mea"
+    And The text of "tomorrow"'s text box should be "meal name"
+
+  @focus
+  Scenario: When backspacing an autocomplete, it should take off one additional letter (like if
+  the autocomplete text did not exist)
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "tomorrow"'s meal
+    And I type "mea"
+    And I type "Back space"
+    And The text of "tomorrow"'s text box should be "me"
+
+  @focus
+  Scenario: When an autocomplete is visible, if the selection in the textarea changes,
+  backspacing that text should only remove the newly selected text and nothing more
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "tomorrow"'s meal
+    And I type "mea"
+    And I select character "1" to "4" in "tomorrow"'s text box
+    And I type "Back space"
+    And The text of "tomorrow"'s text box should be "m name"
 

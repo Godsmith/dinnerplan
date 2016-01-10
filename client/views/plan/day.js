@@ -1,5 +1,7 @@
 'use strict';
 
+let textareaAutocompleter = undefined;
+
 Template.day.helpers({
   dayFromDate: date => moment(date).format('dddd').capitalize(),
   formatDate: date => moment(date).format('YYYY-MM-DD'),
@@ -18,6 +20,7 @@ Template.day.events({
   'click .cancel'() { cancel(this); },
 
   'keydown .editing textarea': function(event, template){
+    textareaAutocompleter.keydown(event.target, event.keyCode);
     switch (event.keyCode) {
       case 13:
         event.preventDefault(); //to prevent the enter key to trigger the edit button
@@ -27,6 +30,10 @@ Template.day.events({
         cancel(this);
         break;
     }
+  },
+
+  'keyup .editing textarea': function(event, template) {
+    textareaAutocompleter.keyup(event.target, Session.get('mealNames'));
   }
 });
 
@@ -38,6 +45,7 @@ Template.day.onRendered(function(){
     $(editButton).focus();
     Session.set("editButtonToFocus", null);
   }
+  textareaAutocompleter = new TextareaAutocompleter();
 });
 
 var ok = function(day) {
@@ -67,4 +75,3 @@ var hideEditing = function(day) {
 };
 
 let editButtonToFocus = (day) => '.viewing.date-' + day.date + ' .edit';
-

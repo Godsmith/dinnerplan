@@ -37,14 +37,12 @@ Feature: Edit meals
     When I click "today"'s meal
     Then The component "div.meal-property" should show
 
-  # getValue always strips spaces, so I cannot verify this. Perhaps with jQuery, but I do not know
-  # how to use that in these tests
-  @ignore
+  @focus
   Scenario: Remove leading and trailing whitespace in meal names
     Given I am a logged in user on the main page
     And I have added "    Korv Stroganoff  " for tonight
     When I click "today"'s meal
-    Then The text of the "Name" textbox should be "Korv Stroganoff"
+    Then The text of the "Name" textbox (without stripping spaces) should be "Korv Stroganoff"
 
   @focus
   Scenario: When a meal name that is not in the database has been created for tonight, it should be

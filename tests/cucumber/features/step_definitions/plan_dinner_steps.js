@@ -99,4 +99,23 @@ module.exports = function () {
   this.Then(/^The input box with id "([^"]*)" should still have the recorded value$/, function (arg1) {
     expect(browser.getValue('#' + arg1)).toEqual(storedValue);
   });
-};
+
+  this.When(/^I type "([^"]*)"$/, function (arg1) {
+    browser.keys(arg1);
+  });
+
+  this.When(/^The text of "([^"]*)"'s text box should be "([^"]*)"$/, function (day, text) {
+    expect(browser.getValue('.date-' + dates[day] + ' textarea')).toEqual(text);
+  });
+
+  this.When(/^I select character "([^"]*)" to "([^"]*)" in "([^"]*)"'s text box$/,
+    function(start, stop, day) {
+    var id = '.date-' + dates[day] + ' textarea';
+    console.log(id)
+    browser.execute(function(start, stop, id) {
+      var textarea = $(id)[0];
+      textarea.selectionStart = start;
+      textarea.selectionEnd = stop
+    }, start, stop, id);
+  });
+}
