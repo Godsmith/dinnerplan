@@ -11,8 +11,8 @@ Template.categories.helpers({
 });
 
 Template.categories.events({
-  'click a': function(event) {
-    let category = $(event.target).attr('class');
+  'click a.category': function(event) {
+    let category = event.target.getAttribute('data-category');
     Session.set('activeCategory', category)
   }
 });

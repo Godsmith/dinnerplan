@@ -25,5 +25,15 @@ Feature: List recipes per category
     And I click ".category.Fisk"
     Then There should be "2" rows in the recipes table, including header
 
+  @focus
+  Scenario: When clicking one of the recipes, the previously active category should still be active
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    And I add the "Fisk" category to "today"'s meal
+    And I navigate to "categories"
+    And I click ".category.Fisk"
+    And I click "a.edit-meal"
+    When I click the "cancel" edit meal button and wait for the dialog to close
+    Then There should be "2" rows in the recipes table, including header
+
 
 
