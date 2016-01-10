@@ -72,13 +72,13 @@ Template.editMeal.events({
     if (oldMealName === newMeal.name) {
       updateMealAndHideModal(oldMealName, newMeal);
     } else {
+      if ($.trim(newMeal.name) === '') {
+        showNameFieldError(STRINGS.nameEmptyString);
+        return;
+      }
       Meteor.call('mealExists', newMeal.name, function(error, mealExists) {
         if (mealExists) {
-          let divSurroundingNameField = $('#inputMealName').parent();
-          divSurroundingNameField.addClass('has-error');
-          let helpBlock = divSurroundingNameField.find('.help-block');
-          helpBlock.text(STRINGS.nameAlreadyExists);
-          helpBlock.css('display', 'inline');
+          showNameFieldError(STRINGS.nameAlreadyExists);
         } else {
           Meteor.call('updateMealNameInDaysDatabase', oldMealName, newMeal.name);
           updateMealAndHideModal(oldMealName, newMeal);
@@ -87,6 +87,14 @@ Template.editMeal.events({
     }
   }
 });
+
+function showNameFieldError(text) {
+  let divSurroundingNameField = $('#inputMealName').parent();
+  divSurroundingNameField.addClass('has-error');
+  let helpBlock = divSurroundingNameField.find('.help-block');
+  helpBlock.text(text);
+  helpBlock.css('display', 'inline');
+}
 
 function updateMealAndHideModal(oldMealName, meal) {
   Meteor.call('updateMeal', oldMealName, meal);

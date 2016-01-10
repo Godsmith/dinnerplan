@@ -173,6 +173,16 @@ Feature: Edit meals
     Then The "Name" edit control should show
 
   @focus
+  Scenario: You should not be able to change a recipe name to a string with only whitespace
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I insert "meal name 2" as "tomorrow"'s meal
+    And I click "today"'s meal
+    And I click the "edit" edit meal button
+    And I enter "" in the "Name" field
+    And I click the "ok" edit meal button
+    Then The "Name" edit control should show
+
+  @focus
   Scenario: After adding a comment, it should show with today's date.
     Given I am a logged in user on the main page that has inserted a meal into the database
     When I click "today"'s meal
