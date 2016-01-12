@@ -1,0 +1,17 @@
+<template name="ingredients">
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="text" id="ingredient" class="form-control" placeholder="Namn på ingrediens">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="ingredient-ok" type="button">Sök</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+    </div>
+  {{>recipesTable meals=meals}}
+  </div>
+</template>

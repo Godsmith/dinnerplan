@@ -166,6 +166,16 @@ module.exports = function () {
     this.support.clickSelector('.editMeal .ok');
   });
 
+  this.When(/^I add "([^"]*)" to the ingredients of "([^"]*)"'s meal$/, function (ingredient, day) {
+    this.support.clickMealName(dates[day]);
+    if (browser.isExisting('.editMeal .edit')) {
+      this.support.clickSelector('.editMeal .edit');
+    }
+    this.support.clickSelector('#inputMealIngredients');
+    browser.keys(ingredient);
+    this.support.clickSelector('.editMeal .ok');
+  });
+
   function count(s, part) {
     return s.split(part).length - 1
   }

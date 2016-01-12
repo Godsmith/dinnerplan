@@ -31,3 +31,10 @@ Router.route('/categories', function() {
     data: {active: 'categories'}
   })
 });
+
+Router.route('/ingredients', function() {
+  this.render('ingredients');
+  this.layout('layout', {
+    data: {active: 'ingredients'}
+  })
+});
