@@ -35,5 +35,16 @@ Feature: List recipes per category
     When I click the "cancel" edit meal button and wait for the dialog to close
     Then There should be "2" rows in the recipes table, including header
 
-
-
+  @focus
+  Scenario: When clicking one of the recipes, in the edit meal dialog that comes up, the
+  textareas should resize automatically when typing
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    And I add the "Fisk" category to "today"'s meal
+    And I navigate to "categories"
+    And I click ".category.Fisk"
+    And I click "a.edit-meal"
+    And I click the "edit" edit meal button
+    And The "Source" textarea has a certain height
+    And I click the "Source" textarea
+    And I enter two lines of text
+    Then The "Source" textarea has increased in height

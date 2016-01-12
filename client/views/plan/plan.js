@@ -25,12 +25,6 @@ Template.plan.onRendered(function() {
   }
 });
 
-Template.plan.events({
-  'input textarea': function(event, template) {
-    adjustTextAreaHeight(event.target);
-  }
-});
-
 Template.plan.helpers({
   weeks: function() {
     var query = Days.find({},{sort: {date: 1}});
