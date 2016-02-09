@@ -3,8 +3,8 @@
 let textareaAutocompleter = undefined;
 
 Template.day.helpers({
-  dayFromDate: date => moment(date).format('dddd').capitalize(),
-  formatDate: date => moment(date).format('YYYY-MM-DD'),
+  dayFromDate: date => moment(new Date(date)).format('dddd').capitalize(),
+  formatDate: date => moment(new Date(date)).format('YYYY-MM-DD'),
   mealExists: meal => meal
 });
 

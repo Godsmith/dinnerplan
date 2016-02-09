@@ -16,16 +16,14 @@ Feature: Creating account and logging in and out
     And I set the control with id "inputNumberOfWeeks" to the value "2"
     Then The number of days showing should be "14"
 
-  # This test will fail when the selected week happens to be 53, since some years do not have a
-  # week 53
   @focus
   Scenario: When changing the start week and the number of weeks shown, those changes should
   persist after a page reload
     Given I am a logged in user on the main page
-    When I send two up arrows to the "inputFirstWeek" control and record the value
+    When I set the control with id "inputFirstWeek" to the value "1"
     And I set the control with id "inputNumberOfWeeks" to the value "2"
     And I refresh the page
-    Then The input box with id "inputFirstWeek" should still have the recorded value
+    Then The input box with id "inputFirstWeek" should have the value "1"
     Then The input box with id "inputNumberOfWeeks" should have the value "2"
 
   @focus

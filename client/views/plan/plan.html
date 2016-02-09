@@ -4,14 +4,15 @@
       <div class="panel-body">
         <form class="form-inline">
           <div class="form-group">
-            <input type="week" class="form-control" id="inputFirstWeek"
+            <input type="number" class="form-control inline-text" id="inputFirstWeek"
                    value="{{firstWeek}}">
+            <label for="inputFirstWeek">veckor bakåt och</label>
           </div>
           <div class="form-group">
-            <label for="inputNumberOfWeeks">och</label>
-            <input type="number" min="1" max="12" class="form-control" id="inputNumberOfWeeks"
+            <input type="number" min="1" max="12" class="form-control inline-text"
+                   id="inputNumberOfWeeks"
                    value="{{numberOfWeeks}}">
-            <label for="inputNumberOfWeeks">veckor framåt</label>
+            <label for="inputNumberOfWeeks">veckor därefter</label>
           </div>
         </form>
       </div>
