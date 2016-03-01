@@ -9,15 +9,14 @@ Template.day.helpers({
 });
 
 Template.day.events({
-  'click .edit'() {
-    $('.viewing.date-' + this.date).hide();
-    $('.editing.date-' + this.date).show();
-    let textarea = $('.editing.date-' + this.date + ' textarea')[0];
-    adjustTextAreaHeight(textarea); // So that the textarea height will scale with the text
-    textarea.select();
-  },
+  'click .edit'() { edit(this); },
   'click .ok'() { ok(this); },
   'click .cancel'() { cancel(this); },
+  'click td.meal-name'() {
+    if (!this.meal) {
+      edit(this);
+    }
+  },
 
   'keydown .editing textarea': function(event, template){
     textareaAutocompleter.keydown(event.target, event.keyCode);
@@ -47,6 +46,14 @@ Template.day.onRendered(function(){
   }
   textareaAutocompleter = new TextareaAutocompleter();
 });
+
+function edit(day) {
+  $('.viewing.date-' + day.date).hide();
+  $('.editing.date-' + day.date).show();
+  let textarea = $('.editing.date-' + day.date + ' textarea')[0];
+  adjustTextAreaHeight(textarea); // So that the textarea height will scale with the text
+  textarea.select();
+}
 
 var ok = function(day) {
   day.meal = $.trim($('.date-' + day.date + ' textarea').val());
