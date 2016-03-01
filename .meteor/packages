@@ -17,12 +17,13 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 momentjs:moment
-velocity:html-reporter
-sanjo:jasmine
+#velocity:html-reporter
+#sanjo:jasmine
 less
 twbs:bootstrap
 accounts-ui
 accounts-password
 iron:router
-xolvio:cucumber@=0.19.5_1
+#xolvio:cucumber@=0.19.5_1
 jeremy:selectize
+fixtures
