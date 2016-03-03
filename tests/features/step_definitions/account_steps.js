@@ -37,12 +37,6 @@ module.exports = function () {
 
   this.Given(/^I am a logged in user$/, function () {
     this.support.createUserAndLogIn();
-    //var userData = {username: 'newuser', password: 'password'};
-    //this.server.call('addUser', userData);
-    //browser.executeAsync(function(userData, done) {
-    //  Meteor.loginWithPassword(userData.username, userData.password, done);
-    //}, userData);
-    //browser.waitForExist('#login-name-link');
   });
 
   this.When(/^I click my username$/, function () {
@@ -66,4 +60,11 @@ module.exports = function () {
     this.support.createUserAndLogIn();
   });
 
+  this.When(/^I log in$/, function () {
+    this.support.logIn();
+  });
+
+  this.When(/^I log out$/, function () {
+    this.support.logOut();
+  });
 };

@@ -101,6 +101,14 @@ Feature: Edit meals
     Then The color of tonight's meal should be "#0645ad"
 
   @focus
+  Scenario: The blue color of a meal should persist even when logging out and in again
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I log out
+    And I refresh the page
+    And I log in
+    Then The color of tonight's meal should be "#0645ad"
+
+  @focus
   Scenario: When adding a property to a meal in the database, that property should persist 
   when reloading the page and clicking the edit button again
     Given I am a logged in user on the main page in edit mode

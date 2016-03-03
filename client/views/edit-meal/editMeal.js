@@ -98,7 +98,6 @@ function showNameFieldError(text) {
 
 function updateMealAndHideModal(oldMealName, meal) {
   Meteor.call('updateMeal', oldMealName, meal);
-  loadMealNames(); // To make the meal blue. Should be done reactively instead.
   $('#editMealModal').modal('hide');
 }
 

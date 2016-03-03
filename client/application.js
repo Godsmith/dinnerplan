@@ -2,14 +2,6 @@ Meteor.subscribe('days');
 Meteor.subscribe('meals');
 Meteor.subscribe('currentUser');
 
-Meteor.startup(function() {
-  loadMealNames();
-});
-
-loadMealNames = function() {
-  Meteor.call('mealNames', (error, result) => { Session.set("mealNames", result); });
-};
-
 adjustTextAreaHeight = function(textarea) {
   textarea.style.height = 'auto';
   //Needs a magic number of 2 here to avoid scrollbars, don't know why

@@ -1,8 +1,15 @@
 'use strict';
 
 Template.editMealLink.helpers({
-  mealLinkClass: meal => _.contains(Session.get('mealNames'), meal) ? 'exists' : ''
+  mealLinkClass: meal => mealExists(meal) ? 'exists' : ''
 });
+
+function mealExists(name) {
+  var meal = Meals.findOne({
+    name: name
+  });
+  return meal != null
+}
 
 Template.editMealLink.events({
   'click a': function(event, template) {

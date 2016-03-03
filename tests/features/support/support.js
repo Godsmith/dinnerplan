@@ -8,19 +8,35 @@ module.exports = function () {
     var today = moment().format('YYYY-MM-DD');
     var tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
     var MEAL_NAME = 'meal name';
+    var USERNAME = 'newuser';
+    var PASSWORD = 'password';
+    var USERDATA = {username: USERNAME, password: PASSWORD};
 
     this.support = {
       navigateToMainPage: function() {
         browser.url(process.env.ROOT_URL);
       },
 
-      createUserAndLogIn: function() {
-        var userData = {username: 'newuser', password: 'password'};
-        theServer.call('addUser', userData);
+      logIn: function() {
         browser.executeAsync(function(userData, done) {
           Meteor.loginWithPassword(userData.username, userData.password, done);
-        }, userData);
+        }, USERDATA);
         browser.waitForExist('#login-name-link');
+      },
+
+      logOut: function() {
+        let usernameLink ='#login-name-link';
+        let logoutButton = '#login-buttons-logout';
+        browser.waitForVisible(usernameLink);
+        browser.click(usernameLink);
+        browser.waitForVisible(logoutButton);
+        browser.click(logoutButton);
+        browser.waitForVisible('#login-sign-in-link');
+      },
+
+      createUserAndLogIn: function() {
+        theServer.call('addUser', USERDATA);
+        this.logIn();
       },
 
       addMealForDate: function(mealName, dateString) {

@@ -48,11 +48,16 @@ Template.day.onRendered(function(){
 });
 
 function edit(day) {
+  loadMealNames();
   $('.viewing.date-' + day.date).hide();
   $('.editing.date-' + day.date).show();
   let textarea = $('.editing.date-' + day.date + ' textarea')[0];
   adjustTextAreaHeight(textarea); // So that the textarea height will scale with the text
   textarea.select();
+}
+
+function loadMealNames() {
+  Meteor.call('mealNames', (error, result) => { Session.set("mealNames", result); });
 }
 
 var ok = function(day) {
