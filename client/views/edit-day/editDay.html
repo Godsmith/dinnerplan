@@ -1,0 +1,24 @@
+<template name="editDay">
+  <div class="modal editDay" id="editDayModal" role="dialog"
+       aria-labelledby="editDayModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="editDayModalLabel">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+          <textarea id="meal-name" rows="1" class="form-control">{{mealName}}</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="edit-day-cancel" class="btn btn-default cancel float-right"
+          data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default ok float-right">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

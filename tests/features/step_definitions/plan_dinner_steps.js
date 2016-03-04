@@ -15,8 +15,8 @@ module.exports = function () {
     this.support.clickEditButtonForDate(dates[arg1]);
   });
 
-  this.When(/^I insert "([^"]*)" in "([^"]*)"'s text box$/, function (arg1, arg2) {
-    this.support.setValueOfSelector('.date-' + dates[arg2] + ' textarea', arg1)
+  this.When(/^I insert "([^"]*)" in the meal name text box$/, function (arg1) {
+    this.support.setValueOfSelector('#meal-name', arg1)
   });
 
   this.When(/^I press "([^"]*)"$/, function (arg1) {
@@ -47,7 +47,7 @@ module.exports = function () {
   });
 
   this.Then(/^The number of days showing should be "([^"]*)"$/, function (arg1) {
-    expect(String(browser.elements('.viewing').value.length)).toEqual(arg1);
+    expect(String(browser.elements('div.meal-name').value.length)).toEqual(arg1);
   });
 
   this.When(/^I click the "([^"]*)" button for "([^"]*)"'s meal$/, function (arg1, arg2) {
@@ -68,8 +68,8 @@ module.exports = function () {
     expect(browser.getValue(selector)).toEqual(arg2);
   });
 
-  this.Then(/^The height of today's textarea should be "([^"]*)" pixels$/, function (height) {
-    var textarea = '.date-' + dates.today + ' textarea';
+  this.Then(/^The height of the textarea should be "([^"]*)" pixels$/, function (height) {
+    var textarea = '#meal-name';
     browser.waitForExist(textarea);
     expect(browser.getCssProperty(textarea, "height").parsed.value).toEqual(parseInt(height));
   });
@@ -84,9 +84,8 @@ module.exports = function () {
   });
 
   this.When(/^"([^"]*)"'s edit button should be selected$/, function (arg1) {
-    var textarea = '.date-' + dates[arg1] + ' textarea';
-    browser.keys('Enter');
-    browser.waitForVisible(textarea)
+    var button = '.date-' + dates[arg1] + ' button';
+    expect(browser.elementActive().value).toEqual(browser.element(button).value);
   });
 
   this.When(/^I send two up arrows to the "([^"]*)" control and record the value$/, function (arg1) {
@@ -106,18 +105,16 @@ module.exports = function () {
     browser.keys(arg1);
   });
 
-  this.When(/^The text of "([^"]*)"'s text box should be "([^"]*)"$/, function (day, text) {
-    expect(browser.getValue('.date-' + dates[day] + ' textarea')).toEqual(text);
+  this.When(/^The meal name text box should show "([^"]*)"$/, function (text) {
+    expect(browser.getValue('#meal-name')).toEqual(text);
   });
 
-  this.When(/^I select character "([^"]*)" to "([^"]*)" in "([^"]*)"'s text box$/,
-    function(start, stop, day) {
-    var id = '.date-' + dates[day] + ' textarea';
-    console.log(id)
-    browser.execute(function(start, stop, id) {
-      var textarea = $(id)[0];
-      textarea.selectionStart = start;
-      textarea.selectionEnd = stop
-    }, start, stop, id);
+  this.When(/^I select character "([^"]*)" to "([^"]*)" in the meal name text box$/,
+    function(start, stop) {
+      browser.execute(function(start, stop) {
+        var textarea = $('#meal-name')[0];
+        textarea.selectionStart = start;
+        textarea.selectionEnd = stop
+    }, start, stop);
   });
-}
+};

@@ -41,7 +41,7 @@ module.exports = function () {
 
       addMealForDate: function(mealName, dateString) {
         this.clickSelector('.date-' + dateString + ' button');
-        var textarea = '.date-' + dateString + ' textarea';
+        var textarea = '#meal-name';
         browser.waitForExist(textarea);
         browser.setValue(textarea, mealName);
         browser.keys('Enter');
@@ -55,7 +55,7 @@ module.exports = function () {
 
       focusEditButtonForDate: function(dateString) {
         var editButton = '.date-' + dateString + ' button';
-        var cancelButton = '.date-' + dateString + ' .cancel';
+        var cancelButton = '#edit-day-cancel';
         browser.waitForExist(editButton);
         browser.click(editButton);
         browser.waitForExist(cancelButton);
@@ -63,7 +63,7 @@ module.exports = function () {
       },
 
       clickMealName: function(dateString) {
-        var selector = '.viewing.date-' + dateString + ' a'
+        var selector = '.date-' + dateString + ' a';
         browser.waitForVisible(selector);
         this.clickSelector(selector)
       },

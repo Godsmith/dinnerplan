@@ -45,7 +45,7 @@ module.exports = function () {
   });
 
   this.Then(/^The color of tonight's meal should be "([^"]*)"$/, function (arg1) {
-    var selector = '.viewing.date-' + dates.today + ' a';
+    var selector = '.date-' + dates.today + ' a';
     browser.waitForVisible(selector);
     expect(browser.getCssProperty(selector, 'color').parsed.hex).toEqual(arg1);
   });
