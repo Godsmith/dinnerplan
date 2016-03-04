@@ -117,4 +117,16 @@ module.exports = function () {
         textarea.selectionEnd = stop
     }, start, stop);
   });
+
+  this.Then(/^There should be an edit meal link with the text "([^"]*)" on the page$/, function(text) {
+    browser.waitForExist('a.edit-meal');
+    expect(browser.getText('a.edit-meal').indexOf(text)).toBeGreaterThan(-1);
+  });
+
+  this.Then(/^There should be two edit meal links on the page$/, function() {
+    let link = 'a.edit-meal';
+    browser.waitForExist(link);
+    console.log(browser.getText(link));
+    expect(browser.getText(link).length).toEqual(2);
+  });
 };

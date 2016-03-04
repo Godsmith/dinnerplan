@@ -3,9 +3,7 @@
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
     <td class="meal-name">
       <div class="meal-name">
-        {{#if mealExists meal}}
-          {{>editMealLink meal=meal}}
-        {{/if}}
+        {{>editMealLinks meal=meal}}
       </div>
     </td>
     {{#if currentUser}}

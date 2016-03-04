@@ -130,3 +130,20 @@ Feature: Creating account and logging in and out
     And I type "Back space"
     And The meal name text box should show "m name"
 
+  @focus
+  Scenario: When inserting two meal names separated by semicolon, two links should be created
+    Given I am a logged in user on the main page
+    When I click the edit button for "today"'s meal
+    And I insert "  meal1; meal2    " in the meal name text box
+    And I press "Enter"
+    Then There should be an edit meal link with the text "meal1" on the page
+    And There should be an edit meal link with the text "meal2" on the page
+
+  @focus
+  Scenario: When inserting two meal names separated by semicolon, but one has only whitespace,
+  only one link should be created
+    Given I am a logged in user on the main page
+    When I click the edit button for "today"'s meal
+    And I insert "  meal1; ; meal2   ;;" in the meal name text box
+    And I press "Enter"
+    Then There should be two edit meal links on the page
