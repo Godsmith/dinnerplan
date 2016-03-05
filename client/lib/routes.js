@@ -38,3 +38,10 @@ Router.route('/ingredients', function() {
     data: {active: 'ingredients'}
   })
 });
+
+Router.route('/shopping-list', function() {
+  this.render('shoppingList');
+  this.layout('layout', {
+    data: {active: 'shopping-list'}
+  })
+});
