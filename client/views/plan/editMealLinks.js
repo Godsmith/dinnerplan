@@ -12,7 +12,8 @@ Template.editMealLinks.helpers({
       .filter((meal) => meal.length > 0)
       .map(function(meal){
       return {
-        meal: meal
+        meal: meal,
+        date: Template.currentData().date
       };
     });
     return trimmedMeals

@@ -147,3 +147,13 @@ Feature: Creating account and logging in and out
     And I insert "  meal1; ; meal2   ;;" in the meal name text box
     And I press "Enter"
     Then There should be two edit meal links on the page
+
+#  @focus
+#  @temp
+#  Scenario: Dragging and dropping should swap meals
+#    Given I am a logged in user on the main page that has inserted a meal into the database
+#    When I click the edit button for "tomorrow"'s meal
+#    And I insert "Korv Stroganoff" in the meal name text box
+#    And I press "Enter"
+#    And I drag "today"'s meal to "tomorrow"'s meal
+#    Then The text of "today"'s meal should be "Korv Stroganoff"

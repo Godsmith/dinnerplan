@@ -129,4 +129,21 @@ module.exports = function () {
     console.log(browser.getText(link));
     expect(browser.getText(link).length).toEqual(2);
   });
+/* did not manage to make this work
+  this.When(/^I drag "([^"]*)"'s meal to "([^"]*)"'s meal$/, function (source, destination) {
+    var sourceTd = '.date-' + dates[source] + ' td.meal-name';
+    var destinationTd = '.date-' + dates[destination] + ' td.meal-name';
+    //browser.dragAndDrop(sourceTd, destinationTd);
+    //let sourceLocation = browser.getLocation(sourceTd);
+    //let destinationLocation = browser.getLocation(destinationTd);
+    console.log(browser.getLocation(sourceTd));
+    console.log(browser.getLocation(destinationTd));
+    browser.moveToObject(sourceTd, 5, 5);
+    browser.buttonDown(0);
+    //browser.touchMove(destinationLocation.x, destinationLocation.y);
+    browser.moveToObject(destinationTd, 5, 5);
+    browser.buttonUp(0);
+
+  });
+  */
 };

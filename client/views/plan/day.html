@@ -1,7 +1,7 @@
 <template name="day">
   <tr class="date-{{date}}">
     <td class="date">{{dayFromDate date}}<br>{{formatDate date}}</td>
-    <td class="meal-name">
+    <td class="meal-name" draggable="true">
       <div class="meal-name">
         {{>editMealLinks meal=meal}}
       </div>
