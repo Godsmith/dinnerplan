@@ -21,7 +21,7 @@ Template.ingredients.events({
 });
 
 function ok() {
-  Meteor.call("meals", {ingredient: $('#ingredient').val()}, function(error, value) {
+  Meteor.call("meals", {ingredient: $('#ingredient').val().trim()}, function(error, value) {
     Session.set("meals", value);
   });
 }
