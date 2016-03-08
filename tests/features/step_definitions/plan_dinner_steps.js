@@ -146,4 +146,13 @@ module.exports = function () {
 
   });
   */
+
+  this.Then(/^All text in the meal name text box should be selected$/, function () {
+    //var textarea = browser.getElement$('#meal-name')[0];
+    let textarea = '#meal-name';
+    let selectionEnd = browser.getAttribute(textarea, 'selectionEnd');
+    let selectionStart = browser.getAttribute(textarea, 'selectionStart');
+    let length = browser.getValue(textarea).length;
+    expect(selectionEnd - selectionStart).toEqual(length);
+  });
 };

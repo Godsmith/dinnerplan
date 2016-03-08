@@ -53,6 +53,7 @@ function edit(day) {
   let textarea = $('#meal-name');
   textarea.val(day ? day.meal : '');
   textarea.focus();
+  textarea.select();
   Tracker.afterFlush(function() {
     adjustTextAreaHeight(textarea[0]); // So that the textarea height will scale with the text
   });

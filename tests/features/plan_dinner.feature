@@ -63,6 +63,13 @@ Feature: Creating account and logging in and out
     And I press "Enter"
     Then The text of "today"'s meal should be "Pasta Carbonara"
 
+  @focus
+    @temp
+  Scenario: Editing an existing meal, the entire meal name should be selected in the edit dialog
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "today"'s meal
+    Then All text in the meal name text box should be selected
+
     @focus
     Scenario: Editing a two-row meal name should bring up a two-row editing button
       Given I am a logged in user on the main page
