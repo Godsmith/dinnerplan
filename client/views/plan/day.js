@@ -15,17 +15,14 @@ Template.day.events({
     }
   },
   'dragstart td.meal-name'(event, template) {
-    console.log('dragstart')
     event.dataTransfer = event.originalEvent.dataTransfer;
     event.dataTransfer.setData('text', template.data.meal);
     event.dataTransfer.setData('date', template.data.date);
   },
   'dragover td'(event) {
-    console.log('dragover')
     event.preventDefault();
   },
   'drop td'(event) {
-    console.log('drop')
     let sourceDate = event.originalEvent.dataTransfer.getData('date');
     Meteor.call('updateDay', {
       date: sourceDate,
