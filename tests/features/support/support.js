@@ -18,6 +18,7 @@ module.exports = function () {
       },
 
       logIn: function() {
+        browser.timeoutsAsyncScript(5000); // Default timeout is apparently too slow
         browser.executeAsync(function(userData, done) {
           Meteor.loginWithPassword(userData.username, userData.password, done);
         }, USERDATA);
