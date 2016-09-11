@@ -154,6 +154,11 @@ Feature: Creating account and logging in and out
     And I press "Enter"
     Then There should be two edit meal links on the page
 
+  @temp
+  Scenario: The current week and current day should have special colors
+    Given I am a logged in user on the main page
+    Then The current week should be marked
+    And The current day should be marked
 #  @focus
 #  @temp
 #  Scenario: Dragging and dropping should swap meals

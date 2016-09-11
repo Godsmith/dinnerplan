@@ -3,7 +3,6 @@ Feature: Creating account and logging in and out
   As a user, I want to create an account so that I can store my data
 
   @focus
-  @temp
   Scenario: Creating an account will log me in and show my user name
     Given The main page is showing
     When I click the Sign in link

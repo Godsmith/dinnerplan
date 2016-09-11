@@ -4,11 +4,14 @@
 Template.day.helpers({
   dayFromDate: date => moment(new Date(date)).format('dddd').capitalize(),
   formatDate: date => moment(new Date(date)).format('YYYY-MM-DD'),
-  mealExists: meal => meal
+  mealExists: meal => meal,
+  isToday: date => date == moment().format('YYYY-MM-DD') ? 'today' : ''
 });
 
 Template.day.events({
-  'click .edit'() { edit(this); },
+  'click .edit'() {
+    edit(this);
+  },
   'click td.meal-name'() {
     if (!this.meal) {
       edit(this);
@@ -33,7 +36,7 @@ Template.day.events({
   }
 });
 
-Template.day.onRendered(function(){
+Template.day.onRendered(function () {
   // If this template is created, it is because we clicked ok when creating it.
   // After this, we have to focus the edit button.
   var editButton = Session.get("editButtonToFocus");
@@ -51,11 +54,13 @@ function edit(day) {
   textarea.val(day ? day.meal : '');
   textarea.focus();
   textarea.select();
-  Tracker.afterFlush(function() {
+  Tracker.afterFlush(function () {
     adjustTextAreaHeight(textarea[0]); // So that the textarea height will scale with the text
   });
 }
 
 function loadMealNames() {
-  Meteor.call('mealNames', (error, result) => { Session.set("mealNames", result); });
+  Meteor.call('mealNames', (error, result) => {
+    Session.set("mealNames", result);
+  });
 }

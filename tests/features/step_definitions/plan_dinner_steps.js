@@ -155,4 +155,12 @@ module.exports = function () {
     let length = browser.getValue(textarea).length;
     expect(selectionEnd - selectionStart).toEqual(length);
   });
+
+  this.Then(/^The current week should be marked$/, function () {
+    expect(browser.getCssProperty('.current', 'background-color').parsed.hex).toEqual('#f8f8f8');
+  });
+
+  this.Then(/^The current day should be marked$/, function () {
+    expect(browser.getCssProperty('.today', 'background-color').parsed.hex).toEqual('#e7e7e7');
+  });
 };

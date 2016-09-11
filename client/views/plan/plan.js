@@ -29,6 +29,11 @@ Template.plan.helpers({
     dayChunks.forEach(function(dayChunk) {
       allWeeks.push({days: dayChunk});
     });
+
+    let indexOfCurrentWeek = weeksBack;
+    if (indexOfCurrentWeek >= 0 && indexOfCurrentWeek < allWeeks.length) {
+      allWeeks[indexOfCurrentWeek].current = true;
+    }
     return allWeeks;
   },
   firstWeek: function() {
