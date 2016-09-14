@@ -28,7 +28,7 @@ TextareaAutocompleter = class TextareaAutocompleter {
       mealNames = mealNames ? mealNames : [];
       mealNames = mealNames.filter((s) => s !== '' && s !== null);
       for (let mealName of mealNames) {
-        if (mealName.startsWith(textareaText)) {
+        if (mealName.toLowerCase().startsWith(textareaText.toLowerCase())) {
           textarea.value = mealName;
           textarea.setSelectionRange(textareaText.length, 88888);
           this.autocompleteIsHighlighted = true;

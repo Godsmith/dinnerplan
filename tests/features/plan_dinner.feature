@@ -117,6 +117,15 @@ Feature: Creating account and logging in and out
     And I type "mea"
     And The meal name text box should show "meal name"
 
+  @temp
+  @focus
+  Scenario: When typing the beginning of an existing meal name, the rest of the meal name should
+  autocomplete, even though the casing is not the same
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click the edit button for "tomorrow"'s meal
+    And I type "MEA"
+    And The meal name text box should show "meal name"
+
   @focus
   Scenario: When backspacing an autocomplete, it should take off one additional letter (like if
   the autocomplete text did not exist)
@@ -154,7 +163,7 @@ Feature: Creating account and logging in and out
     And I press "Enter"
     Then There should be two edit meal links on the page
 
-  @temp
+  @focus
   Scenario: The current week and current day should have special colors
     Given I am a logged in user on the main page
     Then The current week should be marked
