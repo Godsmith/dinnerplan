@@ -1,0 +1,29 @@
+{
+  "name": "dinnerplan",
+  "version": "1.0.0",
+  "description": "Webapp for meal planning written in meteor.js, deployed at dinner-plan.herokuapp.com",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chimp": "^0.47.2",
+    "jquery": "^3.1.0",
+    "jquery-textcomplete": "^1.7.2",
+    "meteor-node-stubs": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Godsmith/dinnerplan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Godsmith/dinnerplan/issues"
+  },
+  "homepage": "https://github.com/Godsmith/dinnerplan#readme"
+}
