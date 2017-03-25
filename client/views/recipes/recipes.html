@@ -1,5 +1,16 @@
 <template name="recipes">
-  {{>recipesTable meals=meals}}
+  <div class="container">
+    <ul class="nav nav-tabs">
+      {{#each categories}}
+        {{>category}}
+      {{/each}}
+    </ul>
+    {{>recipesTable meals=meals}}
+  </div>
 </template>
 
-
+<template name="category">
+  <li role="presentation" class="category {{htmlText}} {{isActive databaseLookupString}}">
+    <a href="#" data-category="{{databaseLookupString}}" class="category">{{htmlText}}</a>
+  </li>
+</template>

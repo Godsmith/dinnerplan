@@ -116,10 +116,10 @@ Template.editMeal.onRendered(function(){
 
 Template.categoriesField.onRendered(function() {
   var $select = $('#inputMealCategories').selectize({
-    valueField: 'value',
-    labelField: 'value',
-    searchField: 'value',
-    options: CATEGORIES
+    valueField: 'htmlText',
+    labelField: 'htmlText',
+    searchField: 'htmlText',
+    options: CATEGORIES_EXCEPT_ALL
   });
   var selectize = $select[0].selectize;
   

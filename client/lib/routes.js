@@ -25,13 +25,6 @@ Router.route('/about', function() {
   })
 });
 
-Router.route('/categories', function() {
-  this.render('categories');
-  this.layout('layout', {
-    data: {active: 'categories'}
-  })
-});
-
 Router.route('/ingredients', function() {
   this.render('ingredients');
   this.layout('layout', {

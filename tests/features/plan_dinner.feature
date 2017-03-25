@@ -117,7 +117,6 @@ Feature: Creating account and logging in and out
     And I type "mea"
     And The meal name text box should show "meal name"
 
-  @temp
   @focus
   Scenario: When typing the beginning of an existing meal name, the rest of the meal name should
   autocomplete, even though the casing is not the same

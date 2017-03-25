@@ -1,7 +1,6 @@
 'use strict';
 
 Template.ingredients.helpers({
-  categories: () => CATEGORIES,
   meals: function() {
     return Session.get("meals");
   }
