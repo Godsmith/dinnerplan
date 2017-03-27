@@ -47,10 +47,12 @@ Template.day.onRendered(function () {
 });
 
 function edit(day) {
-  loadMeals();
-  Session.set('day', day);
-  $('#editDayModal').modal();
-  setFocusToInputBox();
+  Meteor.call('meals', (error, result) => {
+    Session.set("meals", result);
+    Session.set('day', day);
+    $('#editDayModal').modal();
+    setFocusToInputBox();
+  });
 }
 
 function setFocusToInputBox() {
@@ -61,8 +63,3 @@ function setFocusToInputBox() {
   }
 }
 
-function loadMeals() {
-  Meteor.call('meals', (error, result) => {
-    Session.set("meals", result);
-  });
-}
