@@ -24,7 +24,7 @@ showEditMealModal = function(meal) {
   helpBlock.css('display', 'none');
 
   Session.set('editing', meal._id == undefined);
-  for (mealProperty of MEAL_PROPERTIES) {
+  for (mealProperty of getMealProperties()) {
     $('#' + mealProperty.htmlId).val(meal[mealProperty.databaseKeyName]);
   }
 

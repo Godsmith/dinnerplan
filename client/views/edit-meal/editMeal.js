@@ -4,7 +4,7 @@ Template.editMeal.helpers({
   mealProperties: function() {
     var meal = Session.get('meal');
     if (!meal) return false;
-    var retVal = _.map(MEAL_PROPERTIES, function(mealProperty) {
+    return _.map(getMealProperties(), function(mealProperty) {
       return {
         id: mealProperty.htmlId,
         label: mealProperty.label,
@@ -12,7 +12,6 @@ Template.editMeal.helpers({
         type: mealProperty.type
       }
     });
-    return retVal;
   },
   mealName: function() {
     let meal = Session.get('meal');
@@ -26,7 +25,7 @@ Template.editMeal.events({
   'click .ok': function(){
     let currentMeal = Session.get('meal');
     let newMeal = {};
-    for (let mealProperty of MEAL_PROPERTIES) {
+    for (let mealProperty of getMealProperties()) {
       var element = $('#' + mealProperty.htmlId);
       var value;
       switch (mealProperty.type) {
