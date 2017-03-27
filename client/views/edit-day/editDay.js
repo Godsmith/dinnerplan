@@ -1,9 +1,41 @@
 'use strict';
 
-let textareaAutocompleter = undefined;
-
 Template.editDay.onRendered(function(){
-  textareaAutocompleter = new TextareaAutocompleter();
+  this.autorun(function(){
+    // This runs when the "day" session variable is updated, i.e. when clicking an edit button
+    let day = Session.get("day");
+    let meals = Session.get('meals');
+    if (!day) {
+      return;
+    }
+    let mealsArray = (day.meal ? day.meal.split(';') : []).map(s => s.trim());
+    let selectizeControl = $('#meal-name');
+    var $select = selectizeControl.selectize({
+      valueField: 'name',
+      labelField: 'name',
+      searchField: 'name',
+      persist: false,
+      delimiter: ';',
+      openOnFocus: false,
+      create: (input => {return {name: input}}),
+      options: meals
+    });
+
+    // Store the reference to the selectize in the data property to be able to access it elsewhere
+    // From here: http://stackoverflow.com/questions/24666297/how-to-get-the-value-of-the-currently-selected-selectize-js-input-item
+    selectizeControl.data('selectize', $select);
+
+    // Only options in the list may be displayed in the box, so in order to be able to show
+    // also meals that are not in the database in the input box we need to add them as options.
+    var selectize = $select[0].selectize;
+    mealsArray.forEach((mealName) => {
+      selectize.addOption({name: mealName});
+    });
+    selectize.setValue(mealsArray);
+    // Focus the input box here as well, or it will not be focused the first time after the user
+    // has navigated to the page that they click an edit box
+    selectize.focus();
+  });
 });
 
 Template.editDay.helpers({
@@ -24,26 +56,16 @@ Template.editDay.helpers({
 Template.editDay.events({
 
   'click .ok'() { ok(); },
-  'click .cancel'() {
-    cancel();
-  },
+  'click .cancel'() { cancel(); },
 
-  'keydown #meal-name': function(event){
-    textareaAutocompleter.keydown(event.target, event.keyCode);
+  'keydown .selectize-input': (event) => {
     switch (event.keyCode) {
       case 13:
-        event.preventDefault(); //to prevent the enter key to trigger the edit button
+        event.preventDefault();
         ok();
-        break;
-      case 27:
-        cancel();
         break;
     }
   },
-
-  'keyup #meal-name': function(event, template) {
-    textareaAutocompleter.keyup(event.target, Session.get('mealNames'));
-  }
 });
 
 function ok() {

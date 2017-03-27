@@ -47,20 +47,22 @@ Template.day.onRendered(function () {
 });
 
 function edit(day) {
-  loadMealNames();
+  loadMeals();
   Session.set('day', day);
   $('#editDayModal').modal();
-  let textarea = $('#meal-name');
-  textarea.val(day ? day.meal : '');
-  textarea.focus();
-  textarea.select();
-  Tracker.afterFlush(function () {
-    adjustTextAreaHeight(textarea[0]); // So that the textarea height will scale with the text
-  });
+  setFocusToInputBox();
 }
 
-function loadMealNames() {
-  Meteor.call('mealNames', (error, result) => {
-    Session.set("mealNames", result);
+function setFocusToInputBox() {
+  let selectizeControl = $('#meal-name').data('selectize');
+  if (selectizeControl) {
+    let selectize = selectizeControl[0].selectize;
+    selectize.focus()
+  }
+}
+
+function loadMeals() {
+  Meteor.call('meals', (error, result) => {
+    Session.set("meals", result);
   });
 }

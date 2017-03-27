@@ -118,7 +118,7 @@ module.exports = function () {
   });
 
   this.When(/^I enter "([^"]*)" in the selectize field$/, function (arg1) {
-    browser.setValue('.selectize-input input', arg1);
+    browser.setValue('.editMeal .selectize-input input', arg1);
     browser.keys('Enter');
   });
 

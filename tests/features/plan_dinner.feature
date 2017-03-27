@@ -59,23 +59,10 @@ Feature: Creating account and logging in and out
     And I insert "Korv Stroganoff" in the meal name text box
     And I press "Enter"
     And I click the edit button for "today"'s meal
+    And I press "Backspace"
     And I insert "Pasta Carbonara" in the meal name text box
     And I press "Enter"
     Then The text of "today"'s meal should be "Pasta Carbonara"
-
-  @focus
-  Scenario: Editing an existing meal, the entire meal name should be selected in the edit dialog
-    Given I am a logged in user on the main page that has inserted a meal into the database
-    When I click the edit button for "today"'s meal
-    Then All text in the meal name text box should be selected
-
-    @focus
-    Scenario: Editing a two-row meal name should bring up a two-row editing button
-      Given I am a logged in user on the main page
-      And I have added "Text that is so very extremely long that it almost certainly on most computer screens spans two rows" for tonight
-      And I refresh the page
-      And I click the edit button for "today"'s meal
-      Then The height of the textarea should be "54" pixels
 
   @focus
   Scenario: Creating a meal and then creating another one, the textarea should start out empty
@@ -96,7 +83,7 @@ Feature: Creating account and logging in and out
   Scenario: Deleting the text in a planned meal field should remove the meal from that day
     Given I am a logged in user on the main page that has inserted a meal into the database
     When I click the edit button for "today"'s meal
-    And I insert "" in the meal name text box
+    And I press "Backspace"
     And I press "Enter"
     Then There shouldn't be any link to today's meal
     And There shouldn't be meals for any days in the database
@@ -108,41 +95,6 @@ Feature: Creating account and logging in and out
     When I select "today"'s edit button
     And I press "Tab"
     Then "tomorrow"'s edit button should be selected
-
-  @focus
-  Scenario: When typing the beginning of an existing meal name, the rest of the meal name should
-    autocomplete
-    Given I am a logged in user on the main page that has inserted a meal into the database
-    When I click the edit button for "tomorrow"'s meal
-    And I type "mea"
-    And The meal name text box should show "meal name"
-
-  @focus
-  Scenario: When typing the beginning of an existing meal name, the rest of the meal name should
-  autocomplete, even though the casing is not the same
-    Given I am a logged in user on the main page that has inserted a meal into the database
-    When I click the edit button for "tomorrow"'s meal
-    And I type "MEA"
-    And The meal name text box should show "meal name"
-
-  @focus
-  Scenario: When backspacing an autocomplete, it should take off one additional letter (like if
-  the autocomplete text did not exist)
-    Given I am a logged in user on the main page that has inserted a meal into the database
-    When I click the edit button for "tomorrow"'s meal
-    And I type "mea"
-    And I type "Back space"
-    And The meal name text box should show "me"
-
-  @focus
-  Scenario: When an autocomplete is visible, if the selection in the textarea changes,
-  backspacing that text should only remove the newly selected text and nothing more
-    Given I am a logged in user on the main page that has inserted a meal into the database
-    When I click the edit button for "tomorrow"'s meal
-    And I type "mea"
-    And I select character "1" to "4" in the meal name text box
-    And I type "Back space"
-    And The meal name text box should show "m name"
 
   @focus
   Scenario: When inserting two meal names separated by semicolon, two links should be created
@@ -168,7 +120,6 @@ Feature: Creating account and logging in and out
     Then The current week should be marked
     And The current day should be marked
 #  @focus
-#  @temp
 #  Scenario: Dragging and dropping should swap meals
 #    Given I am a logged in user on the main page that has inserted a meal into the database
 #    When I click the edit button for "tomorrow"'s meal

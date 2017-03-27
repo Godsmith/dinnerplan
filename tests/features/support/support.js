@@ -44,7 +44,8 @@ module.exports = function () {
         this.clickSelector('.date-' + dateString + ' button');
         var textarea = '#meal-name';
         browser.waitForExist(textarea);
-        browser.setValue(textarea, mealName);
+        browser.keys('Backspace');
+        browser.keys(mealName);
         browser.keys('Enter');
       },
 

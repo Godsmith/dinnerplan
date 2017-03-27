@@ -16,7 +16,8 @@ module.exports = function () {
   });
 
   this.When(/^I insert "([^"]*)" in the meal name text box$/, function (arg1) {
-    this.support.setValueOfSelector('#meal-name', arg1)
+    this.support.clickSelector('.selectize-input');
+    browser.keys(arg1);
   });
 
   this.When(/^I press "([^"]*)"$/, function (arg1) {
@@ -146,15 +147,6 @@ module.exports = function () {
 
   });
   */
-
-  this.Then(/^All text in the meal name text box should be selected$/, function () {
-    //var textarea = browser.getElement$('#meal-name')[0];
-    let textarea = '#meal-name';
-    let selectionEnd = browser.getAttribute(textarea, 'selectionEnd');
-    let selectionStart = browser.getAttribute(textarea, 'selectionStart');
-    let length = browser.getValue(textarea).length;
-    expect(selectionEnd - selectionStart).toEqual(length);
-  });
 
   this.Then(/^The current week should be marked$/, function () {
     expect(browser.getCssProperty('.current', 'background-color').parsed.hex).toEqual('#f8f8f8');

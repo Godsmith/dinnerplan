@@ -49,7 +49,6 @@ Feature: List recipes per category
     And I enter two lines of text
     Then The "Source" textarea has increased in height
 
-    @temp
   @focus
   Scenario: The "Alla" category that includes all recipes should show up by default
     Given I am a logged in user on the main page that has inserted a meal into the database
@@ -60,7 +59,6 @@ Feature: List recipes per category
     And I navigate to "recipes"
     Then There should be "3" rows in the recipes table, including header
 
-  @temp
   @focus
   Scenario: When going to a specific category and back to the "Alla" category, all meals shall
   show up again
