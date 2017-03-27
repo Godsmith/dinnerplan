@@ -7,13 +7,16 @@
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li class="navbar-text">{{> loginButtons }}</li>
-          <li class="{{#if activeIs 'plan'}}active{{/if}}"><a href="/">Veckoplan</a></li>
-          <li class="{{#if activeIs 'recipes'}}active{{/if}}"><a href="/recipes">Recept</a></li>
+          <li class="{{#if activeIs 'plan'}}active{{/if}}"><a
+              href="/">{{i18n "layout.plan"}}</a></li>
+          <li class="{{#if activeIs 'recipes'}}active{{/if}}"><a
+              href="/recipes">{{i18n "layout.recipes"}}</a></li>
           <li class="{{#if activeIs 'ingredients'}}active{{/if}}"><a
-              href="/ingredients">Ingredienser</a></li>
+              href="/ingredients">{{i18n "layout.ingredients"}}</a></li>
           <li class="{{#if activeIs 'shopping-list'}}active{{/if}}"><a
-              href="/shopping-list">Inköpslista</a></li>
-          <li class="{{#if activeIs 'about'}}active{{/if}}"><a href="/about">Om</a></li>
+              href="/shopping-list">{{i18n "layout.shoppingList"}}</a></li>
+          <li class="{{#if activeIs 'about'}}active{{/if}}"><a
+              href="/about">{{i18n "layout.about"}}</a></li>
         </ul>
       </div>
     </nav>

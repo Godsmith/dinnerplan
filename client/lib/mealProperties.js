@@ -1,25 +1,25 @@
 getMealProperties = function () {
 
   class MealProperty {
-    constructor(key, type, htmlId, label, showInList) {
+    constructor(key, type, htmlId, showInList) {
       this.databaseKeyName = key;
       this.type = type;
       this.htmlId = htmlId;
-      this.label = label;
+      this.label = i18n('mealProperty.' + key);
       this.showInList = showInList;
     }
   }
 
   return [
-    new MealProperty('name', 'textarea', 'inputMealName', 'Namn', true),
-    new MealProperty('source', 'textarea', 'inputMealSource', 'Källa', false),
-    new MealProperty('servings', 'servings', 'inputMealServings', 'Portioner', false),
-    new MealProperty('time', 'textarea', 'inputMealTime', 'Tid', true),
-    new MealProperty('ingredients', 'textarea', 'inputMealIngredients', 'Ingredienser', false),
-    new MealProperty('steps', 'textarea', 'inputMealSteps', 'Steg', false),
-    new MealProperty('rating', 'rating', 'inputMealRating', 'Betyg', true),
-    new MealProperty('categories', 'categories', 'inputMealCategories', 'Kategorier', false),
-    new MealProperty('comments', 'comments', 'inputMealComments', 'Kommentarer', false)
+    new MealProperty('name', 'textarea', 'inputMealName', true),
+    new MealProperty('source', 'textarea', 'inputMealSource', false),
+    new MealProperty('servings', 'servings', 'inputMealServings', false),
+    new MealProperty('time', 'textarea', 'inputMealTime', true),
+    new MealProperty('ingredients', 'textarea', 'inputMealIngredients', false),
+    new MealProperty('steps', 'textarea', 'inputMealSteps', false),
+    new MealProperty('rating', 'rating', 'inputMealRating', true),
+    new MealProperty('categories', 'categories', 'inputMealCategories', false),
+    new MealProperty('comments', 'comments', 'inputMealComments', false)
   ];
 };
 

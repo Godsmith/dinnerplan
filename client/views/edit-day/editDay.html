@@ -7,11 +7,12 @@
           <h4 class="modal-title" id="editDayModalLabel">{{title}}</h4>
         </div>
         <div class="modal-body">
-          <input type="text" id="meal-name" value="" placeholder="Ett eller flera receptnamn">
+          <input type="text" id="meal-name" value=""
+                 placeholder="{{i18n "editDay.oneOrMoreRecipeNames"}}">
         </div>
         <div class="modal-footer">
           <button type="button" id="edit-day-cancel" class="btn btn-default cancel float-right"
-          data-dismiss="modal">
+                  data-dismiss="modal">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>
           <button type="button" class="btn btn-default ok float-right">

@@ -2,7 +2,7 @@
 
 
 Template.day.helpers({
-  dayFromDate: date => moment(new Date(date)).format('dddd').capitalize(),
+  dayFromDate: date => i18n('day.' + moment(new Date(date)).format('dddd')),
   formatDate: date => moment(new Date(date)).format('YYYY-MM-DD'),
   mealExists: meal => meal,
   isToday: date => date == moment().format('YYYY-MM-DD') ? 'today' : ''

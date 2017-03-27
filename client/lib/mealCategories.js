@@ -1,13 +1,13 @@
 getMealCategories = function () {
   return [
-    {htmlText: 'Alla', databaseLookupString: ''},
-    {htmlText: 'Bjudmat', databaseLookupString: 'Bjudmat'},
-    {htmlText: 'Fisk', databaseLookupString: 'Fisk'},
-    {htmlText: 'Sallad', databaseLookupString: 'Sallad'},
-    {htmlText: 'Snabblagat', databaseLookupString: 'Snabblagat'},
-    {htmlText: 'Soppa', databaseLookupString: 'Soppa'},
-    {htmlText: 'Vardagsmat', databaseLookupString: 'Vardagsmat'},
-    {htmlText: 'Vegetariskt', databaseLookupString: 'Vegetariskt'}
+    {htmlText: i18n('mealCategories.all'), databaseLookupString: ''},
+    {htmlText: i18n('mealCategories.entertaining'), databaseLookupString: i18n('mealCategories.entertaining')},
+    {htmlText: i18n('mealCategories.fish'), databaseLookupString: i18n('mealCategories.fish')},
+    {htmlText: i18n('mealCategories.salad'), databaseLookupString: i18n('mealCategories.salad')},
+    {htmlText: i18n('mealCategories.quick'), databaseLookupString: i18n('mealCategories.quick')},
+    {htmlText: i18n('mealCategories.soup'), databaseLookupString: i18n('mealCategories.soup')},
+    {htmlText: i18n('mealCategories.everyday'), databaseLookupString: i18n('mealCategories.everyday')},
+    {htmlText: i18n('mealCategories.vegetarian'), databaseLookupString: i18n('mealCategories.vegetarian')}
   ];
 };
 
