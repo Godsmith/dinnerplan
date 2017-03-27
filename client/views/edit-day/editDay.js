@@ -18,6 +18,7 @@ Template.editDay.onRendered(function(){
       delimiter: ';',
       openOnFocus: false,
       create: (input => {return {name: input}}),
+      createOnBlur: true,
       options: meals
     });
 

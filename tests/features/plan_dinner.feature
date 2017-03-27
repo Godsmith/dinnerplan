@@ -42,6 +42,14 @@ Feature: Creating account and logging in and out
     Then The text of "today"'s meal should be "Korv Stroganoff"
 
   @focus
+  Scenario: Adding meals to days by pressing Ok but not Enter before
+    Given I am a logged in user on the main page
+    When I click the edit button for "today"'s meal
+    And I insert "Korv Stroganoff" in the meal name text box
+    And I click "button.ok"
+    Then The text of "today"'s meal should be "Korv Stroganoff"
+
+  @focus
   Scenario: Canceling when adding a meal by pressing Enter
     Given The main page is showing
     And I am a logged in user
