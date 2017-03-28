@@ -7,7 +7,7 @@ Template.recipes.helpers({
     });
     return Session.get("meals");
   },
-  categories: () => CATEGORIES
+  categories: () => getMealCategories()
 });
 
 Template.recipes.events({

@@ -118,7 +118,7 @@ Template.categoriesField.onRendered(function() {
     valueField: 'htmlText',
     labelField: 'htmlText',
     searchField: 'htmlText',
-    options: CATEGORIES_EXCEPT_ALL
+    options: getMealCategoriesExceptAll()
   });
   var selectize = $select[0].selectize;
   
