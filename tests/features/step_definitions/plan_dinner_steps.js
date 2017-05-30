@@ -86,7 +86,9 @@ module.exports = function () {
 
   this.When(/^"([^"]*)"'s edit button should be selected$/, function (arg1) {
     var button = '.date-' + dates[arg1] + ' button';
-    expect(browser.elementActive().value).toEqual(browser.element(button).value);
+    var activeElement = browser.elementActive().value.ELEMENT;
+    var expectedElement = browser.element(button).value.ELEMENT;
+    expect(activeElement).toEqual(expectedElement);
   });
 
   this.When(/^I send two up arrows to the "([^"]*)" control and record the value$/, function (arg1) {
