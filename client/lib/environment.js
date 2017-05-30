@@ -67,3 +67,62 @@ i18n.map('sv_SE', {
     createShoppingList: 'Skapa inköpslista'
   }
 });
+i18n.map('en_US', {
+  layout: {
+    plan: "Week Plan",
+    recipes: "Recipes",
+    ingredients: "Ingredients",
+    shoppingList: "Shopping List",
+    about: "About"
+  },
+  about: {
+    madeBy: 'Made by',
+    source: 'Source',
+    roadmap: 'Roadmap',
+    bugReports: 'Issue tracker'
+  },
+  editDay: {
+    oneOrMoreRecipeNames: "One or more recipe names"
+  },
+  mealProperty: {
+    name: 'Name',
+    source: 'Source',
+    servings: 'Servings',
+    time: 'Time',
+    ingredients: 'Ingredients',
+    steps: 'Steps',
+    rating: 'Rating',
+    categories: 'Categories',
+    comments: 'Comments'
+  },
+  ingredients: {
+    nameOfIngredient: "Ingredient name",
+    search: "Search"
+  },
+  day: {
+    Monday: 'Monday',
+    Tuesday: 'Tuesday',
+    Wednesday: 'Wednesday',
+    Thursday: 'Thursday',
+    Friday: 'Friday',
+    Saturday: 'Saturday',
+    Sunday: 'Sunday'
+  },
+  plan: {
+    weeksBackAnd: 'weeks back and',
+    weeksAfter: 'weeks after'
+  },
+  mealCategories: {
+    all: 'All',
+    entertaining: 'Entertaining',
+    fish: 'Fish',
+    salad: 'Salad',
+    quick: 'Quick',
+    soup: 'Soup',
+    everyday: 'Everyday',
+    vegetarian: 'Vegetarian'
+  },
+  shoppingList: {
+    createShoppingList: 'Create shopping list'
+  }
+});
