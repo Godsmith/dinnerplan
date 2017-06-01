@@ -26,6 +26,7 @@ Template.day.events({
     event.preventDefault();
   },
   'drop td'(event) {
+    event.preventDefault();
     let sourceDate = event.originalEvent.dataTransfer.getData('date');
     Meteor.call('updateDay', {
       date: sourceDate,
