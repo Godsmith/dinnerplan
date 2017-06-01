@@ -9,6 +9,17 @@ Template.plan.onRendered(function() {
     $(this).val(Math.min(parseInt(this.value), MAX_NUMBER_OF_WEEKS_SHOWN));
     Meteor.call('updateNumberOfWeeks', parseInt(this.value));
   });
+
+  // To hide modal when pressing back button. Source: https://gist.github.com/thedamon/9276193
+  $(".modal").on("shown.bs.modal", function()  { // any time a modal is shown
+    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+    history.pushState(null, null, urlReplace); // push state that hash into the url
+  });
+
+  // If a pushstate has previously happened and the back button is clicked, hide any modals.
+  $(window).on('popstate', function() {
+    $(".modal").modal('hide');
+  });
 });
 
 Template.plan.helpers({

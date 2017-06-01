@@ -57,6 +57,13 @@ Feature: Edit meals
     When I click the "cancel" edit meal button and wait for the dialog to close
     Then The edit controls should not show
 
+    @temp
+  @focus
+  Scenario: When I press the back button the edit controls should disappear
+    Given I am a logged in user on the main page in edit mode
+    When I click the back button in the browser
+    Then The edit controls should not show
+
   @focus
   Scenario: When I insert a new row in one of the edit fields the textarea should expand
   automatically

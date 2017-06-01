@@ -178,6 +178,10 @@ module.exports = function () {
     this.support.clickSelector('.editMeal .ok');
   });
 
+  this.When(/^I click the back button in the browser$/, function () {
+    browser.back();
+  });
+
   function count(s, part) {
     return s.split(part).length - 1
   }
