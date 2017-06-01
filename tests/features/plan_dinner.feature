@@ -79,6 +79,15 @@ Feature: Creating account and logging in and out
     Then The meal name text box should show ""
 
   @focus
+  Scenario: Typing a recipe for a day, pressing cancel and then selecting that day again should remove the text
+    Given I am a logged in user on the main page
+    When I click the edit button for "today"'s meal
+    And I insert "this should be removed" in the meal name text box
+    And I click "#edit-day-cancel"
+    And I click the edit button for "today"'s meal
+    Then The meal name text box should show ""
+
+  @focus
   Scenario: Creating a meal consisting just of spaces should not add an entry to the database
     Given I am a logged in user on the main page
     When I click the edit button for "today"'s meal
