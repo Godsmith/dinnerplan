@@ -17,11 +17,14 @@ module.exports = function () {
         browser.url(process.env.ROOT_URL);
       },
 
-      logIn: function() {
+      logIn: function(userData) {
+        if (!userData) {
+          userData = USERDATA;
+        }
         browser.timeoutsAsyncScript(5000); // Default timeout is apparently too slow
-        browser.executeAsync(function(userData, done) {
-          Meteor.loginWithPassword(userData.username, userData.password, done);
-        }, USERDATA);
+        browser.executeAsync(function(data, done) {
+          Meteor.loginWithPassword(data.username, data.password, done);
+        }, userData);
         browser.waitForExist('#login-name-link');
       },
 
@@ -35,8 +38,19 @@ module.exports = function () {
         browser.waitForVisible('#login-sign-in-link');
       },
 
-      createUserAndLogIn: function() {
-        theServer.call('addUser', USERDATA);
+      createUser(userData) {
+        if (!userData) {
+          userData = USERDATA;
+        }
+        theServer.call('addUser', userData);
+      },
+
+      createUsers(userDatas) {
+        theServer.call('addUsers', userDatas);
+      },
+
+      createUserAndLogIn: function(userData) {
+        this.createUser(userData);
         this.logIn();
       },
 

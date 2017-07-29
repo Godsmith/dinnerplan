@@ -226,3 +226,12 @@ Feature: Edit meals
     And I click the "ok" edit meal button
     And I click "today"'s meal
     Then The component ".editMeal" should include the HTML ">a.com</a>"
+
+  @temp
+  @focus
+  Scenario: The same recipe name should be able to be used by different users without conflict
+    Given There are users named "Bill" and "Ted"
+    And "Bill" has inserted a recipe "Pannkakor" in the database with "Time" "60 min"
+    And "Ted" has inserted a recipe "Pannkakor" in the database with "Time" "30 min"
+    And "Bill"'s recipe "Pannkakor" should have "Time" "60 min"
+    Then "Ted"'s recipe "Pannkakor" should have "Time" "30 min"

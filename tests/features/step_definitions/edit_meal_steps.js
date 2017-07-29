@@ -182,6 +182,27 @@ module.exports = function () {
     browser.back();
   });
 
+  this.Given(/^There are users named "([^"]*)" and "([^"]*)"$/, function (username1, username2) {
+    this.support.createUsers([{username: username1, password: 'password'},
+                              {username: username2, password: 'password'}]);
+  });
+
+  this.Given(/^"([^"]*)" has inserted a recipe "([^"]*)" in the database with "([^"]*)" "([^"]*)"$/, function (username, recipeName, fieldName, fieldValue) {
+    this.support.navigateToMainPage();
+    this.support.logIn({username: username, password: 'password'});
+    this.support.addMealForDate(recipeName, dates.today);
+    this.support.clickMealName(dates.today);
+    this.support.setValueOfSelector('#inputMeal' + fieldName, fieldValue);
+    this.support.clickSelector('.editMeal .ok');
+    this.support.logOut();
+  });
+
+  this.Then(/^"([^"]*)"'s recipe "([^"]*)" should have "([^"]*)" "([^"]*)"$/, function (username, recipeName, fieldName, fieldValue) {
+    this.server.call('getFieldValue', username, recipeName, fieldName, function(value) {
+      expect(value).toEqual(fieldValue)
+    });
+  });
+
   function count(s, part) {
     return s.split(part).length - 1
   }
