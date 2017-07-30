@@ -227,7 +227,6 @@ Feature: Edit meals
     And I click "today"'s meal
     Then The component ".editMeal" should include the HTML ">a.com</a>"
 
-  @temp
   @focus
   Scenario: The same recipe name should be able to be used by different users without conflict
     Given There are users named "Bill" and "Ted"
