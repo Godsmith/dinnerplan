@@ -55,7 +55,17 @@ function populateMeals() {
     openOnFocus: false,
     create: (input => {return {name: input}}),
     createOnBlur: true,
-    options: meals
+    options: meals,
+    onDropdownOpen: function() {
+      // Manually prevent dropdown from opening when there is no search term
+      if (!this.lastQuery.length) {
+        this.close();
+      }
+    },
+    onItemAdd: function() {
+      // Close dropdown when choosing a meal
+      this.close();
+    }
   });
 
   // Store the reference to the selectize in the data property to be able to access it elsewhere
