@@ -14,7 +14,8 @@ i18n.map('sv_SE', {
     recipes: "Recept",
     ingredients: "Ingredienser",
     shoppingList: "Inköpslista",
-    about: "Om"
+    about: "Om",
+    tools: "Verktyg"
   },
   about: {
     madeBy: 'Skapad av',
@@ -65,6 +66,9 @@ i18n.map('sv_SE', {
   },
   shoppingList: {
     createShoppingList: 'Skapa inköpslista'
+  },
+  tools: {
+    export: 'Exportera recept'
   }
 });
 i18n.map('en_US', {
@@ -73,7 +77,8 @@ i18n.map('en_US', {
     recipes: "Recipes",
     ingredients: "Ingredients",
     shoppingList: "Shopping List",
-    about: "About"
+    about: "About",
+    tools: "Tools"
   },
   about: {
     madeBy: 'Made by',
@@ -124,5 +129,8 @@ i18n.map('en_US', {
   },
   shoppingList: {
     createShoppingList: 'Create shopping list'
+  },
+  tools: {
+    export: 'Export recipes'
   }
 });
