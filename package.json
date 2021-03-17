@@ -14,7 +14,10 @@
     "meteor-node-stubs": "^0.2.3",
     "webdriverio": "^4.7.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chimpy": "^3.0.4",
+    "chromedriver": "^88.0.0"
+  },
   "scripts": {
     "test": "mocha"
   },
