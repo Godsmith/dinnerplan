@@ -8,15 +8,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "chimp": "^0.49.0",
     "jquery": "^3.1.0",
     "jquery-textcomplete": "^1.7.2",
-    "meteor-node-stubs": "^0.2.3",
-    "webdriverio": "^4.7.1"
-  },
-  "devDependencies": {
-    "chimpy": "^3.0.4",
-    "chromedriver": "^88.0.0"
+    "meteor-node-stubs": "^0.2.3"
   },
   "scripts": {
     "test": "mocha"
@@ -30,5 +24,11 @@
   "bugs": {
     "url": "https://github.com/Godsmith/dinnerplan/issues"
   },
-  "homepage": "https://github.com/Godsmith/dinnerplan#readme"
+  "homepage": "https://github.com/Godsmith/dinnerplan#readme",
+  "devDependencies": {
+    "chimp": "0.49.0",
+    "chromedriver": "2.35.0",
+    "moment": "^2.29.1",
+    "webdriverio": "4.7.1"
+  }
 }
