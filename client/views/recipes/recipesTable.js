@@ -3,3 +3,11 @@ Template.recipesTable.helpers({
     return getMealPropertiesToShowInList();
   }
 });
+
+Template.recipesTable.onRendered(function() {
+  $('#recipes').DataTable( {
+    "paging": false,
+    "info": false,
+    "searching": false
+  });
+});

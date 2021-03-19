@@ -50,6 +50,7 @@ iron:url@1.1.0
 jeremy:selectize@0.12.1_5
 jquery@1.11.10
 launch-screen@1.1.1
+lc3t35:datatables-bootstrap3@1.10.10
 less@2.7.9
 livedata@1.0.18
 localstorage@1.0.12
