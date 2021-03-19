@@ -203,6 +203,10 @@ module.exports = function () {
     });
   });
 
+  this.When(/^I press ok in the dialog$/, function () {
+    browser.alertAccept();
+  });
+
   function count(s, part) {
     return s.split(part).length - 1
   }

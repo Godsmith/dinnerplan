@@ -234,3 +234,15 @@ Feature: Edit meals
     And "Ted" has inserted a recipe "Pannkakor" in the database with "Time" "30 min"
     And "Bill"'s recipe "Pannkakor" should have "Time" "60 min"
     Then "Ted"'s recipe "Pannkakor" should have "Time" "30 min"
+
+  @focus
+  Scenario: A recipe can be deleted
+    Given I am a logged in user on the main page that has inserted a meal into the database
+    When I click "today"'s meal
+    And I click the "edit" edit meal button
+    And I click the "delete" edit meal button
+    And I press ok in the dialog
+    Then The edit controls should not show
+    And The color of tonight's meal should be "#ba0000"
+    
+

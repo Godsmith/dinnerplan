@@ -22,6 +22,12 @@ Template.editMeal.helpers({
 
 Template.editMeal.events({
   'click .edit': () => Session.set('editing', true),
+  'click .delete': () => {
+    if (confirm(i18n('editRecipe.areYouSureYouWantToDelete'))) {
+      Meteor.call('deleteMeal', Session.get('meal').name);
+      hideModal();
+    }
+  },
   'click .ok': function(){
     let currentMeal = Session.get('meal');
     let newMeal = {};
@@ -97,6 +103,10 @@ function showNameFieldError(text) {
 
 function updateMealAndHideModal(oldMealName, meal) {
   Meteor.call('updateMeal', oldMealName, meal);
+  hideModal()
+}
+
+function hideModal() {
   $('#editMealModal').modal('hide');
 }
 
@@ -113,6 +123,10 @@ Template.editMeal.onRendered(function(){
   });
 });
 
+Template.editMealButtons.helpers({
+  is_new: () => Session.get("meal")._id == undefined
+});
+
 Template.categoriesField.onRendered(function() {
   var $select = $('#inputMealCategories').selectize({
     valueField: 'htmlText',
@@ -121,7 +135,7 @@ Template.categoriesField.onRendered(function() {
     options: getMealCategoriesExceptAll()
   });
   var selectize = $select[0].selectize;
-  
+
   this.autorun(function(){
     var meal = Session.get("meal");
     let categoriesArray = meal.categories ? meal.categories.split(',') : [];

@@ -26,6 +26,9 @@ i18n.map('sv_SE', {
   editDay: {
     oneOrMoreRecipeNames: "Ett eller flera receptnamn"
   },
+  editRecipe: {
+    areYouSureYouWantToDelete: "Är du säker på att du vill ta bort receptet?"
+  },
   mealProperty: {
     name: 'Namn',
     source: 'Källa',
@@ -88,6 +91,9 @@ i18n.map('en_US', {
   },
   editDay: {
     oneOrMoreRecipeNames: "One or more recipe names"
+  },
+  editRecipe: {
+    areYouSureYouWantToDelete: "Are you sure you want to delete the recipe?"
   },
   mealProperty: {
     name: 'Name',
