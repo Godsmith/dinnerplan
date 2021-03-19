@@ -23,6 +23,7 @@ showEditMealModal = function(meal) {
   let helpBlock = divSurroundingNameField.find('.help-block');
   helpBlock.css('display', 'none');
 
+  // If the meal is not in the database, set editing mode immediately
   Session.set('editing', meal._id == undefined);
   for (mealProperty of getMealProperties()) {
     $('#' + mealProperty.htmlId).val(meal[mealProperty.databaseKeyName]);
