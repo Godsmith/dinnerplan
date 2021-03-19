@@ -2,7 +2,6 @@
 Webapp for meal planning written in meteor.js, deployed at dinner-plan.herokuapp.com
 
 ## Set up environment
-
 1. Install meteor.
 2. Install node 4.9.1. 
    - New version throws errors when trying to install chimp, since the fibers package doesn't seem to work anymore. 
