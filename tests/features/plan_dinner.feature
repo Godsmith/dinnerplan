@@ -99,8 +99,6 @@ Feature: Creating account and logging in and out
   @focus
   Scenario: Deleting the text in a planned meal field should remove the meal from that day
     Given I am a logged in user on the main page that has inserted a meal into the database
-    # Refresh the page to get the meal name into the suggestions list
-    And I refresh the page
     When I click the edit button for "today"'s meal
     And I press "Backspace"
     And I press "Enter"
